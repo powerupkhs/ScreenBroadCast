@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_root2"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <TextView android:text="ID" android:id="@+id/tv_forjoinid"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+    
+	<EditText android:id="@+id/edit_forjoinid" android:layout_width="200dip"
+		android:layout_height="35dip" android:layout_marginRight="10dp" />
+	
+	<TextView android:text="이름" android:id="@+id/tv_forjoinname"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+    
+	<EditText android:id="@+id/edit_forjoinname" android:layout_width="200dip"
+		android:layout_height="35dip" android:layout_marginRight="10dp" />
+	
+	<TextView android:text="비밀번호" android:id="@+id/tv_forjoinpw"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+	
+	<EditText android:id="@+id/edit_forjoinpw" android:layout_width="200dip"
+		android:layout_height="35dip" android:password="true" />
+	
+	<TextView android:text="비밀번호확인" android:id="@+id/tv_forjoinpw2"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+	
+	<EditText android:id="@+id/edit_forjoinpw2" android:layout_width="200dip"
+		android:layout_height="35dip" android:password="true" />
+
+</LinearLayout>

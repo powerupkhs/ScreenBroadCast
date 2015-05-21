@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_root3"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fff"
+    >
+    <TextView android:id="@+id/textview_create"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:text="방 제목" ></TextView>
+    
+	<EditText android:id="@+id/edit_forcreate" android:layout_width="200dip"
+		android:layout_height="35dip" android:layout_marginRight="10dp" />
+	
+	<RadioGroup 
+	    android:id="@+id/radiogroup1"
+	    android:layout_height="wrap_content"
+	    android:layout_width="wrap_content">
+	    <RadioButton 
+	        android:id="@+id/is_private"
+	        android:layout_width = "wrap_content"
+	        android:layout_height ="wrap_content"
+	         android:checked="true"
+	        android:text="비공개"/>
+	    <RadioButton 
+	        android:id="@+id/is_public"
+	        android:layout_width="wrap_content"
+	        android:layout_height = "wrap_content"
+	        android:text="공개"
+	        />
+	    
+	</RadioGroup>
+	 <TextView android:id="@+id/textview_roompw"
+		android:layout_width="wrap_content" android:layout_height="wrap_content"
+		android:text="비밀번호" ></TextView>
+    
+	<EditText android:id="@+id/edit_forroompw" 
+	    android:layout_width="200dip"
+		android:layout_height="35dip" android:layout_marginRight="10dp" />
+</LinearLayout>

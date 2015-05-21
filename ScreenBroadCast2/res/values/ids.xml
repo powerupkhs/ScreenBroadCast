@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<item name="actionbar_compat" type="id"/>
+<item type="id" name="actionbar_compat_title" />
+<item type="id" name="actionbar_compat_item_refresh_progress" />
+<item type="id" name="actionbar_compat_item_refresh" />
+</resources>

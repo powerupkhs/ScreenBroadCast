@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/list_forRoom"
+            android:layout_width="wrap_content"
+            android:layout_height="267dp"
+            android:layout_weight="1.25"
+            android:background="#FFFFFF"
+            android:cacheColorHint="#00000000" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:orientation="horizontal" >
+<!-- 
+            <Button
+                android:id="@+id/create"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:text="개설" />
+ -->
+
+            <EditText
+                android:id="@+id/searchText"
+                android:layout_width="190dp"
+                android:layout_height="wrap_content" />
+
+            <ImageButton
+                android:id="@+id/searchBtn"
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+		  	    android:scaleType="centerCrop"
+		 	    android:src = "@drawable/search"
+                 />
+            <!--  android:scaleType="centerCrop"
+				android:padding="0sp"
+				android:src="@drawable/search" /> -->
+			<ImageButton
+                android:id="@+id/logout"
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+		  	    android:scaleType="centerCrop"
+		 	    android:src = "@drawable/logout"
+		 	    />
+			<ImageButton
+                android:id="@+id/bookmark"
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+		  	    android:scaleType="centerCrop"
+		 	    android:src = "@drawable/bookmark"
+		 	    />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

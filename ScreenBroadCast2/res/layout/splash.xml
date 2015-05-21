@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:src="@drawable/title" />
+	<LinearLayout
+	    android:id="@+id/first"
+	    android:orientation="horizontal"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:layout_gravity="center">
+	    <Button
+        android:id="@+id/login"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:text="로그인"/>
+	    <Button
+        android:id="@+id/join"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:text="회원가입"/>
+	    <Button
+        android:id="@+id/watch"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:text="gogo"/>
+	</LinearLayout>
+    
+</LinearLayout>
