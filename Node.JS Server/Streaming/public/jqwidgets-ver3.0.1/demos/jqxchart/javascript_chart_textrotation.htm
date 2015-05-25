@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>jqxChart Axis Text Rotation Example</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare chart data
+            var sampleData = [
+                    { Day: 'Monday', Keith: 30, Erica: 15, George: 25 },
+                    { Day: 'Tuesday', Keith: 25, Erica: 25, George: 30 },
+                    { Day: 'Wednesday', Keith: 30, Erica: 20, George: 25 },
+                    { Day: 'Thursday', Keith: 35, Erica: 25, George: 45 },
+                    { Day: 'Friday', Keith: 20, Erica: 20, George: 25 },
+                    { Day: 'Saturday', Keith: 30, Erica: 20, George: 30 },
+                    { Day: 'Sunday', Keith: 60, Erica: 45, George: 90 }
+            ];
+            // prepare jqxChart settings
+            var settings = {
+                title: "Axis text rotation example",
+                description: "",
+                padding: { left: 5, top: 5, right: 5, bottom: 5 },
+                titlePadding: { left: 90, top: 0, right: 0, bottom: 10 },
+                source: sampleData,
+                categoryAxis:
+                    {
+                        position: 'top',
+                        dataField: 'Day',
+                        showGridLines: true,
+                        textRotationAngle: 55,
+                        horizontalTextAlignment: 'right',
+                        verticalTextAlignment: 'center',
+                        textRotationPoint: 'right',
+                        textOffset: { x: 0, y: 2 }
+                    },
+                colorScheme: 'scheme04',
+                showToolTips: true,
+                enableAnimations: true,
+                seriesGroups:
+                    [
+                        {
+                            type: 'column',
+                            seriesGapPercent: 15,
+                            orientation: 'horizontal',
+                            valueAxis:
+                            {
+                                position: 'right',
+                                textRotationAngle: 0,
+                                minValue: 0,
+                                maxValue: 100,
+                                unitInterval: 10,
+                                description: 'Time in minutes'
+                            },
+                            series: [
+                                    { dataField: 'Keith', displayText: 'Keith' },
+                                    { dataField: 'Erica', displayText: 'Erica' },
+                                    { dataField: 'George', displayText: 'George' }
+                            ]
+                        }
+                    ]
+            };
+
+            // select the chartContainer DIV element and render the chart.
+            $('#chartContainer').jqxChart(settings);
+        });
+    </script>
+</head>
+<body style="background:white;">
+    <div id='chartContainer' style="width:680px; height: 400px;"></div>
+</body>
+</html>

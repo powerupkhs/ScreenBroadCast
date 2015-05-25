@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+<head>
+    <title id='Description'>jqxChart Line Series with Custom Colors Example</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.js"></script>
+    <style type="text/css">
+        .jqx-chart-axis-text, .jqx-chart-label-text, .jqx-chart-legend-text, .jqx-chart-axis-description, .jqx-chart-title-text, .jqx-chart-title-description
+        {
+            fill: #ffffff;
+            color: #ffffff;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var source =
+            {
+                datatype: "csv",
+                datafields: [
+                    { name: 'Date' },
+                    { name: 'S&P 500' },
+                    { name: 'NASDAQ' }
+                ],
+                url: '../sampledata/nasdaq_vs_sp500.txt'
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source, { async: false, autoBind: true, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); } });
+            var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+            // prepare jqxChart settings
+            var settings = {
+                title: "U.S. Stock Market Index Performance (2011)",
+                description: "NASDAQ Composite compared to S&P 500",
+                enableAnimations: true,
+                showLegend: true,
+                padding: { left: 10, top: 5, right: 10, bottom: 5 },
+                titlePadding: { left: 90, top: 0, right: 0, bottom: 10 },
+                source: dataAdapter,
+                backgroundImage: '../../images/chart_background.jpg',
+                categoryAxis:
+                    {
+                        dataField: 'Date',
+                        formatFunction: function (value) {
+                            return months[value.getMonth()];
+                        },
+                        toolTipFormatFunction: function (value) {
+                            return value.getDate() + '-' + months[value.getMonth()];
+                        },
+                        type: 'date',
+                        baseUnit: 'month',
+                        showTickMarks: true,
+                        tickMarksInterval: 1,
+                        tickMarksColor: '#ffffff',
+                        toolTipBackground: '666',
+                        unitInterval: 1,
+                        showGridLines: true,
+                        gridLinesInterval: 3,
+                        gridLinesColor: '#ffffff',
+                        valuesOnTicks: false
+                    },
+                seriesGroups:
+                    [
+                        {
+                            type: 'line',
+                            valueAxis:
+                            {
+                                unitInterval: 500,
+                                minValue: 0,
+                                maxValue: 3000,
+                                displayValueAxis: true,
+                                description: 'Daily Closing Price',
+                                axisSize: 'auto',
+                                tickMarksColor: '#ffffff'
+                            },
+                            series: [
+                                    { dataField: 'S&P 500', displayText: 'S&P 500', color: '#ffffff' },
+                                    { dataField: 'NASDAQ', displayText: 'NASDAQ', color: '#0ff0ff' }
+                                ]
+                        }
+                    ]
+            };
+
+            // setup the chart
+            $('#jqxChart').jqxChart(settings);
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxChart' style="width: 500px; height: 375px">
+    </div>
+</body>
+</html>

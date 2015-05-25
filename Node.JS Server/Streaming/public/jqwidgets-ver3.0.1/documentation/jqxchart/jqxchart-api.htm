@@ -1,0 +1,1492 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="../../Styles/jqx.apireference.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <meta name="keywords" content="jQuery, Chart, Chart plugin, Data Visualization, Help Documentation" />
+    <meta name="description" content="This page represents the help documentation of the jqxChart widget." />
+    <title>jqxChart API Reference</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".documentation-option-type-click").click(function (event) {
+                $(event.target).parents('tr').next().find(".property-content").toggle();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="Div1">
+        <h2>Properties</h2>
+        <table class="documentation-table" style="padding-bottom: 20px;">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Default
+                </th>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span14'>title</span>
+                </td>
+                <td>
+                    <span>String</span>
+                </td>
+                <td>
+                    ''
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets the title of the chart.</p>
+                            Example:
+<pre>
+<code>
+    // select the chart element and change the title to 'New Title'
+    $('#jqxChart').jqxChart({title: 'New Title'});
+    
+    // refresh the chart element
+    $('#jqxChart').jqxChart('refresh');
+</code>
+</pre>
+                        
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span15'>description</span>
+                </td>
+                <td>
+                    <span>String</span>
+                </td>
+                <td>
+                    ''
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets the description text of the chart.</p>
+                            Example:
+<pre>
+<code>
+    // select the chart element and change the description to 'New description'
+    $('#jqxChart').jqxChart({description: 'New description'});
+    
+    // refresh the chart element
+    $('#jqxChart').jqxChart('refresh');
+</code>
+</pre>
+                        
+                    </div>
+                </td>
+            </tr>
+            
+           <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span1'>showBorderLine</span>
+                </td>
+                <td>
+                    <span>Boolean</span>
+                </td>
+                <td>
+                    true
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Determines whether to display the chart's border line</p>
+                            
+                            Example:
+<pre>
+<code>
+    // hide the border line
+    $('#jqxChart').jqxChart({showBorderLine: 'false'});
+    
+    // refresh the chart element
+    $('#jqxChart').jqxChart('refresh');
+</code>
+</pre>
+                        
+                    </div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span2'>borderLineColor</span>
+                </td>
+                <td>
+                    <span>String</span>
+                </td>
+                <td>
+                    #888888
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets the chart's border color.</p>
+                            Example:
+<pre>
+<code>
+    // select the chart element and change the default border color.
+    $('#jqxChart').jqxChart({borderLineColor: 'Blue'});
+    
+    // refresh the chart element
+    $('#jqxChart').jqxChart('refresh');
+</code>
+</pre>
+                        
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span3'>borderLineWidth</span>
+                </td>
+                <td>
+                    <span>Number</span>
+                </td>
+                <td>
+                    1
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets the chart's border line width</p>
+                            Example:
+<pre>
+<code>
+    $('#jqxChart').jqxChart({borderLineWidth: 1});
+    
+    // refresh the chart element
+    $('#jqxChart').jqxChart('refresh');
+</code>
+</pre>
+                        
+                    </div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span4'>backgroundColor</span>
+                </td>
+                <td>
+                    <span>String</span>
+                </td>
+                <td>
+                    White
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets the chart's background color.</p>
+                            Example:
+<pre>
+<code>
+    // select the chart element and change the default background color.
+    $('#jqxChart').jqxChart({backgroundColor: 'Gray'});
+    
+    // refresh the chart element
+    $('#jqxChart').jqxChart('refresh');
+</code>
+</pre>
+                        
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span5'>backgroundImage</span>
+                </td>
+                <td>
+                    <span>String</span>
+                </td>
+                <td>
+                    ''
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets the chart's background image.</p>
+                            Example:
+<pre>
+<code>
+    // select the chart element and set background image.
+    $('#jqxChart').jqxChart({backgroundImage: '../images/chart_background.jpg'});
+    
+    // refresh the chart element
+    $('#jqxChart').jqxChart('refresh');
+</code>
+</pre>
+                        
+                    </div>
+                </td>
+            </tr>
+               
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span16'>showLegend</span>
+                </td>
+                <td>
+                    <span>Boolean</span>
+                </td>
+                <td>
+                    false
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Determines whether to show or hide the chart series legend.</p>
+                            Example:
+<pre>
+<code>
+    // select the chart element and hides the legend
+    $('#jqxChart').jqxChart({showLegend: false});
+    
+    // refresh the chart element
+    $('#jqxChart').jqxChart('refresh');
+</code>
+</pre>
+                       
+                    </div>
+                </td>
+            </tr>
+       <!-- legendLayout -->
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span34'>legendLayout</span>
+                </td>
+                <td>
+                    <span>Object</span>
+                </td>
+                <td>
+                    null
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                            <p> Sets the legend's layout. The expected object is with the following fields:</p>
+                            <ul>
+                                <li>left - legend's X position.</li>
+                                <li>top - legend's Y position.</li>
+                                <li>width - legend's width.</li>
+                                <li>height - legend's height.</li>
+                                <li>flow - 'horizontal' or 'vertical'.</li>
+                            </ul>
+                          Example:
+                       <h4>
+                            Code example</h4>
+                        <pre><code>$('#jqxChart').jqxChart({legendLayout : { left: 500, top: 140, width: 300, height: 200, flow: 'vertical' }}); </code></pre>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span17'>padding</span>
+                </td>
+                <td>
+                    <span>Padding</span>
+                </td>
+                <td>
+                    { left: 5, top: 5, right: 5, bottom: 5 }
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets the left,top, right & bottom padding of the Chart.</p>
+                            Example:
+<pre>
+<code>
+    $('#jqxChart').jqxChart({padding: { left: 10, top: 10, right: 10, bottom: 10 }});
+    $('#jqxChart').jqxChart('refresh');
+</code>
+</pre>
+                        
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span18'>titlePadding</span>
+                </td>
+                <td>
+                    <span>Padding</span>
+                </td>
+                <td>
+                    { left: 2, top: 2, right: 2, bottom: 2 }
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets the padding of the chart's title.</p>
+                            Example:
+<pre>
+<code>
+    $('#jqxChart').jqxChart({titlePadding: { left: 10, top: 10, right: 10, bottom: 10 }});
+    $('#jqxChart').jqxChart('refresh');
+</code>
+</pre>
+                       
+                    </div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span19'>colorScheme</span>
+                </td>
+                <td>
+                    <span>String</span>
+                </td>
+                <td>
+                    'scheme01'
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets the chart's color pallete. jqxChart suppports 11 color schemes from 'scheme01'
+                            to 'scheme11'.</p>
+                            Example:
+<pre>
+<code>
+    $('#jqxChart').jqxChart({colorScheme: 'scheme06'});
+    $('#jqxChart').jqxChart('refresh');
+</code>
+</pre>
+                       
+                    </div>
+                </td>
+            </tr>
+
+            <!-- greyScale -->
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span>greyScale</span>
+                </td>
+                <td>
+                    <span>Boolean</span>
+                </td>
+                <td>
+                    false
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Determines whether to display the chart using grey scale colors.
+                        </p>
+						Example:
+<pre><code>    
+    $('#jqxChart').jqxChart({greyScale: true});
+</code></pre>
+						
+                    </div>
+                </td>
+            </tr>
+            <!-- end of greyScale -->
+			
+            <!-- showToolTips -->
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span20'>showToolTips</span>
+                </td>
+                <td>
+                    <span>Boolean</span>
+                </td>
+                <td>
+                    true
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Enables or disables the chart tooltips.</p>
+                            Example:
+<pre>
+<code>
+    $('#jqxChart').jqxChart({showToolTips: false});
+    $('#jqxChart').jqxChart('refresh');
+</code>
+</pre>
+                        
+                    </div>
+                </td>
+            </tr>
+
+            <!-- toolTipShowDelay -->
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span21'>toolTipShowDelay</span>
+                </td>
+                <td>
+                    <span>Number</span>
+                </td>
+                <td>
+                    500
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Determines the tooltips show delay in milliseconds. Values may range from 0 to 10000 [ms]</p>
+                            Example:
+<pre>
+<code>
+    $('#jqxChart').jqxChart({toolTipShowDelay: 2000});
+    $('#jqxChart').jqxChart('refresh');
+</code>
+</pre>
+                        
+                    </div>
+                </td>
+            </tr>
+
+            <!-- toolTipHideay -->
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span6'>toolTipHideDelay</span>
+                </td>
+                <td>
+                    <span>Number</span>
+                </td>
+                <td>
+                    4000
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Determines the tooltips hide delay in milliseconds.</p>
+                            Example:
+<pre>
+<code>
+    $('#jqxChart').jqxChart({toolTipHideDelay: 5000});
+    $('#jqxChart').jqxChart('refresh');
+</code>
+</pre>
+                        
+                    </div>
+                </td>
+            </tr>
+
+            <!-- toolTipFormatFunction -->
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span7'>toolTipFormatFunction</span>
+                </td>
+                <td>
+                    <span>Function</span>
+                </td>
+                <td>
+                    undefined
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            User defined tooltips text formatting callback function.</p>                       
+                    </div>
+                </td>
+            </tr>
+           
+           <!-- rtl -->
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span33'>rtl</span>
+                </td>
+                <td>
+                    <span>Boolean</span>
+                </td>
+                <td>
+                    false
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                            <p> Sets or gets a value indicating whether the Chart's layout is mirrored.</p>
+                          Example:
+                       <h4>
+                            Code example</h4>
+                        <p>
+                            Set the <code>rtl</code> property.
+                        </p>
+                        <pre><code>$('#jqxChart').jqxChart({rtl : true}); </code></pre>
+                        <p>
+                            Get the <code>rtl</code> property.
+                        </p>
+                        <pre><code>var rtl = $('#jqxChart').jqxChart('rtl'); </code></pre>
+                            
+                    </div>
+                </td>
+            </tr>
+                 
+                               
+            <!-- enableCrosshairs -->
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span8'>enableCrosshairs</span>
+                </td>
+                <td>
+                    <span>Boolean</span>
+                </td>
+                <td>
+                    false
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Enables or disables the crosshairs lines. The lines are displayed in line and area series when you move over a data point.</p>
+                            Example:
+<pre>
+<code>
+    $('#jqxChart').jqxChart('enableCrosshairs', false});
+</code>
+</pre>
+                            
+                    </div>
+                </td>
+            </tr>
+            
+            <!-- crosshairsColor -->
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span9'>crosshairsColor</span>
+                </td>
+                <td>
+                    <span>String</span>
+                </td>
+                <td>
+                    #888888
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Gets or sets the color of the crosshairs lines.</p>
+                            Example:
+<pre>
+<code>
+    $('#jqxChart').jqxChart('crosshairsColor', '#AA55AA'});
+</code>
+</pre>
+                            
+                    </div>
+                </td>
+            </tr>
+
+            <!-- crosshairsDashStyle -->
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span10'>crosshairsDashStyle</span>
+                </td>
+                <td>
+                    <span>String</span>
+                </td>
+                <td>
+                    '2,2'
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Gets or sets the dash style of the crosshairs lines. The style is a series of numbers indicating line length followed by space length.</p>
+                            Example:
+<pre>
+<code>
+    $('#jqxChart').jqxChart('crosshairsDashStyle', '1,1'});
+</code>
+</pre>
+                            
+                    </div>
+                </td>
+            </tr>
+
+           <!-- crosshairsLineWidth -->
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span32'>crosshairsLineWidth</span>
+                </td>
+                <td>
+                    <span>Number</span>
+                </td>
+                <td>
+                    1.0
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Gets or sets the width of the crosshairs lines. </p>
+                            Example:
+<pre>
+<code>
+    $('#jqxChart').jqxChart('crosshairsLineWidth', 2.0});
+</code>
+</pre>
+                            
+                    </div>
+                </td>
+            </tr>
+                 
+            <!-- axisPadding -->
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span35'>axisPadding</span>
+                </td>
+                <td>
+                    <span>Number</span>
+                </td>
+                <td>
+                    5
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Gets or sets the axis padding. </p>
+                            Example:
+<pre>
+<code>
+    $('#jqxChart').jqxChart('axisPadding', 10});
+</code>
+</pre>
+                            
+                    </div>
+                </td>
+            </tr>
+                   
+          <!-- columnSeriesOverlap -->
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span36'>columnSeriesOverlap</span>
+                </td>
+                <td>
+                    <span>Boolean</span>
+                </td>
+                <td>
+                    false
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Enables or disables overlapping of the column series. </p>
+                            Example:
+<pre>
+<code>
+    $('#jqxChart').jqxChart('columnSeriesOverlap', true});
+</code>
+</pre>
+                            
+                    </div>
+                </td>
+            </tr>
+
+            <!-- enabled -->
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span22'>enabled</span>
+                </td>
+                <td>
+                    <span>Boolean</span>
+                </td>
+                <td>
+                    true
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Gets or sets whether the chart widget in enabled or disabled state.</p>
+                            Example:
+<pre>
+<code>
+    $('#jqxChart').jqxChart({enabled: false});
+    $('#jqxChart').jqxChart('refresh');
+</code>
+</pre>
+                       
+                    </div>
+                </td>
+            </tr>
+            
+            <!-- source -->
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span23'>source</span>
+                </td>
+                <td>
+                    <span>Object</span>
+                </td>
+                <td>
+                    null
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets the chart's data source.</p>
+                            Example:
+                            <pre><code>
+    var source =
+    {
+        datatype: "tab",
+        datafields: [
+            { name: 'Date'},
+            { name: 'Referral'},
+            { name: 'SearchPaid'},
+            { name: 'SearchNonPaid'}
+        ],
+        url: '../sampledata/website_analytics.txt'
+    };
+
+    var dataAdapter = new $.jqx.dataAdapter(source,
+        {
+            async: false,
+            autoBind: true,
+        });
+
+    // prepare jqxChart settings
+    var settings = {
+        title: "Visual Web Traffic Analysis",
+        description: "Unique site visitors in 2011",
+        source: dataAdapter,
+        categoryAxis:
+        {
+            dataField: 'Date',
+            unitInterval: Math.round(dataAdapter.records.length / 12),
+            showGridLines: false
+        },
+        colorScheme: 'scheme06',
+        seriesGroups:
+        [
+            {
+                type: 'stackedarea100',
+                valueAxis:
+                {
+                    unitInterval: 500,
+                    description: 'Daily visitors'
+                },
+                series: [
+                        { dataField: 'SearchNonPaid', displayText: 'Non-Paid Search Traffic' },
+                        { dataField: 'SearchPaid', displayText: 'Paid Search Traffic' },
+                        { dataField: 'Referral', displayText: 'Referral Traffic' }
+                    ]
+            }
+        ]
+    };
+
+    // setup the chart
+    $('#jqxChart').jqxChart(settings);
+</code>
+</pre>
+                        
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span24'>categoryAxis</span>
+                </td>
+                <td>
+                    <span>Object</span>
+                </td>
+                <td>
+                    null
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Sets the Chart's categoryAxis.</p>
+							Example:
+<pre><code>
+categoryAxis:
+{
+    dataField: 'Date',
+    formatFunction: function (value) {
+        var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        return months[value.getMonth()];
+    },
+    type: 'date',
+    baseUnit: 'month',
+    flip: false,
+    showTickMarks: true,
+    tickMarksInterval: 1,
+    tickMarksColor: '#888888',
+    unitInterval: 2,
+    showGridLines: true,
+    gridLinesInterval: 3,
+    gridLinesColor: '#888888'
+}                        
+</code></pre>
+                        <ul>
+                            <li>dataField - points to a data field in the data source.</li>
+                            <li>type - the type of the axis. Values can be 'default' or 'date' when displaying dates.</li>
+                            <li>unitInterval - sets the interval between the units.</li>
+                            <li>baseUnit - the base unit when used with 'date' axis. Values can be 'year', 'month', 'day', 'hour', 'minute', 'second' or 'millisecond'.</li>
+                            <li>valuesOnTicks - specifies whether the axis values will be aligned with the tick marks.</li>
+                            <li>showTickMarks - when this property is true, the ticks are displayed in the categoryAxis.</li>
+                            <li>tickMarksInterval - sets the interval between each tick mark.</li>
+                            <li>tickMarksColor - sets the color of the tick marks.</li>
+                            <li>tickMarksDashStyle - a string sequence of numbers represening line and space lengths, e.g. '2,2' </li>
+                            <li>showGridLines - displays the grid lines.</li>
+                            <li>gridLinesInterval - sets the interval between the grid lines.</li>
+                            <li>gridLinesColor - set the grid lines color.</li>
+                            <li>gridLinesDashStyle - a string sequence of numbers represening line and space lengths, e.g. '2,2' </li>
+                            <li>axisSize - sets the size of the categoryAxis.</li>
+                            <li>formatSettings - settings used to format the displayed values.</li>
+                            <li>formatFunction - custom function to format the displayed values.</li>
+                            <li>toolTipFormatSettings - settings used to format category axis values in tooltips.</li>
+                            <li>toolTipFormatFunction - custom function to format category axis values in tooltips.</li>
+                            <li>textRotationAngle - rotation of the text along the axis (0-360) degrees.</li>
+                            <li>textRotationPoint - position to rotate the text around, e.g. 'left', 'center' or 'right'</li>
+                            <li>textOffset - horizontal and vertical text position offset, e.g. {x: 5, y: 2}</li>
+                            <li>horizontalTextAlignment - horizontal alignment for the values along the axis.</li>
+                            <li>verticalTextAlignment - vertical alignment for the values along the axis.</li>
+                            <li>horizontalDescriptionAlignment - horizontal alignment for the axis description text</li>
+                            <li>verticalDescriptionAlignment - vertical alignment for the axis description text.</li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span25'>seriesGroups</span>
+                </td>
+                <td>
+                    <span>Object</span>
+                </td>
+                <td>
+                    null
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            The seriesGroups property is used to describe all series displayed on the chart. jqxChart supports multiple
+                            series of different types and series grouping. Each series group may have its own Value Axis (Y-axis) which
+                            allows you to have values with different scales displayed on the same chart at the same time. It also allows
+                            you to display multiple series types together on the same chart. For example, you can display all series in
+                            one group as lines and the series in a second group as columns.
+                        </p>
+<pre><code>
+    seriesGroups:
+    [
+        {
+            type: 'stackedarea100',
+            orientation: 'vertical',
+            valueAxis:
+            {
+                unitInterval: 500,
+                flip: false,
+                minValue: 0,
+                maxValue: 3000,
+                displayValueAxis: true,
+                description: 'Daily visitors',
+                axisSize: 'auto',
+                tickMarksColor: '#888888'
+            },
+            series: [
+                    { dataField: 'SearchNonPaid', displayText: 'Non-Paid Search Traffic' },
+                    { dataField: 'SearchPaid', displayText: 'Paid Search Traffic' },
+                    { dataField: 'Referral', displayText: 'Referral Traffic' }
+                ],
+            bands:
+            [
+                { minValue: 2000, maxValue: 2500, color: '#FF0000', opacity: 0.15},
+                { minValue: 1000, maxValue: 1100, color: '#FF0000', opacity: 0.20}
+            ]
+                
+        }
+    ]
+</code></pre>
+<br/>
+The seriesGroups is an array of objects where each object represents one group. A group may have the following properties:
+<br/>
+                        <ul>
+                            <li>type - sets the chart type. jqxChart supports several common chart types. You can
+                                easily plot series of different types on a common chart. A type must be specified
+                                for each series group. Currently jqxChart supports the following series types:
+                                <ul>
+                                    <li>column - simple column series</li>
+                                    <li>stackedcolumn - stacked column series</li>
+                                    <li>stackedcolumn100 - percentage stacked columns</li>
+                                    <li>rangecolumn - floating column between two values</li>
+                                    <li>line - simple streight lines connecting the value points</li>
+                                    <li>stackedline - stacked lines</li>
+                                    <li>stackedline100 - percentage stacked lines</li>
+                                    <li>spline - smooth lines connecting the value points</li>
+                                    <li>stackedspline - smooth stacked lines</li>
+                                    <li>stackedspline100 - percentage stacked smooth lines</li>
+                                    <li>stepline - step line</li>
+                                    <li>stackedstepline - stacked step line</li>
+                                    <li>stackedstepline100 - percentage stacked step line</li>
+                                    <li>area - area connecting the value points with streight lines</li>
+                                    <li>stackedarea- stacked area with streight lines between the points</li>
+                                    <li>rangearea - floating area between pairs of value points</li>
+                                    <li>stackedline100 - percentage stacked area</li>
+                                    <li>splinearea - smooth area connecting the value points</li>
+                                    <li>splinerangearea - smooth floating area between pairs of value points</li>
+                                    <li>stackedsplineara - smooth stacked area</li>
+                                    <li>stackedsplinearea100 - percentage stacked smooth area</li>
+                                    <li>steplinearea - step area connecting the value points</li>
+                                    <li>stackedsteplineara - step stacked area</li>
+                                    <li>stackedsteplinearea100 - percentage stacked step area</li>
+                                    <li>pie - circular chart divided into sectors, illustrating proportion</li>
+									<li>donut - chart divided into circular sectors with different inner and outer radius</li>
+                                    <li>scatter - data is displayed as a collection of points</li>
+                                    <li>bubble - data is displayed as a collection of bubbles</li>
+                                </ul>
+                            </li><br/>
+                            <li>orientation - specifies the orientation of the series group.</li>
+                                <ul>
+                                    <li>vertical - the valueAxis is displayed along the y-Axis and the categoryAxis along the x-Axis.</li>
+                                    <li>horizontal - the valueAxis is displayed along the x-Axis and the categoryAxis along the y-Axis.</li>
+                                </ul>
+                            </li><br/>
+                            <li>series - an array of Chart series.<p>Each serie has the following properties:</p></li>
+                                <ul>
+                                    <li>dataField - name of the field in the data source.</li>
+                                    <li>displayText - name to display for this serie.</li>
+                                    <li>colorScheme - color palette to use when rendering the serie.</li>
+                                    <li>color - color for the serie. Takes precedence over the colorScheme property.</li>
+                                    <li>greyScale - boolean that determines whether to display the serie in grey scale.</li>
+                                    <li>formatSettings - data formatting settings for the values in the serie.</li>
+                                    <li>formatFunction - data formatting function for the values in the serie.</li>
+                                    <li>toolTipFormatSettings - tooltip data formatting settings for the values in the serie.</li>
+                                    <li>toolTipFormatFunction - tooltip data formatting function for the values in the serie.</li>
+                                    <li>toolTipLineColor - determines the tooltip's border lines color.</li>
+                                    <li>toolTipBackground - determines the tooltip's background.</li>
+                                    <li>toolTipClass - determines the tooltip's CSS class name.</li>
+                                    <li>useGradient - determines whether to use color gradients.</li>
+                                    <li>opacity - determines the opacity of the items in this serie.</li>                       
+                                    <li>lineWidth - determines the line tickness of the items in this serie.</li>                 
+                                    <li>lineDashStyle - a string sequence of numbers represening line and space lengths, e.g. '2,2' </li>
+                                    <li>symbolType - determines the symbol type displayed for the data points in the serie. This parameter is applicable to line and area series only. Acceptable values are: 'none', 'circle', 'square', 'diamond', 'triangle_up', 'triangle_down', 'triangle_left', 'triangle_right'</li>                                           
+                                    <li>showLabels - determines whether to display the data point label.</li>
+                                    <li>labelsOffset - determines the offset from the data point of the data point label. The property should be specified in the following format: {x: 0, y: 0}.</li>
+                                    <li>labelsAngle - determines the rotation angle of the data point labels.</li>
+                                    <li>radius - determines the pie chart's radius.</li>
+                                    <li>labelRadius - determines the radius of the displayed labels in a pie/donut chart.</li>
+                                    <li>innerRadius - determines the radius of the inner circle in a donut chart.</li>
+                                    <li>initialAngle - determines the initial rendering angle of the series in a pie/donut chart.</li>
+                                    <li>centerOffset - determines the offset from the center point in a pie/donut chart.</li>
+                                </ul><br/>                                
+                            <li>valueAxis - sets the value axis options.
+                                <ul>
+                                    <li>unitInterval - sets the interval between the units.</li>
+                                    <li>description - sets the description text of the valueAxis.</li>
+                                    <li>minValue - sets the minimum value of the valueAxis.</li>                 
+                                    <li>maxValue - sets the maximum value of the valueAxis.</li>                                        
+                                    <li>formatSettings - settings used to format the displayed values along the axis.</li>
+                                    <li>formatFunction - custom function to format the displayed values along the axis.</li>
+                                    <li>flip - specifies whether the values are displayed in reverse order.</li>
+                                    <li>displayValueAxis - shows or hides the valueAxis.</li>
+                                    <li>axisSize - sets the size of the axis.</li>
+                                    <li>showTickMarks - when this property is true, the ticks are displayed in the valueAxis.</li>
+                                    <li>tickMarksInterval - sets the interval between each tick mark.</li>                       
+                                    <li>tickMarksColor - sets the color of the tick marks.</li>
+                                    <li>tickMarksDashStyle - a string sequence of numbers represening line and space lengths, e.g. '2,2' </li>
+                                    <li>showGridLines - when this property is true, grid lines are displayed along the values of the axis.</li>
+                                    <li>gridLinesInterval - sets the interval between the grid lines.</li>                       
+                                    <li>gridLinesColor - sets the color of the grid lines.</li>
+                                    <li>gridLinesDashStyle - a string sequence of numbers represening line and space lengths, e.g. '2,2' </li>
+                                    <li>baselineValue - sets the baseline value for the axis.</li>
+                                    <li>logarithmicScale - determines whether to use logarithmic scale. The default value is 'false'.</li>
+                                    <li>logarithmicScaleBase - base for logarithmic scale. The default value is 10.</li>
+                                    <li>textRotationAngle - rotation of the text along the axis (0-360) degrees.</li>
+                                    <li>textRotationPoint - position to rotate the text around, e.g. 'left', 'center' or 'right'</li>
+                                    <li>textOffset - horizontal and vertical text position offset, e.g. {x: 5, y: 2}</li>
+                                    <li>horizontalTextAlignment - horizontal alignment for the values along the axis.</li>
+                                    <li>verticalTextAlignment - vertical alignment for the values along the axis.</li>
+                                    <li>horizontalDescriptionAlignment - horizontal alignment for the axis description text</li>
+                                    <li>verticalDescriptionAlignment - vertical alignment for the axis description text.</li>                                    
+                                </ul><br/>
+                            <li>bands - optional color bands dislayed in the chart's plot area</li>
+                                <ul>
+                                    <li>minValue - start value of the color band.</li>
+                                    <li>maxValue - end value of the color band.</li>
+                                    <li>color - color used to fill the area between the minValue and the maxValue.</li>
+                                    <li>opacity - fraction indicating the fill opacity.</li>
+                                </ul>
+                            </li><br/>
+                             <li>greyScale - boolean that determines whether to display the series in the group in grey scale.</li>
+                            </li>                          
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            <!-- enableAnimations -->
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span>enableAnimations</span>
+                </td>
+                <td>
+                    <span>Boolean</span>
+                </td>
+                <td>
+                    false
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style="width: 100%">
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Determines if the animations are enabled. When you set this property it will turn on or off the animations
+                            for all series in all seriesGroups in the chart. You can override this property for individual seriesGroups and series.
+                        </p>
+                    </div>
+                </td>
+            </tr>
+            <!-- end of enableAnimations -->
+            <!-- animationDuration -->
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span>animationDuration</span>
+                </td>
+                <td>
+                    <span>Number</span>
+                </td>
+                <td>
+                    1000
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Determines the animations duration in milliseconds. The value must be between 0 and 5000.
+                            If it is outside of this range jqxChart will reset it to the default value of 1000.
+                        </p>
+                    </div>
+                </td>
+            </tr>
+            <!-- end of animationDuration -->
+
+            <!-- renderEngine -->
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span>renderEngine</span>
+                </td>
+                <td>
+                    <span>String</span>
+                </td>
+                <td>
+                    ''
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Determines the rendering engine used to display the chart. Possible values are 'SVG', 'VML' and 'HTML5'.
+							When the property is not set jqxChart will automatically select an optimal rendering engine depending on the browser capabilities.
+                        </p>
+						Example:
+<pre><code>    
+    $('#jqxChart').jqxChart({renderEngine: 'HTML5'});
+    $('#jqxChart').jqxChart('refresh');
+</code></pre>
+						
+                    </div>
+                </td>
+            </tr>
+            <!-- end of renderEngine -->
+            
+        </table>
+        <br />
+    </div>       
+    <div id="events">
+    <h2>Events</h2>
+        <table class="documentation-table">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Arguments
+                </th>
+                <th>
+                </th>
+            </tr>
+            <!-- mouseover -->
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span11'>mouseover</span>
+                </td>
+                <td>
+                    <span>Object</span>
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            The event is raised when the user moves the cursor above a series element.
+                            Example:</p>
+<pre>
+<code>
+    // get the series groups of an existing chart
+    var groups = $('#jqxChart').jqxChart('seriesGroups');
+    
+    // add a mouseover event handler function to the 1st group    
+    if (groups.length > 0)
+    {
+        groups[0].mouseover = function(e)
+        {
+            alert('event = ' + e.event + ' index = ' + e.elementIndex );
+        }
+        
+        // update the group
+        $('#jqxChart').jqxChart({seriesGroups: groups});
+    }
+</code>
+</pre>
+                       
+                    </div>
+                </td>
+            </tr>
+            <!-- mouseout -->
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span12'>mouseout</span>
+                </td>
+                <td>
+                    <span>Object</span>
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            The event is raised when the user moves the cursor out of a series element.
+                            Example:</p>
+<pre>
+<code>
+    // get the series groups of an existing chart
+    var groups = $('#jqxChart').jqxChart('seriesGroups');
+    
+    // add a mouseout event handler function to the 1st group    
+    if (groups.length > 0)
+    {
+        groups[0].mouseout = function(e)
+        {
+            alert('event = ' + e.event + ' index = ' + e.elementIndex );
+        }
+        
+        // update the group
+        $('#jqxChart').jqxChart({seriesGroups: groups});
+    }
+</code>
+</pre>
+                        
+                    </div>
+                </td>
+            </tr>
+            
+            <!-- click -->
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span13'>click</span>
+                </td>
+                <td>
+                    <span>Object</span>
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='padding-bottom: 20px; width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            The event is raised when the user clicks on series element.
+                            Example:</p>
+<pre>
+<code>
+    // get the series groups of an existing chart
+    var groups = $('#jqxChart').jqxChart('seriesGroups');
+    
+    // add a click event handler function to the 1st group    
+    if (groups.length > 0)
+    {
+        groups[0].click = function(e)
+        {
+            alert('event = ' + e.event + ' index = ' + e.elementIndex );
+        }
+        
+        // update the group
+        $('#jqxChart').jqxChart({seriesGroups: groups});
+    }
+</code>
+</pre>
+                        
+                    </div>
+                </td>
+            </tr>
+      </table>
+    </div>        
+   <div id="methods">
+        <h2 class="documentation-top-header">
+            Methods</h2>
+        <table class="documentation-table">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Arguments
+                </th>
+                <th>
+                    Return Value
+                </th>
+            </tr>
+			
+			<!-- refresh -->
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span26'>refresh</span>
+                </td>
+                <td>
+                    <span>None</span>
+                </td>
+                <td>
+                    None
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Refreshes the content of the chart widget after a property or data update.
+                            Example:</p>
+<pre>
+<code>
+    // select the chart element and change the color scheme
+    $('#jqxChart').jqxChart({colorScheme: 'scheme02'});
+    
+    // refresh the chart element
+    $('#jqxChart').jqxChart('refresh');
+</code>
+</pre>
+                        
+                    </div>
+                </td>
+            </tr>
+
+            <!-- addColorScheme -->
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span27'>addColorScheme</span>
+                </td>
+                <td>
+                    <span>schemeName, array of colors</span>
+                </td>
+                <td>
+                    None
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Adds a new color sheme. If a scheme with the same name already exists the method will update its colors.</p>
+                        <p>Example:</p>
+<pre>
+<code>
+    // setup the chart
+    var myChart = $('#jqxChart').jqxChart(settings);
+
+    // add a new color scheme named 'myScheme'
+    myChart.jqxChart('addColorScheme', 'myScheme', ['#FF0000', '#00FF00', '#0000FF']);
+
+    // apply the new scheme by setting the chart's colorScheme property
+    myChart.jqxChart('colorScheme', 'myScheme');
+
+    // refresh the chart
+    myChart.jqxChart('refresh');
+</code>
+</pre>
+                        
+                    </div>
+                </td>
+            </tr>
+
+            <!-- removeColorScheme -->
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span28'>removeColorScheme</span>
+                </td>
+                <td>
+                    <span>schemeName</span>
+                </td>
+                <td>
+                    None
+                </td>
+            </tr>
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Removes an existing color scheme. If the scheme does not exist the method has no effect.</p>
+                        <p>Example:</p>
+<pre>
+<code>
+    // remove an existing color scheme named 'myScheme'
+    $('#jqxChart').jqxChart('removeColorScheme', 'myScheme');
+</code>
+</pre>
+                        
+                    </div>
+                </td>
+            </tr>
+
+            <!-- getColorScheme -->
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span29'>getColorScheme</span>
+                </td>
+                <td>
+                    <span>schemeName</span>
+                </td>
+                <td>
+                    array of colors or undefined
+                </td>
+            </tr>
+			
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Returns the colors of a color scheme by name. If the scheme doesn't exist the method returns undefined.</p>
+                        <p>Example:</p>
+<pre>
+<code>
+    // get the colors of a scheme named 'myScheme'
+    var schemeColors = $('#jqxChart').jqxChart('getColorScheme', 'myScheme');
+</code>
+</pre>
+                        
+                    </div>
+                </td>
+            </tr>
+			
+            <!-- saveAsJPEG -->
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span30'>saveAsJPEG</span>
+                </td>
+                <td>
+                    <span>fileName, exportServer</span>
+                </td>
+                <td>
+                    'chart.jpeg', ''
+                </td>
+            </tr>
+			
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Exports the chart's content as JPEG image.<br/>
+							The browser must support HTML5 Canvas and the device must be able to connect to the export server.
+							If you don't setup your own export server the default server is jqwidgets.com.
+                        <p>Example:</p>
+<pre>
+<code>    
+    $('#jqxChart').jqxChart('saveAsJPEG', 'myChart.jpeg');
+</code>
+</pre>
+                        
+                    </div>
+                </td>
+            </tr>
+			
+            <!-- saveAsPNG -->
+            <tr>
+                <td class="documentation-option-type-click">
+                    <span id='Span31'>saveAsPNG</span>
+                </td>
+                <td>
+                    <span>fileName, exportServer</span>
+                </td>
+                <td>
+                    'chart.png', ''
+                </td>
+            </tr>
+			
+            <tr>
+                <td colspan='3' style='width: 100%'>
+                    <div class="documentation-option-description property-content" style="display: none;">
+                        <p>
+                            Exports the chart's content as PNG image.<br/>
+							The browser must support HTML5 Canvas and the device must be able to connect to the export server.
+							If you don't setup your own export server the default server is jqwidgets.com.
+                        <p>Example:</p>
+<pre>
+<code>
+    $('#jqxChart').jqxChart('saveAsPNG', 'myChart.png');
+</code>
+</pre>
+                        
+                    </div>
+                </td>
+            </tr>
+			
+        </table>
+        <br />
+    </div>                
+</body>
+</html>

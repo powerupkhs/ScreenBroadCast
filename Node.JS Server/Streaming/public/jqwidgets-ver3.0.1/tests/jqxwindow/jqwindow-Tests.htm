@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>jqxWindow Test</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxwindow.js"></script>
+    <link rel="stylesheet" href="../../Styles/qunit-git.css" media="screen" />
+    <script type="text/javascript" src="../../Scripts/qunit-git.js"></script>  
+   <script type="text/javascript">
+        $(document).ready(function () {
+            $('#window').jqxWindow();
+            $('#methodsWindow').jqxWindow();
+
+
+            module('Methods');
+
+            test('move', function () {
+                var left = 25,
+            top = 23;
+                $('#methodsWindow').jqxWindow('move', left, top);
+                equal(parseInt($('#methodsWindow').css('left'), 10), left, 'Window\'s left position should be equal to ' + left);
+                equal(parseInt($('#methodsWindow').css('top'), 10), top, 'Window\'s left position should be equal to ' + top);
+            });
+
+            test('enable/disable', function () {
+                $('#methodsWindow').jqxWindow('disable');
+                ok($('#methodsWindow').jqxWindow('disabled'), 'Disabled should be equal to true.');
+                ok($('#methodsWindow').find('.jqx-window-header-disabled').length > 0, 'There should be a header with disabled class.');
+                ok($('#methodsWindow').find('.jqx-window-content-disabled').length > 0, 'There should be a content with disabled class.');
+            });
+
+            test('setTitle/setContent', function () {
+                var header = '<p>sample title</p>',
+            content = '<p>sample content</p>';
+                $('#methodsWindow').jqxWindow('title', header);
+                $('#methodsWindow').jqxWindow('content', content);
+                ok($('#methodsWindow').jqxWindow('_headerContentWrapper').html().toLowerCase() == header, 'Window\'s title should be changed');
+                ok($('#methodsWindow').jqxWindow('_content').html().toLowerCase() == content, 'Window\'s content should be changed');
+            });
+
+            module('Properties methods');
+
+            test('Layout', function () {
+                var header = $('#window').jqxWindow('_header'),
+            content = $('#window').jqxWindow('_content'),
+            width = 300,
+            height = 300;
+                $('#window').jqxWindow('height', height);
+                $('#window').jqxWindow('width', width);
+                equal(Math.round($('#window').height()), 300, 'Host\'s height should be ' + height);
+                equal(Math.round($('#window').width()), 300, 'Host\'s width should be ' + width);
+                equal(Math.round($('#window').jqxWindow('_content').height()), Math.round($('#window').height() -
+                                    header.outerHeight(true) - (content.outerHeight(true)
+                                    - content.height())), 'Content\'s height must be the difference between the host and the header.');
+                ok(header.children('.jqx-window-close-button-background').position().left >
+                         $('#window').jqxWindow('_headerContentWrapper').position().left,
+                         'The close button should be in the right side of the header.');
+            });
+
+            test('minHeight, minHeight', function () {
+                var minHeight = 300,
+            minWidth = 300,
+            width = 100,
+            height = 100;
+                $('#window').jqxWindow('minHeight', minHeight);
+                $('#window').jqxWindow('minWidth', minWidth);
+                $('#window').jqxWindow('height', width);
+                $('#window').jqxWindow('width', height);
+                equal($('#window').jqxWindow('height'), minHeight, 'Window\'s height should be equals to the minHeight');
+                equal($('#window').jqxWindow('width'), minWidth, 'Window\'s width should be equals to the minWidth');
+            });
+
+            test('maxHeight, maxHeight', function () {
+                var maxHeight = 800,
+            maxWidth = 800,
+            height = 850,
+            width = 850;
+                $('#window').jqxWindow('maxHeight', maxHeight);
+                $('#window').jqxWindow('maxWidth', maxWidth);
+                $('#window').jqxWindow('height', height);
+                $('#window').jqxWindow('width', width);
+                equal($('#window').jqxWindow('height'), maxHeight, 'Window\'s height should be equals to the maxHeight');
+                equal($('#window').jqxWindow('width'), maxWidth, 'Window\'s width should be equals to the maxWidth');
+            });
+
+            test('showCloseButton', function () {
+                var header = $('#window').jqxWindow('_header');
+                $('#window').jqxWindow('showCloseButton', true);
+                ok(header.children('.jqx-window-close-button-background').css('visibility') !== 'hidden', 'The close button should be visible.');
+                $('#window').jqxWindow('showCloseButton', false);
+                ok(header.children('.jqx-window-close-button-background').css('visibility') == 'hidden', 'The close button should be invisible.');
+            });
+
+            test('title/content', function () {
+                var header = '<p>sample title</p>',
+            content = '<p>sample content</p>';
+                $('#window').jqxWindow('title', header);
+                $('#window').jqxWindow('content', content);
+                ok($('#window').jqxWindow('title').toLowerCase() === header, 'Window\'s title should be changed');
+                ok($('#window').jqxWindow('content').toLowerCase() === content, 'Window\'s content should be changed');
+            });
+
+            test('resize', function () {
+                $('#window').jqxWindow('resizable', false);
+                ok($('#window').children('.jqx-resize').length === 0, 'The window resizing should have been stoped');
+
+                $('#window').jqxWindow('resizable', true);
+                ok($('#window').children('.jqx-resize').length === 1, 'The window resizing should have been started');
+            });
+
+            test('isModal', function () {
+                $('#window').jqxWindow('isModal', true);
+                ok($('.jqx-window-modal').length > 0, 'There must be a modal background.');
+
+                $('#window').jqxWindow('isModal', false);
+                ok($('.jqx-window-modal').length === 0, 'There must be a modal background.');
+            });
+
+            test('dragArea', function () {
+                var height = 150,
+            width = 150,
+            left = 300,
+            top = 300,
+            dragArea = { top: 0, left: 0, height: 200, width: 200 };
+                $('#window').jqxWindow('height', height);
+                $('#window').jqxWindow('width', width);
+                $('#window').jqxWindow('dragArea', dragArea);
+                $('#window').jqxWindow('move', left, top);
+
+                ok(parseInt($('#window').css('left'), 10) < dragArea.left, 'We\'ve set a limit to the dragging area, so window\'s left should be less than ' + dragArea.left);
+                ok(parseInt($('#window').css('top'), 10) < dragArea.top, 'We\'ve set a limit to the dragging area, so window\'s left should be less than ' + dragArea.top);
+            });
+
+            test('dialogResults', function () {
+                var btnOk = $('<input type="button" value="OK" />'),
+            event = $.Event('click');
+                btnOk.appendTo($('#content'));
+                $('#window').jqxWindow('okButton', btnOk);
+                btnOk.trigger(event);
+                ok($('#window').jqxWindow('dialogResult').OK, 'The dialog result should be equal to OK.');
+            });
+
+            module('Events');
+
+            test('close', function () {
+                var closeTriggered = false,
+            openTriggered = false;
+                $('#window').on('close', function () {
+                    closeTriggered = true;
+                    $('#window').jqxWindow('open');
+                });
+                $('#window').on('open', function () {
+                    openTriggered = true;
+                });
+                $('#window').jqxWindow('close');
+                setTimeout(function () {
+                    ok(closeTriggered, 'close event should be triggered');
+                }, 1000);
+                setTimeout(function () {
+                    ok(openTriggered, 'open event should be triggered');
+                }, 3000);
+            });
+
+        });
+    </script>
+</head>
+<body>   
+    <h1 id="qunit-header">Window widget QUnit test</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+    <div style="visibility:hidden;" id="window">
+        <div id="header">Header</div>
+        <div id="content">Content</div>
+    </div>
+        <div style="visibility:hidden;" id="methodsWindow">
+        <div id="methodsWindowHeader">Header</div>
+        <div id="methodsWindowContent">Content</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <link rel="stylesheet" href="../../Styles/qunit-git.css" media="screen" />
+    <script type="text/javascript" src="../../Scripts/qunit-git.js"></script>
+    <script>
+        $(document).ready(function () {
+            var items = ['item1', 'item2', 'item3', 'item4', 'item5'];
+            $('#jqxListBox').jqxListBox({ source: items, width: '250px', height: '30px' });
+            $('#jqxListBox').css('display', 'none');
+
+            module("Module Properties");
+
+            test("disabled property test", function () {
+                // get disabled.
+                var disabled = $('#jqxListBox').jqxListBox('disabled');
+                ok(disabled == false, "get disabled test.");
+
+                // set disabled.
+                $('#jqxListBox').jqxListBox({ disabled: true });
+                var newDisabled = $('#jqxListBox').jqxListBox('disabled');
+                ok(newDisabled == true, "set disabled test.");
+
+                // reset disabled to false
+                $('#jqxListBox').jqxListBox({ disabled: false });
+            });
+
+            test("width property test", function () {
+                // get width.
+                var width = $('#jqxListBox').jqxListBox('width');
+                ok(width == "250px", "get width test.");
+
+                // set width.
+                $('#jqxListBox').jqxListBox({ width: "300px" });
+                width = $('#jqxListBox').jqxListBox('width');
+                ok(width == "300px", "set width test.");
+            });
+
+            test("height property test", function () {
+                // get height.
+                var height = $('#jqxListBox').jqxListBox('height');
+                ok(height == "30px", "get height test.");
+
+                // set height.
+                $('#jqxListBox').jqxListBox({ height: "50px" });
+                height = $('#jqxListBox').jqxListBox('height');
+                ok(height == "50px", "set height test.");
+            });
+
+            test("multiple property test", function () {
+                // get multiple.
+                var multiple = $('#jqxListBox').jqxListBox('multiple');
+                ok(multiple == false, "get multiple test.");
+
+                // set multiple.
+                $('#jqxListBox').jqxListBox({ multiple: true });
+                multiple = $('#jqxListBox').jqxListBox('multiple');
+                ok(multiple == true, "set multiple test.");
+            });
+
+            test("selectedIndex property test", function () {
+                // get selectedIndex.
+                var selectedIndex = $('#jqxListBox').jqxListBox('selectedIndex');
+                ok(selectedIndex == "-1", "get selectedIndex test.");
+
+                // set selectedIndex.
+                $('#jqxListBox').jqxListBox({ selectedIndex: "2" });
+                selectedIndex = $('#jqxListBox').jqxListBox('selectedIndex');
+                ok(selectedIndex == "2", "set selectedIndex test.");
+            });
+
+            test("scrollBarSize property test", function () {
+                // get scrollBarSize.
+                var scrollBarSize = $('#jqxListBox').jqxListBox('scrollBarSize');
+                ok(scrollBarSize == 15, "get scrollBarSize test.");
+
+                // set scrollBarSize.
+                $('#jqxListBox').jqxListBox({ scrollBarSize: 30 });
+                scrollBarSize = $('#jqxListBox').jqxListBox('scrollBarSize');
+                ok(scrollBarSize == 30, "set scrollBarSize test.");
+            });
+
+
+            test("enableHover property test", function () {
+                // get enableHover.
+                var enableHover = $('#jqxListBox').jqxListBox('enableHover');
+                ok(enableHover == true, "get enableHover test.");
+
+                // set enableHover.
+                $('#jqxListBox').jqxListBox({ enableHover: false });
+                enableHover = $('#jqxListBox').jqxListBox('enableHover');
+                ok(enableHover == false, "set enableHover test.");
+            });
+
+            test("enableSelection property test", function () {
+                // get enableSelection.
+                var enableSelection = $('#jqxListBox').jqxListBox('enableSelection');
+                ok(enableSelection == true, "get enableSelection test.");
+
+                // set enableSelection.
+                $('#jqxListBox').jqxListBox({ enableSelection: false });
+                enableSelection = $('#jqxListBox').jqxListBox('enableSelection');
+                ok(enableSelection == false, "set enableSelection test.");
+            });
+
+            test("equalItemsWidth property test", function () {
+                // get equalItemsWidth.
+                var equalItemsWidth = $('#jqxListBox').jqxListBox('equalItemsWidth');
+                ok(equalItemsWidth == true, "get equalItemsWidth test.");
+
+                // set equalItemsWidth.
+                $('#jqxListBox').jqxListBox({ equalItemsWidth: false });
+                equalItemsWidth = $('#jqxListBox').jqxListBox('equalItemsWidth');
+                ok(equalItemsWidth == false, "set equalItemsWidth test.");
+            });
+
+            test("itemHeight property test", function () {
+                // get itemHeight.
+                var itemHeight = $('#jqxListBox').jqxListBox('itemHeight');
+                ok(itemHeight == -1, "get itemHeight test.");
+
+                // set itemHeight.
+                $('#jqxListBox').jqxListBox({ itemHeight: 3 });
+                itemHeight = $('#jqxListBox').jqxListBox('itemHeight');
+                ok(itemHeight == 3, "set itemHeight test.");
+            });
+
+            test("emptyGroupText property test", function () {
+                // get emptyGroupText.
+                var emptyGroupText = $('#jqxListBox').jqxListBox('emptyGroupText');
+                ok(emptyGroupText == "Group", "get emptyGroupText test.");
+
+                // set emptyGroupText.
+                $('#jqxListBox').jqxListBox({ emptyGroupText: "ListBox" });
+                emptyGroupText = $('#jqxListBox').jqxListBox('emptyGroupText');
+                ok(emptyGroupText == "ListBox", "set emptyGroupText test.");
+            });
+
+            module("Module Methods");
+
+            test("disableAt method test", function () {
+                // disable item
+                $('#jqxListBox').jqxListBox('disableAt', 2);
+                var item = $('#jqxListBox').jqxListBox('getItem', 2);
+                ok(item.disabled == true, 'disableAt method test');
+            });
+
+            test("enableAt method test", function () {
+                // enable item
+                $('#jqxListBox').jqxListBox('enableAt', 2);
+                var item = $('#jqxListBox').jqxListBox('getItem', 2);
+                ok(item.disabled == false, 'enableAt method test');
+            });
+            module("Module Events");
+            test("selection event test", function () {
+                var selection = false;
+                $('#jqxListBox').on('select', function () {
+                    selection = true;
+                });
+
+                $('#jqxListBox').jqxListBox({ selectedIndex: 0 });
+                ok(selection == true, 'select event test');
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id='jqxListBox'>
+    </div>
+    <br />
+    <br />
+    <div>
+        <h1 id="qunit-header">
+            QUnit example</h1>
+        <h2 id="qunit-banner">
+        </h2>
+        <div id="qunit-testrunner-toolbar">
+        </div>
+        <h2 id="qunit-userAgent">
+        </h2>
+        <ol id="qunit-tests">
+        </ol>
+        <div id="qunit-fixture">
+            test markup, will be hidden</div>
+    </div>
+</body>
+</html>

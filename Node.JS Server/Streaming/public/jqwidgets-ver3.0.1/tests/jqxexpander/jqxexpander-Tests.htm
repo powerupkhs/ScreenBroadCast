@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.web.css" media="screen" />
+    <link rel="stylesheet" href="../../Styles/Site.css" media="screen" />
+    <link rel="stylesheet" href="../../Styles/qunit-git.css" media="screen" />
+    <script type="text/javascript" src="../../scripts/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/qunit-git.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxexpander.js"></script>
+     <script type="text/javascript">
+         $(document).ready(function () {
+
+             $("#jqxExpander").jqxExpander({ width: '400px', height: '420px' });
+             $("#jqxExpander").css('display', 'none');
+             module("Module Properties");
+
+             test("expandAnimationDuration property test", function () {
+                 // get expandAnimationDuration.
+                 var expandAnimationDuration = $('#jqxExpander').jqxExpander('expandAnimationDuration');
+                 ok(expandAnimationDuration == 259, "get expandAnimationDuration test.");
+
+                 // set expandAnimationDuration.
+                 $('#jqxExpander').jqxExpander({ expandAnimationDuration: 500 });
+                 var expandAnimationDuration = $('#jqxExpander').jqxExpander('expandAnimationDuration');
+                 ok(expandAnimationDuration == 500, "set expandAnimationDuration test.");
+             });
+
+             test("collapseAnimationDuration property test", function () {
+                 // get collapseAnimationDuration
+                 var collapseAnimationDuration = $('#jqxExpander').jqxExpander('collapseAnimationDuration');
+                 ok(collapseAnimationDuration == 250, "get collapseAnimationDuration test.");
+
+                 // set collapseAnimationDuration.
+                 $('#jqxExpander').jqxExpander({ collapseAnimationDuration: 500 });
+                 var collapseAnimationDuration = $('#jqxExpander').jqxExpander('collapseAnimationDuration');
+                 ok(collapseAnimationDuration == 500, "set collapseAnimationDuration test.");
+
+             });
+
+             test("disabled property test", function () {
+                 // get disabled
+                 var disabled = $('#jqxExpander').jqxExpander('disabled');
+                 ok(disabled == false, "get disabled test.");
+
+                 // set disabled.
+                 $('#jqxExpander').jqxExpander({ disabled: true });
+                 var disabled = $('#jqxExpander').jqxExpander('disabled');
+                 ok(disabled == true, "set disabled test.");
+
+
+             });
+
+             test("animationType property test", function () {
+                 // get animationType
+                 var animationType = $('#jqxExpander').jqxExpander('animationType');
+                 ok(animationType == "slide", "get animationType test.");
+
+                 // set animationType.
+                 $('#jqxExpander').jqxExpander({ animationType: "none" });
+                 var animationType = $('#jqxExpander').jqxExpander('animationType');
+                 ok(animationType == "none", "set animationType test.");
+             });
+
+             test("toggleMode property test", function () {
+                 // get toggleMode
+                 var toggleMode = $('#jqxExpander').jqxExpander('toggleMode');
+                 ok(toggleMode == "click", "get toggleMode test.");
+
+                 // set toggleMode.
+                 $('#jqxExpander').jqxExpander({ toggleMode: "dblclick" });
+                 var toggleMode = $('#jqxExpander').jqxExpander('toggleMode');
+                 ok(toggleMode == "dblclick", "set toggleMode test.");
+             });
+
+             test("showArrow property test", function () {
+                 // get showArrow
+                 var showArrow = $('#jqxExpander').jqxExpander('showArrow');
+                 ok(showArrow == true, "get showArrow test.");
+
+                 // set showArrow.
+                 $('#jqxExpander').jqxExpander({ showArrow: false });
+                 var showArrow = $('#jqxExpander').jqxExpander('showArrow');
+                 ok(showArrow == false, "set showArrow test.");
+             });
+
+             test("arrowPosition property test", function () {
+                 // get arrowPosition
+                 var arrowPosition = $('#jqxExpander').jqxExpander('arrowPosition');
+                 ok(arrowPosition == "right", "get arrowPosition test.");
+
+                 // set arrowPosition.
+                 $('#jqxExpander').jqxExpander({ arrowPosition: "left" });
+                 var arrowPosition = $('#jqxExpander').jqxExpander('arrowPosition');
+                 ok(arrowPosition == "left", "set arrowPosition test.");
+             });
+
+             test("height property test", function () {
+                 // get height
+                 var height = $('#jqxExpander').jqxExpander('height');
+                 ok(height == "420px", "get height test.");
+
+                 // set height.
+                 $('#jqxExpander').jqxExpander({ height: "50px" });
+                 var height = $('#jqxExpander').jqxExpander('height');
+                 ok(height == "50px", "set height test.");
+             });
+
+             test("width property test", function () {
+                 // get width
+                 var width = $('#jqxExpander').jqxExpander('width');
+                 ok(width == "400px", "get width test.");
+
+                 // set width.
+                 $('#jqxExpander').jqxExpander({ width: "500px" });
+                 var width = $('#jqxExpander').jqxExpander('width');
+                 ok(width == "500px", "set width test.");
+             });
+
+             module("Module Methods");
+
+             test("expand method test", function () {
+                 $('#jqxExpander').jqxExpander('expand');
+                 var expanded = $('#jqxExpander').jqxExpander('expanded');
+                 setTimeout(function () {
+                     ok(expanded == true, "expand method test.");
+                 }, 1000);
+            });
+
+             test("collapse method test", function () {
+                 $('#jqxExpander').jqxExpander({ animationType: 'none' });
+                 $('#jqxExpander').jqxExpander('collapse');
+                 var expanded = $('#jqxExpander').jqxExpander('expanded');
+                 setTimeout(function () {
+                     ok(expanded == false, "collapse method test.");
+                 }, 1000);
+             });
+         });
+    </script>
+</head>
+<body>
+    <div id='jqxExpander'>
+        <div>
+        </div>
+        <div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div>
+        <h1 id="qunit-header">
+            QUnit example</h1>
+        <h2 id="qunit-banner">
+        </h2>
+        <div id="qunit-testrunner-toolbar">
+        </div>
+        <h2 id="qunit-userAgent">
+        </h2>
+        <ol id="qunit-tests">
+        </ol>
+        <div id="qunit-fixture">
+            test markup, will be hidden</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="../../Styles/Site.css" media="screen" />
+    <link rel="stylesheet" href="../../Styles/qunit-git.css" media="screen" />
+    <script type="text/javascript" src="../../scripts/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/qunit-git.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".documentation-option-type-click").click(function (event) {
+                $(event.target).parents('tr').next().find(".property-content").toggle();
+            });
+
+            $('#jqxScrollBar').jqxScrollBar({ width: '250px', height: '25px' }); 
+            $('#jqxScrollBar').css('visibility', 'hidden');
+            module("Module Properties");
+
+            test("width property test", function () {
+                // get width.
+                var width = $('#jqxScrollBar').jqxScrollBar('width');
+                ok(width == "250px", "get width test.");
+
+                // set width.
+                $('#jqxScrollBar').jqxScrollBar({ width: "500px" });
+                width = $('#jqxScrollBar').jqxScrollBar('width');
+                ok(width == "500px", "set width test.");
+            });
+
+            test("height property test", function () {
+                // get height.
+                var height = $('#jqxScrollBar').jqxScrollBar('height');
+                ok(height == "25px", "get height test.");
+
+                // set height.
+                $('#jqxScrollBar').jqxScrollBar({ height: "50" });
+                height = $('#jqxScrollBar').jqxScrollBar('height');
+                ok(height == "50", "set height test.");
+            });
+
+            test("vertical property test", function () {
+                // get vertical.
+                var vertical = $('#jqxScrollBar').jqxScrollBar('vertical');
+                ok(vertical == false, "get vertical test.");
+
+                // set vertical.
+                $('#jqxScrollBar').jqxScrollBar({ vertical: true });
+                vertical = $('#jqxScrollBar').jqxScrollBar('vertical');
+                ok(vertical == true, "set vertical test.");
+            });
+
+            test("min property test", function () {
+                // get min.
+                var min = $('#jqxScrollBar').jqxScrollBar('min');
+                ok(min == 0, "get min test.");
+
+                // set min.
+                $('#jqxScrollBar').jqxScrollBar({ min: 3 });
+                min = $('#jqxScrollBar').jqxScrollBar('min');
+                ok(min == 3, "set min test.");
+            });
+
+            test("max property test", function () {
+                // get max.
+                var max = $('#jqxScrollBar').jqxScrollBar('max');
+                ok(max == 1000, "get max test.");
+
+                // set max.
+                $('#jqxScrollBar').jqxScrollBar({ max: 30 });
+                max = $('#jqxScrollBar').jqxScrollBar('max');
+                ok(max == 30, "set max test.");
+            });
+
+            test("value property test", function () {
+                // get value.
+                var value = $('#jqxScrollBar').jqxScrollBar('value');
+                // value == 3 because the min property is set to 3.
+                ok(value == 3, "get value test.");
+
+                // set value.
+                $('#jqxScrollBar').jqxScrollBar({ value: 30 });
+                value = $('#jqxScrollBar').jqxScrollBar('value');
+                ok(value == 30, "set value test.");
+            });
+
+            test("step property test", function () {
+                // get step.
+                var step = $('#jqxScrollBar').jqxScrollBar('step');
+                ok(step == 10, "get step test.");
+
+                // set step.
+                $('#jqxScrollBar').jqxScrollBar({ step: 5 });
+                step = $('#jqxScrollBar').jqxScrollBar('step');
+                ok(step == 5, "set step test.");
+            });
+
+            test("largestep property test", function () {
+                // get largestep.
+                var largestep = $('#jqxScrollBar').jqxScrollBar('largestep');
+                ok(largestep == 50, "get largestep test.");
+
+                // set largestep.
+                $('#jqxScrollBar').jqxScrollBar({ largestep: 15 });
+                largestep = $('#jqxScrollBar').jqxScrollBar('largestep');
+                ok(largestep == 15, "set largestep test.");
+            });
+
+            test("thumbMinSize property test", function () {
+                // get thumbMinSize.
+                var thumbMinSize = $('#jqxScrollBar').jqxScrollBar('thumbMinSize');
+                ok(thumbMinSize == 10, "get thumbMinSize test.");
+
+                // set thumbMinSize.
+                $('#jqxScrollBar').jqxScrollBar({ thumbMinSize: 5 });
+                thumbMinSize = $('#jqxScrollBar').jqxScrollBar('thumbMinSize');
+                ok(thumbMinSize == 5, "set thumbMinSize test.");
+            });
+
+            test("disabled property test", function () {
+                // get disabled.
+                var disabled = $('#jqxScrollBar').jqxScrollBar('disabled');
+                ok(disabled == false, "get disabled test.");
+
+                // set disabled.
+                $('#jqxScrollBar').jqxScrollBar({ disabled: true });
+                disabled = $('#jqxScrollBar').jqxScrollBar('disabled');
+                ok(disabled == true, "set disabled test.");
+            });
+
+
+            module("Module Methods");
+            test("setPosition Method test", function () {
+                $('#jqxScrollBar').jqxScrollBar({min: 0, max: 1000});
+                var newValue = $('#jqxScrollBar').jqxScrollBar('setPosition', 100);
+                ok(newValue == 100, "setPosition method test.");
+            });
+
+            module("Module Events");
+              test("valuechanged event test", function () {
+                // get disabled.
+                var valuechanged = false;
+		$('#jqxScrollBar').on('valuechanged', function()
+		{
+		    valuechanged = true;
+		});
+      		var newValue = $('#jqxScrollBar').jqxScrollBar('setPosition', 200);
+                ok(valuechanged == true, 'valuechanged event test.');
+            });
+        });
+    </script>
+</head>
+<body>
+      <div id="jqxScrollBar">
+      
+    </div>
+
+    <br />
+    <br />
+    <div>
+        <h1 id="qunit-header">
+            QUnit example</h1>
+        <h2 id="qunit-banner">
+        </h2>
+        <div id="qunit-testrunner-toolbar">
+        </div>
+        <h2 id="qunit-userAgent">
+        </h2>
+        <ol id="qunit-tests">
+        </ol>
+        <div id="qunit-fixture">
+            test markup, will be hidden</div>
+    </div>
+</body>
+</html>

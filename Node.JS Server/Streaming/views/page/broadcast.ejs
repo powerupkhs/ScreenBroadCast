@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<head>
+    <% include ../header.ejs %>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+        var socket = io.connect();
+        var userName;
+        $(document).ready(function(){
+            
+            socket.emit('join', '<%= roomNumber %>');
+
+            socket.on('roomCount', function(data){
+                $('#roomCount').text('현재 접속자 수 : ' + data + ' 명');
+            });
+            
+            $('#chat').append('<b>채팅에 참여하신 것을 환영합니다</b><br/><br/>');
+            
+            socket.on('message', function(data){
+                var json = JSON.parse(data);
+                
+                $('#chat').append('<b>' + json.id + ' 님의 채팅</b> : <br/>');
+                $('#chat').append(json.data + '<br/>');
+                
+                $("#chat").scrollTop($("#chat")[0].scrollHeight);
+            });
+            
+            socket.on('changeSWF', function(data){
+                if(data == <%= roomNumber %>){
+                    document.getElementById('wrapper').innerHTML='<embed src="/videos/finish.swf" autostart="true" width="675" height="530">';
+                }
+            });
+        });
+        
+        function enter_chat(){
+            if (event.keyCode == 13) {   
+                chat();
+            }
+        }
+        
+        function chat(){
+            socket.emit('message', '{ "id": "<%= userid %>" , "data": "' + $('#chat_content').val() + '" }');
+            $('#chat_content').val("");
+        }
+        
+        
+        function spin(filePath){
+            document.getElementById('wrapper').innerHTML='<embed src="'+filePath+'" autostart="true" width="675" height="530">'
+        }
+        function spin2(filePath){
+            document.getElementById('wrapper').innerHTML='<embed src="'+filePath+'" autostart="true" width="550" height="530">'
+        }
+        
+        function full_screen(roomNumber){
+            window.open('/fullScreen?roomNumber=' + roomNumber);
+        }
+    </script>
+</head>
+<body>
+    <div id="wrap">
+    	<div id="top">
+    		<% include ../top.ejs %>
+    	</div>
+    	<div id="center">
+            <div id="right" style="width:675px; margin-right:10px;">
+                <p style="border:1px solid gray; background-color:#f8f8f8; color:#494949; width:675px; height:20px; font-weight:bold; margin-bottom:5px; border-radius:5px; box-shadow: 1px 1px 3px #999;"><%= roomName %></p>
+                <div id="wrapper">
+                    <object id="FlashID" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="675" height="530">
+                        <param name="movie" value="/videos/post_broad.swf" />
+                        <param name="FlashVars" value="roomNumber=<%= roomNumber %>"/>
+                        <param name="quality" value="high" />
+                        <param name="wmode" value="opaque" />
+                        <param name="swfversion" value="9.0.45.0" />
+                        <!-- 이 param 태그는 Flash Player 6.0 r65 이후 버전 사용자에게 최신 버전의 Flash Player를 다운로드하라는 메시지를 표시합니다. 사용자에게 이러한 메시지를 표시하지 않으려면 이 태그를 삭제하십시오. -->
+                        <param name="expressinstall" value="Scripts/expressInstall.swf" />
+                        <param name="LOOP" value="false" />
+                        <!-- 다음 객체 태그는 IE 이외의 브라우저에 사용됩니다. IECC를 사용하여 IE에서 이 태그를 숨기십시오. -->
+                        <!--[if !IE]>-->
+                        <object type="application/x-shockwave-flash" data="/videos/post_broad.swf" width="675" height="530">
+                        <!--<![endif]-->
+                            <param name="FlashVars" value="roomNumber=<%= roomNumber %>"/>
+                            <param name="quality" value="high" />
+                            <param name="wmode" value="opaque" />
+                            <param name="swfversion" value="9.0.45.0" />
+                            <param name="expressinstall" value="Scripts/expressInstall.swf" />
+                            <param name="LOOP" value="false" />
+                            <!-- Flash Player 6.0 이전 버전 사용자의 브라우저에는 다음과 같은 대체 내용이 표시됩니다. -->
+                            <div>
+                            <h4>이 페이지의 내용을 보려면 최신 버전의 Adobe Flash Player가 필요합니다.</h4>
+                            <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Adobe Flash Player 내려받기" width="112" height="33" /></a></p>
+                            </div>
+                        <!--[if !IE]>-->
+                        </object>
+                    <!--<![endif]-->
+                    </object>
+                    <!--<embed src="/videos/post_broad.swf" style="width:675px;height:530px;" id="flash">-->
+                </div>
+                <p style="border:1px solid gray; background-color:#f8f8f8; color:#494949; width:675px; height:125px; margin-top:3px; border-radius:8px; box-shadow: 1px 1px 3px #999;">
+                    <input type="button" value="화면전환(↑)" onclick="spin('/videos/post_broad.swf?roomNumber=<%= roomNumber %>')"/>
+                    <br/>
+                    <input type="button" value="화면전환(←)" onclick="spin2('/videos/post_broad4.swf?roomNumber=<%= roomNumber %>')"/>
+                    <input type="button" value="화면전환(↓)" onclick="spin('/videos/post_broad3.swf?roomNumber=<%= roomNumber %>')"/>
+                    <input type="button" value="화면전환(→)" onclick="spin2('/videos/post_broad2.swf?roomNumber=<%= roomNumber %>')"/>
+                    <br/><br/>
+                    <input type="button" value="크게 보기" onclick="full_screen(<%= roomNumber %>)"/>
+                    <input type="button" value="추천 하기" onclick="window.open('/recommend?room=<%= room[0].number %>&id=<%= userid %>')" />
+                    <input type="button" value="즐겨 찾기" onclick="window.open('/favorites?BJ=<%= room[0].id %>&id=<%= userid %>')" />
+                    <br/><br/>
+                    <b>[ 제목 ] </b> <%= room[0].name %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>[ 방송BJ ] </b> <%= room[0].id %> &nbsp;(<b>추천수</b> : <span id="recommend"><%= room[0].recommend %></span>)
+                    <br/>
+                    <b>[ 방송 시작 날짜 ] </b> <%= room[0].date %>
+                </p>
+            </div>
+            <div id="left">
+                            <p id="roomCount" style="width:270px; border:1px solid black; margin-bottom:10px; background-color:#73d8ff; color:#494949; font-weight:bold; border-radius:5px; box-shadow: 2px 2px 5px #999;">현재 접속자 수 : 0 명</p>
+                            <div style="border:1px solid black; padding:3px; border-radius:5px; box-shadow: 2px 2px 5px #999;">
+                                <div style="width:250px; height:622px; text-align:left; overflow-x:hidden;overflow-y:scroll; margin-bottom:5px; border:1px solid black; padding:0 5px; border-radius:5px; box-shadow: 2px 2px 5px #999;" id="chat"></div>
+                                    <input type="text" size="32" id="chat_content" onkeydown="enter_chat()" style="border:1px solid black;" />
+                                    <input type="button" value="전송" onclick="chat()" style="padding:2px;" />
+                            </div>
+            </div>
+        </div>
+    	</div>
+    	<div id="bottom">
+    		<% include ../bottom.ejs %>
+    	</div>
+    </div>
+</body>
+

@@ -1,0 +1,258 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="../../Styles/Site.css" media="screen" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../Styles/qunit-git.css" media="screen" />
+    <script type="text/javascript" src="../../scripts/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/qunit-git.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.columnsresize.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.grouping.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.pager.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.sort.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.filter.js"></script> 
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Test the Grid when the Paging functionality is enabled.
+
+            // prepare the data
+            var data = new Array();
+
+            var firstNames =
+            [
+                "Andrew", "Nancy", "Shelley", "Regina", "Yoshi", "Antoni", "Mayumi", "Ian", "Peter", "Lars", "Petra", "Martin", "Sven", "Elio", "Beate", "Cheryl", "Michael", "Guylene"
+            ];
+
+            var lastNames =
+            [
+                "Fuller", "Davolio", "Burke", "Murphy", "Nagase", "Saavedra", "Ohno", "Devling", "Wilson", "Peterson", "Winkler", "Bein", "Petersen", "Rossi", "Vileid", "Saylor", "Bjorn", "Nodier"
+            ];
+
+            var productNames =
+            [
+                "Black Tea", "Green Tea", "Caffe Espresso", "Doubleshot Espresso", "Caffe Latte", "White Chocolate Mocha", "Cramel Latte", "Caffe Americano", "Cappuccino", "Espresso Truffle", "Espresso con Panna", "Peppermint Mocha Twist"
+            ];
+
+            var priceValues =
+            [
+                "2.25", "1.5", "3.0", "3.3", "4.5", "3.6", "3.8", "2.5", "5.0", "1.75", "3.25", "4.0"
+            ];
+
+            var generaterow = function (index) {
+                if (index == undefined) index = "id";
+
+                var row = {};
+                var productindex = Math.floor(Math.random() * productNames.length);
+                var price = parseFloat(priceValues[productindex]);
+                var quantity = 1 + Math.round(Math.random() * 10);
+                row["id"] = index;
+                row["firstname"] = firstNames[Math.floor(Math.random() * firstNames.length)];
+                row["lastname"] = lastNames[Math.floor(Math.random() * lastNames.length)];
+                row["productname"] = productNames[productindex];
+                row["price"] = price;
+                row["quantity"] = quantity;
+                row["total"] = price * quantity;
+                return row;
+            }
+
+            for (var i = 0; i < 100; i++) {
+                data[i] = generaterow(i);
+            }
+
+            var source =
+            {
+                localdata: data,
+                datatype: "array",
+                id: 'id'
+            };
+
+            $("#jqxgrid").jqxGrid(
+            {
+                width: 400,
+                source: source,
+                groupable: true,
+                pageable: true,
+                columns: [
+                  { text: 'First Name', datafield: 'firstname', width: 100 },
+                  { text: 'Last Name', datafield: 'lastname', width: 100 },
+                  { text: 'Product', datafield: 'productname', width: 180 },
+                  { text: 'Quantity', datafield: 'quantity', width: 80, cellsalign: 'right' },
+                  { text: 'Unit Price', datafield: 'price', width: 90, cellsalign: 'right', cellsformat: 'c2' },
+                  { text: 'Total', datafield: 'total', width: 100, cellsalign: 'right', cellsformat: 'c2' }
+                ],
+                groups: ['firstname']
+            });
+
+            module("Module Grouping");
+
+            test("groups state test", function () {
+                $('#jqxgrid').jqxGrid({ pageable: true });
+
+                var hiddenrows = $('#jqxgrid').jqxGrid('hiddens');
+                var rows = 0;
+                for (i = 0; i < hiddenrows.length; i++) {
+                    if (hiddenrows[i]) {
+                        rows++;
+                    }
+                }
+
+                ok(rows == 100, "initial state test.");
+                ok(hiddenrows.length > 100, "initial state test rows count.");
+                var prevhiddenrows = hiddenrows;
+                var hiddenrows = $('#jqxgrid').jqxGrid('hiddens');
+                $('#jqxgrid').jqxGrid('gotopage', 1);
+                var rows = 0;
+                for (i = 0; i < hiddenrows.length; i++) {
+                    if (hiddenrows[i]) {
+                        rows++;
+                    }
+                }
+
+                ok(rows == 100, "visibility state after navigation test.");
+                ok(hiddenrows.length > 100, "visibility state of all rows after navigation test.");
+                ok(prevhiddenrows.length == hiddenrows.length, "visibility state of rows before and after navigation test.");
+
+                $('#jqxgrid').jqxGrid('addgroup', 'lastname');
+                var hiddenrows = $('#jqxgrid').jqxGrid('hiddens');
+                var rows = 0;
+                for (i = 0; i < hiddenrows.length; i++) {
+                    if (hiddenrows[i]) {
+                        rows++;
+                    }
+                }
+
+                ok(rows > 100, "initial state after adding new group test.");
+                ok(prevhiddenrows.length < hiddenrows.length, "adding a new group test");
+
+                $('#jqxgrid').jqxGrid('gotopage', 2);
+                var hiddenrows = $('#jqxgrid').jqxGrid('hiddens');
+                var rows = 0;
+                for (i = 0; i < hiddenrows.length; i++) {
+                    if (hiddenrows[i]) {
+                        rows++;
+                    }
+                }
+
+                ok(rows > 100, "initial state after adding new group and navigating test.");
+
+                $('#jqxgrid').jqxGrid('removegroup', 'firstname');
+                var prevhiddenrows = hiddenrows;
+                var hiddenrows = $('#jqxgrid').jqxGrid('hiddens');
+                var rows = 0;
+                for (i = 0; i < hiddenrows.length; i++) {
+                    if (hiddenrows[i]) {
+                        rows++;
+                    }
+                }
+
+                ok(rows == 100 && hiddenrows.length > 100, "remove group test.");
+                ok(prevhiddenrows.length > hiddenrows.length, "remove group test. Test the number of rows before and after remove.");
+
+                $('#jqxgrid').jqxGrid('removegroup', 'lastname');
+                var hiddenrows = $('#jqxgrid').jqxGrid('hiddens');
+                var rows = 0;
+                for (i = 0; i < hiddenrows.length; i++) {
+                    if (hiddenrows[i]) {
+                        rows++;
+                    }
+                }
+
+                ok(rows == 0 && hiddenrows.length == 0, "clear all groups test.");
+
+                $('#jqxgrid').jqxGrid({ pageable: false });
+
+                var hiddenrows = $('#jqxgrid').jqxGrid('hiddens');
+                var rows = 0;
+                for (i = 0; i < hiddenrows.length; i++) {
+                    if (hiddenrows[i]) {
+                        rows++;
+                    }
+                }
+
+                ok(rows == 0, "initial state test without paging.");
+
+                $('#jqxgrid').jqxGrid('addgroup', 'firstname');
+                var hiddenrows = $('#jqxgrid').jqxGrid('hiddens');
+                var rows = 0;
+                for (i = 0; i < hiddenrows.length; i++) {
+                    if (hiddenrows[i]) {
+                        rows++;
+                    }
+                }
+
+                ok(rows == 100, "initial state after adding new group test without paging.");
+                var previousrows = rows;
+
+                var lastnamerows = hiddenrows;
+                $('#jqxgrid').jqxGrid('addgroup', 'lastname');
+                var prevhiddenrows = hiddenrows;
+                var hiddenrows = $('#jqxgrid').jqxGrid('hiddens');
+                var rows = 0;
+                for (i = 0; i < hiddenrows.length; i++) {
+                    if (hiddenrows[i]) {
+                        rows++;
+                    }
+                }
+
+                ok(rows > previousrows, "Adding new group test without paging.");
+                ok(prevhiddenrows.length < hiddenrows.length, "Adding new group test, test records and groups without paging.");
+
+                $('#jqxgrid').jqxGrid('removegroup', 'firstname');
+                var prevhiddenrows = hiddenrows;
+                var hiddenrows = $('#jqxgrid').jqxGrid('hiddens');
+                var rows = 0;
+                for (i = 0; i < hiddenrows.length; i++) {
+                    if (hiddenrows[i]) {
+                        rows++;
+                    }
+                }
+
+                ok(rows == 100 && hiddenrows.length > 100, "remove group test without paging.");
+                ok(prevhiddenrows.length > hiddenrows.length, "remove group test without paging. Test rows count before and after remove.");
+                ok(lastnamerows.length == hiddenrows.length, "remove group test without paging. Test expected rows count.");
+
+                $('#jqxgrid').jqxGrid('removegroup', 'lastname');
+                var hiddenrows = $('#jqxgrid').jqxGrid('hiddens');
+                var rows = 0;
+                for (i = 0; i < hiddenrows.length; i++) {
+                    if (hiddenrows[i]) {
+                        rows++;
+                    }
+                }
+                ok(prevhiddenrows.length > hiddenrows.length, "clear all groups test. Test rows count before and after remove.");
+                ok(rows == 0 && hiddenrows.length == 0, "clear all groups test. ");
+
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <h1 id="qunit-header">
+            QUnit example</h1>
+        <h2 id="qunit-banner">
+        </h2>
+        <div id="qunit-testrunner-toolbar">
+        </div>
+        <h2 id="qunit-userAgent">
+        </h2>
+        <ol id="qunit-tests">
+        </ol>
+        <div id="qunit-fixture">
+            test markup, will be hidden</div>
+    </div>
+    <div  style="display: none;" id="jqxgrid">
+    </div>
+</body>
+</html>

@@ -1,0 +1,265 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="../../Styles/Site.css" media="screen" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.web.css" media="screen" />
+    <link rel="stylesheet" href="../../Styles/qunit-git.css" media="screen" />
+    <script type="text/javascript" src="../../scripts/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/qunit-git.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#jqxMenu').jqxMenu({ width: 250, height: 30 });
+            $('#jqxMenu').css('visibility', 'hidden');
+   	    $('#jqxMenu').css('display', 'none');
+            module("Module Properties");
+
+            test("mode property test", function () {
+                // get mode.
+                var mode = $('#jqxMenu').jqxMenu('mode');
+                ok(mode == 'horizontal', "get mode test.");
+
+                // set mode.
+                $('#jqxMenu').jqxMenu({ mode: 'vertical' });
+                var newMode = $('#jqxMenu').jqxMenu('mode');
+                ok(newMode == 'vertical', "set mode test.");
+
+                // reset value to 0
+                $('#jqxMenu').jqxMenu({ mode: 'horizontal' });
+            });
+
+            test("width property test", function () {
+                // get width.
+                var width = $('#jqxMenu').jqxMenu('width');
+                ok(width == 250, "get width test.");
+
+                // set width.
+                $('#jqxMenu').jqxMenu({ width: 300 });
+                width = $('#jqxMenu').jqxMenu('width');
+                ok(width == 300, "set width test.");
+            });
+
+            test("height property test", function () {
+                // get height.
+                var height = $('#jqxMenu').jqxMenu('height');
+                ok(height == 30, "get height test.");
+
+                // set height.
+                $('#jqxMenu').jqxMenu({ height: 50 });
+                height = $('#jqxMenu').jqxMenu('height');
+                ok(height == 50, "set height test.");
+            });
+
+            test("animationShowDuration property test", function () {
+                // get animationShowDuration.
+                var animationShowDuration = $('#jqxMenu').jqxMenu('animationShowDuration');
+                ok(animationShowDuration ==200, "get animationShowDuration test.");
+
+                // set animationShowDuration.
+                $('#jqxMenu').jqxMenu({ animationShowDuration: 300 });
+                animationShowDuration = $('#jqxMenu').jqxMenu('animationShowDuration');
+                ok(animationShowDuration == 300, "set animationShowDuration test.");
+            });
+
+            test("animationHideDuration property test", function () {
+                // get animationHideDuration.
+                var animationHideDuration = $('#jqxMenu').jqxMenu('animationHideDuration');
+                ok(animationHideDuration == 200, "get animationHideDuration test.");
+
+                // set animationHideDuration.
+                $('#jqxMenu').jqxMenu({ animationHideDuration: 400 });
+                animationHideDuration = $('#jqxMenu').jqxMenu('animationHideDuration');
+                ok(animationHideDuration == 400, "set animationHideDuration test.");
+            });
+
+            test("animationHideDelay property test", function () {
+                // get animationHideDelay.
+                var animationHideDelay = $('#jqxMenu').jqxMenu('animationHideDelay');
+                ok(animationHideDelay == 100, "get animationHideDelay test.");
+
+                // set animationHideDelay.
+                $('#jqxMenu').jqxMenu({ animationHideDelay: 700 });
+                animationHideDelay = $('#jqxMenu').jqxMenu('animationHideDelay');
+                ok(animationHideDelay == 700, "set animationHideDelay test.");
+            });
+
+            test("animationShowDelay property test", function () {
+                // get animationShowDelay.
+                var animationShowDelay = $('#jqxMenu').jqxMenu('animationShowDelay');
+                ok(animationShowDelay == 100, "get animationShowDelay test.");
+
+                // set animationShowDelay.
+                $('#jqxMenu').jqxMenu({ animationShowDelay: 700 });
+                animationShowDelay = $('#jqxMenu').jqxMenu('animationShowDelay');
+                ok(animationShowDelay == 700, "set animationShowDelay test.");
+            });
+
+            test("autoSizeMainItems property test", function () {
+                // get autoSizeMainItems.
+                var autoSizeMainItems = $('#jqxMenu').jqxMenu('autoSizeMainItems');
+                ok(autoSizeMainItems == false , "get autoSizeMainItems test.");
+
+                // set autoSizeMainItems.
+                $('#jqxMenu').jqxMenu({ autoSizeMainItems: true });
+                autoSizeMainItems = $('#jqxMenu').jqxMenu('autoSizeMainItems');
+                ok(autoSizeMainItems == true, "set autoSizeMainItems test.");
+            });
+
+            test("autoCloseOnClick property test", function () {
+                // get autoCloseOnClick.
+                var autoCloseOnClick = $('#jqxMenu').jqxMenu('autoCloseOnClick');
+                ok(autoCloseOnClick == true, "get autoCloseOnClick test.");
+
+                // set autoCloseOnClick.
+                $('#jqxMenu').jqxMenu({ autoCloseOnClick: false });
+                autoCloseOnClick = $('#jqxMenu').jqxMenu('autoCloseOnClick');
+                ok(autoCloseOnClick == false, "set autoCloseOnClick test.");
+            });
+
+            test("enableRoundedCorners property test", function () {
+                // get enableRoundedCorners.
+                var enableRoundedCorners = $('#jqxMenu').jqxMenu('enableRoundedCorners');
+                ok(enableRoundedCorners == true, "get enableRoundedCorners test.");
+
+                // set enableRoundedCorners.
+                $('#jqxMenu').jqxMenu({ enableRoundedCorners: false });
+                enableRoundedCorners = $('#jqxMenu').jqxMenu('enableRoundedCorners');
+                ok(enableRoundedCorners == false, "set enableRoundedCorners test.");
+            });
+
+            test("disabled property test", function () {
+                // get disabled.
+                var disabled = $('#jqxMenu').jqxMenu('disabled');
+                ok(disabled == false, "get disabled test.");
+
+                // set disabled.
+                $('#jqxMenu').jqxMenu({ disabled: true });
+                disabled = $('#jqxMenu').jqxMenu('disabled');
+                ok(disabled == true, "set disabled test.");
+            });
+
+            test("autoOpenPopup property test", function () {
+                // get autoOpenPopup.
+                var autoOpenPopup = $('#jqxMenu').jqxMenu('autoOpenPopup');
+                ok(autoOpenPopup == true, "get autoOpenPopup test.");
+
+                // set autoOpenPopup.
+                $('#jqxMenu').jqxMenu({ autoOpenPopup: false });
+                autoOpenPopup = $('#jqxMenu').jqxMenu('autoOpenPopup');
+                ok(autoOpenPopup == false, "set autoOpenPopup test.");
+            });
+
+            test("enableHover property test", function () {
+                // get enableHover.
+                var enableHover = $('#jqxMenu').jqxMenu('enableHover');
+                ok(enableHover == true, "get enableHover test.");
+
+                // set enableHover.
+                $('#jqxMenu').jqxMenu({ enableHover: false });
+                enableHover = $('#jqxMenu').jqxMenu('enableHover');
+                ok(enableHover == false, "set enableHover test.");
+            });
+
+            test("autoOpen property test", function () {
+                // get autoOpen.
+                var autoOpen = $('#jqxMenu').jqxMenu('autoOpen');
+                ok(autoOpen == true, "get autoOpen test.");
+
+                // set autoOpen.
+                $('#jqxMenu').jqxMenu({ autoOpen: false });
+                autoOpen = $('#jqxMenu').jqxMenu('autoOpen');
+                ok(autoOpen == false, "set autoOpen test.");
+            });
+
+            test("autoGenerate property test", function () {
+                // get autoGenerate.
+                var autoGenerate = $('#jqxMenu').jqxMenu('autoGenerate');
+                ok(autoGenerate == true, "get autoGenerate test.");
+
+                // set autoGenerate.
+                $('#jqxMenu').jqxMenu({ autoGenerate: false });
+                autoGenerate = $('#jqxMenu').jqxMenu('autoGenerate');
+                ok(autoGenerate == false, "set autoGenerate test.");
+            });
+
+            test("clickToOpen property test", function () {
+                // get clickToOpen.
+                var clickToOpen = $('#jqxMenu').jqxMenu('clickToOpen');
+                ok(clickToOpen == false, "get clickToOpen test.");
+
+                // set clickToOpen.
+                $('#jqxMenu').jqxMenu({ clickToOpen: true });
+                clickToOpen = $('#jqxMenu').jqxMenu('clickToOpen');
+                ok(clickToOpen == true, "set clickToOpen test.");
+            });
+
+
+
+            module("Module Methods");
+
+
+
+            module("Module Events");
+
+            
+        });
+    </script>
+</head>
+<body>
+      <div class='jqx-menu' id="jqxMenu">
+        <ul>
+	        <li class='jqx-menu-item-top'>
+                <div>
+                      <a href="#">File</a>		                          
+                </div>
+                <div class='jqx-menu-dropdown'>
+                    <ul>
+          	            <li class='jqx-menu-item'><a href="#">New</a></li>
+		  	            <li class='jqx-menu-item'> <a href="#">Open</a></li>
+		  	            <li class='jqx-menu-item'> <a href="#">Close</a></li>
+		  	        </ul>
+                </div>
+	        </li>
+	        <li class='jqx-menu-item-top'><div><a href="#">View</a></div>
+		        <div class='jqx-menu-dropdown'>
+                <ul>
+			        <li class='jqx-menu-item'><a href="#">Source</a></li>
+			        <li class='jqx-menu-item'><a href="#">Debug info</a></li>
+			        <li class='jqx-menu-item'><a href="#">Layout</a>
+				        <div class='jqx-menu-dropdown'>            
+                            <ul>
+					            <li class='jqx-menu-item'><a href="#">CSS</a></li>
+					            <li class='jqx-menu-item'><a href="#">HTML</a></li>	
+					            <li class='jqx-menu-item'><a href="#">Javascript</a></li>	
+				            </ul>
+			            </div>
+                    </li>		
+		        </ul>
+                </div>
+	        </li>
+            <li class='jqx-menu-item-top'><a href="#">Analyze</a></li>
+	        <li class='jqx-menu-item-top'><a href="#">Window</a></li>
+	        <li class='jqx-menu-item-top'><a href="#">Help</a></li>	
+	        <li class='jqx-menu-item-top'>Tools</li>
+        </ul>    
+    </div>
+
+    <br />
+    <br />
+    <div>
+        <h1 id="qunit-header">
+            QUnit example</h1>
+        <h2 id="qunit-banner">
+        </h2>
+        <div id="qunit-testrunner-toolbar">
+        </div>
+        <h2 id="qunit-userAgent">
+        </h2>
+        <ol id="qunit-tests">
+        </ol>
+        <div id="qunit-fixture">
+            test markup, will be hidden</div>
+    </div>
+</body>
+</html>

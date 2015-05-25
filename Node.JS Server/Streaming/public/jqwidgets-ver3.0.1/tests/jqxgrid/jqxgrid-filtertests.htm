@@ -1,0 +1,443 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="../../Styles/Site.css" media="screen" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../Styles/qunit-git.css" media="screen" />
+    <script type="text/javascript" src="../../scripts/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/qunit-git.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.columnsresize.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.grouping.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.pager.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.sort.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.filter.js"></script> 
+    <script type="text/javascript">
+        function generatedata(rowscount, hasNullValues) {
+            // prepare the data
+            var data = new Array();
+            if (rowscount == undefined) rowscount = 100;
+            var firstNames =
+            [
+                "Andrew", "Nancy", "Shelley", "Regina", "Yoshi", "Antoni", "Mayumi", "Ian", "Peter", "Lars", "Petra", "Martin", "Sven", "Elio", "Beate", "Cheryl", "Michael", "Guylene"
+            ];
+
+            var lastNames =
+            [
+                "Fuller", "Davolio", "Burke", "Murphy", "Nagase", "Saavedra", "Ohno", "Devling", "Wilson", "Peterson", "Winkler", "Bein", "Petersen", "Rossi", "Vileid", "Saylor", "Bjorn", "Nodier"
+            ];
+
+            var productNames =
+            [
+                "Black Tea", "Green Tea", "Caffe Espresso", "Doubleshot Espresso", "Caffe Latte", "White Chocolate Mocha", "Caramel Latte", "Caffe Americano", "Cappuccino", "Espresso Truffle", "Espresso con Panna", "Peppermint Mocha Twist"
+            ];
+
+            var priceValues =
+            [
+                 "2.25", "1.5", "3.0", "3.3", "4.5", "3.6", "3.8", "2.5", "5.0", "1.75", "3.25", "4.0"
+            ];
+
+            for (var i = 0; i < rowscount; i++) {
+                var row = {};
+                var productindex = Math.floor(Math.random() * productNames.length);
+                var price = parseFloat(priceValues[productindex]);
+                var quantity = 1 + Math.round(Math.random() * 10);
+
+                row["id"] = i;
+                row["available"] = productindex % 2 == 0;
+                if (hasNullValues == true) {
+                    if (productindex % 2 != 0) {
+                        var random = Math.floor(Math.random() * rowscount);
+                        row["available"] = i % random == 0 ? null : false;
+                    }
+                }
+                row["firstname"] = firstNames[Math.floor(Math.random() * firstNames.length)];
+                row["lastname"] = lastNames[Math.floor(Math.random() * lastNames.length)];
+                row["name"] = row["firstname"] + " " + row["lastname"];
+                row["productname"] = productNames[productindex];
+                row["price"] = price;
+                row["quantity"] = quantity;
+                row["total"] = price * quantity;
+
+                var date = new Date();
+                date.setFullYear(2012, Math.floor(Math.random() * 11), Math.floor(Math.random() * 27));
+                date.setHours(0, 0, 0, 0);
+                row["date"] = date;
+
+                data[i] = row;
+            }
+
+            return data;
+        }
+
+        $(document).ready(function () {
+            var data = generatedata(500);
+            var source =
+            {
+                localdata: data,
+                datatype: "array"
+            };
+
+            var addfilter = function () {
+                var filtergroup = new $.jqx.filter();
+
+                var filter_or_operator = 1;
+                var filtervalue = 'Beate';
+                var filtercondition = 'contains';
+                var filter1 = filtergroup.createfilter('stringfilter', filtervalue, filtercondition);
+
+                filtervalue = 'Andrew';
+                filtercondition = 'starts_with';
+                var filter2 = filtergroup.createfilter('stringfilter', filtervalue, filtercondition);
+
+                filtergroup.addfilter(filter_or_operator, filter1);
+                filtergroup.addfilter(filter_or_operator, filter2);
+                // add the filters.
+                $("#jqxgrid").jqxGrid('addfilter', 'firstname', filtergroup);
+                // apply the filters.
+                $("#jqxgrid").jqxGrid('applyfilters');
+            }
+            var adapter = new $.jqx.dataAdapter(source);
+
+            $("#jqxgrid").jqxGrid(
+            {
+                width: 670,
+                source: adapter,
+                filterable: true,
+                sortable: true,
+                autoshowfiltericon: true,
+                columns: [
+                  { text: 'First Name', datafield: 'firstname', width: 90 },
+                  { text: 'Last Name', datafield: 'lastname', width: 90 },
+                  { text: 'Product', datafield: 'productname', width: 170 },
+                  { text: 'Order Date', datafield: 'date', width: 160, cellsformat: 'dd-MMMM-yyyy' },
+                  { text: 'Quantity', datafield: 'quantity', width: 80, cellsalign: 'right' },
+                  { text: 'Available', datafield: 'available', width: 80, cellsalign: 'right' },
+                  { text: 'Unit Price', datafield: 'price', cellsalign: 'right', cellsformat: 'c2' }
+                ]
+            });
+
+            module("Module Filtering");
+
+            test("clear after applied filter", function () {
+                $("#jqxgrid").jqxGrid('clearfilters');
+                $("#jqxgrid").jqxGrid('updatebounddata');
+                addfilter();
+                $("#jqxgrid").jqxGrid('clear');  
+                var rows = $("#jqxgrid").jqxGrid('getrows');
+                ok(rows.length == 0, "clear failed");
+            });
+
+            test("apply filter", function () {
+                $("#jqxgrid").jqxGrid('clearfilters');
+                $("#jqxgrid").jqxGrid('updatebounddata');
+                var rows = $("#jqxgrid").jqxGrid('getrows');
+                addfilter();
+                var rowsafter = $("#jqxgrid").jqxGrid('getrows');
+                ok(rows.length > rowsafter.length, "filter failed");
+            });
+
+            test("clear filter", function () {
+                $("#jqxgrid").jqxGrid('clearfilters');
+                $("#jqxgrid").jqxGrid('updatebounddata');
+                var rows = $("#jqxgrid").jqxGrid('getrows');
+                addfilter();
+                $("#jqxgrid").jqxGrid('clearfilters');
+                var rowsafter = $("#jqxgrid").jqxGrid('getrows');
+                ok(rows.length == rowsafter.length, "clearfilter failed");
+            });
+
+            test("filter after sort", function () {
+                $("#jqxgrid").jqxGrid('clearfilters');
+                $("#jqxgrid").jqxGrid('updatebounddata');
+                $("#jqxgrid").jqxGrid('sortby', 'firstname', 'asc');
+                var rows = $("#jqxgrid").jqxGrid('getrows');
+                addfilter();
+                $("#jqxgrid").jqxGrid('clearfilter');
+                var rowsafter = $("#jqxgrid").jqxGrid('getrows');
+                ok(rows[0].firstname == rowsafter[0].firstname, "filter after sort failed");
+            });
+
+            test("equal filter", function () {
+                $("#jqxgrid").jqxGrid('clearfilters');
+                $("#jqxgrid").jqxGrid('updatebounddata');
+                var filtergroup = new $.jqx.filter();
+                var filter_or_operator = 1;
+                var filtervalue = 'Beate';
+                var filtercondition = 'equal';
+                var filter = filtergroup.createfilter('stringfilter', filtervalue, filtercondition);
+
+                filtergroup.addfilter(filter_or_operator, filter);
+                // add the filters.
+                $("#jqxgrid").jqxGrid('addfilter', 'firstname', filtergroup);
+                // apply the filters.
+                $("#jqxgrid").jqxGrid('applyfilters');
+                var rows = $("#jqxgrid").jqxGrid('getrows');
+                var m = false;
+                for (var i = 0; i < rows.length; i++) {
+                    if (rows[i].firstname != 'Beate') {
+                        m = true;
+                        break;
+                    }
+                }
+                ok(m == false, "equal filter failed");
+            });
+            test("starts_with filter", function () {
+                $("#jqxgrid").jqxGrid('clearfilters');
+                $("#jqxgrid").jqxGrid('updatebounddata');
+                var filtergroup = new $.jqx.filter();
+                var filter_or_operator = 1;
+                var filtervalue = 'Be';
+                var filtercondition = 'starts_with';
+                var filter = filtergroup.createfilter('stringfilter', filtervalue, filtercondition);
+
+                filtergroup.addfilter(filter_or_operator, filter);
+                // add the filters.
+                $("#jqxgrid").jqxGrid('addfilter', 'firstname', filtergroup);
+                // apply the filters.
+                $("#jqxgrid").jqxGrid('applyfilters');
+                var rows = $("#jqxgrid").jqxGrid('getrows');
+                var m = false;
+                for (var i = 0; i < rows.length; i++) {
+                    if (rows[i].firstname.substring(0, 2) != 'Be') {
+                        m = true;
+                        break;
+                    }
+                }
+                ok(m == false, "starts_with filter failed");
+            });
+            test("ends_with filter", function () {
+                $("#jqxgrid").jqxGrid('clearfilters');
+                $("#jqxgrid").jqxGrid('updatebounddata');
+                var filtergroup = new $.jqx.filter();
+                var filter_or_operator = 1;
+                var filtervalue = 'ew';
+                var filtercondition = 'starts_with';
+                var filter = filtergroup.createfilter('stringfilter', filtervalue, filtercondition);
+
+                filtergroup.addfilter(filter_or_operator, filter);
+                // add the filters.
+                $("#jqxgrid").jqxGrid('addfilter', 'firstname', filtergroup);
+                // apply the filters.
+                $("#jqxgrid").jqxGrid('applyfilters');
+                var rows = $("#jqxgrid").jqxGrid('getrows');
+                var m = false;
+                for (var i = 0; i < rows.length; i++) {
+                    if (rows[i].firstname.substring(rows[i].firstname.length - 2, 2) != 'ew') {
+                        m = true;
+                        break;
+                    }
+                }
+                ok(m == false, "ends_with filter failed");
+            });
+            test("contains filter", function () {
+                $("#jqxgrid").jqxGrid('clearfilters');
+                $("#jqxgrid").jqxGrid('updatebounddata');
+                var filtergroup = new $.jqx.filter();
+                var filter_or_operator = 1;
+                var filtervalue = 'Andr';
+                var filtercondition = 'contains';
+                var filter = filtergroup.createfilter('stringfilter', filtervalue, filtercondition);
+
+                filtergroup.addfilter(filter_or_operator, filter);
+                // add the filters.
+                $("#jqxgrid").jqxGrid('addfilter', 'firstname', filtergroup);
+                // apply the filters.
+                $("#jqxgrid").jqxGrid('applyfilters');
+                var rows = $("#jqxgrid").jqxGrid('getrows');
+                var m = false;
+                for (var i = 0; i < rows.length; i++) {
+                    if (rows[i].firstname != "Andrew") {
+                        m = true;
+                        break;
+                    }
+                }
+                ok(m == false, "contains filter failed");
+            });
+
+            test("date_less_than filter", function () {
+                $("#jqxgrid").jqxGrid('clearfilters');
+                $("#jqxgrid").jqxGrid('updatebounddata');
+                var filtergroup = new $.jqx.filter();
+                var filter_or_operator = 1;
+                var filtervalue = new Date(2012, 7, 1);
+                var filtercondition = 'less_than';
+                var filter = filtergroup.createfilter('datefilter', filtervalue, filtercondition);
+
+                filtergroup.addfilter(filter_or_operator, filter);
+                // add the filters.
+                $("#jqxgrid").jqxGrid('addfilter', 'date', filtergroup);
+                // apply the filters.
+                $("#jqxgrid").jqxGrid('applyfilters');
+                var rows = $("#jqxgrid").jqxGrid('getrows');
+                var m = false;
+                for (var i = 0; i < rows.length; i++) {
+                    if (rows[i].date > filtervalue) {
+                        m = true;
+                        break;
+                    }
+                }
+                ok(m == false, "date_less_than filter failed");
+            });
+
+            test("date_greater_than filter", function () {
+                $("#jqxgrid").jqxGrid('clearfilters');
+                $("#jqxgrid").jqxGrid('updatebounddata');
+                var filtergroup = new $.jqx.filter();
+                var filter_or_operator = 1;
+                var filtervalue = new Date(2012, 7, 1);
+                var filtercondition = 'greater_than';
+                var filter = filtergroup.createfilter('datefilter', filtervalue, filtercondition);
+
+                filtergroup.addfilter(filter_or_operator, filter);
+                // add the filters.
+                $("#jqxgrid").jqxGrid('addfilter', 'date', filtergroup);
+                // apply the filters.
+                $("#jqxgrid").jqxGrid('applyfilters');
+                var rows = $("#jqxgrid").jqxGrid('getrows');
+                var m = false;
+                for (var i = 0; i < rows.length; i++) {
+                    if (rows[i].date < filtervalue) {
+                        m = true;
+                        break;
+                    }
+                }
+                ok(m == false, "date_greater_than filter failed");
+            });
+
+            test("number_greater_than filter", function () {
+                $("#jqxgrid").jqxGrid('clearfilters');
+                $("#jqxgrid").jqxGrid('updatebounddata');
+                var filtergroup = new $.jqx.filter();
+                var filter_or_operator = 1;
+                var filtervalue = 5;
+                var filtercondition = 'greater_than';
+                var filter = filtergroup.createfilter('numericfilter', filtervalue, filtercondition);
+
+                filtergroup.addfilter(filter_or_operator, filter);
+                // add the filters.
+                $("#jqxgrid").jqxGrid('addfilter', 'quantity', filtergroup);
+                // apply the filters.
+                $("#jqxgrid").jqxGrid('applyfilters');
+                var rows = $("#jqxgrid").jqxGrid('getrows');
+                var m = false;
+                for (var i = 0; i < rows.length; i++) {
+                    if (rows[i].quantity < filtervalue) {
+                        m = true;
+                        break;
+                    }
+                }
+                ok(m == false, "number_greater_than filter failed");
+            });
+
+            test("number_less_than filter", function () {
+                $("#jqxgrid").jqxGrid('clearfilters');
+                $("#jqxgrid").jqxGrid('updatebounddata');
+                var filtergroup = new $.jqx.filter();
+                var filter_or_operator = 1;
+                var filtervalue = 5;
+                var filtercondition = 'less_than';
+                var filter = filtergroup.createfilter('numericfilter', filtervalue, filtercondition);
+
+                filtergroup.addfilter(filter_or_operator, filter);
+                // add the filters.
+                $("#jqxgrid").jqxGrid('addfilter', 'quantity', filtergroup);
+                // apply the filters.
+                $("#jqxgrid").jqxGrid('applyfilters');
+                var rows = $("#jqxgrid").jqxGrid('getrows');
+                var m = false;
+                for (var i = 0; i < rows.length; i++) {
+                    if (rows[i].quantity > filtervalue) {
+                        m = true;
+                        break;
+                    }
+                }
+                ok(m == false, "number_less_than filter failed");
+            });
+
+            test("bool filter", function () {
+                $("#jqxgrid").jqxGrid('clearfilters');
+                $("#jqxgrid").jqxGrid('updatebounddata');
+                var filtergroup = new $.jqx.filter();
+                var filter_or_operator = 1;
+                var filtervalue = true;
+                var filtercondition = 'equal';
+                var filter = filtergroup.createfilter('booleanfilter', filtervalue, filtercondition);
+
+                filtergroup.addfilter(filter_or_operator, filter);
+                // add the filters.
+                $("#jqxgrid").jqxGrid('addfilter', 'available', filtergroup);
+                // apply the filters.
+                $("#jqxgrid").jqxGrid('applyfilters');
+                var rows = $("#jqxgrid").jqxGrid('getrows');
+                var m = false;
+                for (var i = 0; i < rows.length; i++) {
+                    if (rows[i].available == false) {
+                        m = true;
+                        break;
+                    }
+                }
+                ok(m == false, "bool filter failed");
+            });
+
+            test("multicolumn filter", function () {
+                $("#jqxgrid").jqxGrid('clearfilters');
+                $("#jqxgrid").jqxGrid('updatebounddata');
+                var filtergroup = new $.jqx.filter();
+                var filter_or_operator = 1;
+                var filtervalue = true;
+                var filtercondition = 'equal';
+                var filter = filtergroup.createfilter('booleanfilter', filtervalue, filtercondition);
+
+                filtergroup.addfilter(filter_or_operator, filter);
+                // add the filters.
+                addfilter();
+                var rows = $("#jqxgrid").jqxGrid('getrows');
+
+                $("#jqxgrid").jqxGrid('addfilter', 'available', filtergroup);
+                // apply the filters.
+                $("#jqxgrid").jqxGrid('applyfilters');
+                var rowsnew = $("#jqxgrid").jqxGrid('getrows');
+                ok(rowsnew.length < rows.length, "multicolumn filter failed");
+            });
+
+            test("pager with filter", function () {
+                $("#jqxgrid").jqxGrid({ pageable: true });
+                $("#jqxgrid").jqxGrid('updatebounddata');
+                $("#jqxgrid").jqxGrid('clearfilters');
+                $("#jqxgrid").jqxGrid('updatebounddata');
+                var rows = $("#jqxgrid").jqxGrid('getrows');
+                addfilter();
+                var rowsafter = $("#jqxgrid").jqxGrid('getrows');
+                ok(rowsafter.length < rows.length, "multicolumn filter failed");
+            });
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <h1 id="qunit-header">
+            QUnit example</h1>
+        <h2 id="qunit-banner">
+        </h2>
+        <div id="qunit-testrunner-toolbar">
+        </div>
+        <h2 id="qunit-userAgent">
+        </h2>
+        <ol id="qunit-tests">
+        </ol>
+        <div id="qunit-fixture">
+            test markup, will be hidden</div>
+    </div>
+    <div  style="display: none;" id="jqxgrid">
+    </div>
+</body>
+</html>

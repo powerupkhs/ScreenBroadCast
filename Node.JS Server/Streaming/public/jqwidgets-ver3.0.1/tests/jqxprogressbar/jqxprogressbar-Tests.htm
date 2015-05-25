@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="../../Styles/Site.css" media="screen" />
+    <link rel="stylesheet" href="../../Styles/qunit-git.css" media="screen" />
+    <script type="text/javascript" src="../../scripts/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/qunit-git.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxprogressbar.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#jqxProgressBar').jqxProgressBar({animationDuration: 0, width: '250px', height: '30px', value: 30 });
+
+            module("Module Properties");
+
+            test("value property test", function () {
+                // get value.
+                var value = $('#jqxProgressBar').jqxProgressBar('value');
+                ok(value == 30, "get value test.");
+
+                // set value.
+                $('#jqxProgressBar').jqxProgressBar({ value: 100 });
+                var newValue = $('#jqxProgressBar').jqxProgressBar('value');
+                ok(newValue == 100, "set value test.");
+
+                // reset value to 0
+                $('#jqxProgressBar').jqxProgressBar({ value: 0 });
+            });
+
+            test("min property test", function () {
+                // get min
+                var min = $('#jqxProgressBar').jqxProgressBar('min');
+                ok(min == 0, "get min test.");
+
+                // set min.
+                $('#jqxProgressBar').jqxProgressBar({ min: 50 });
+                var newMin = $('#jqxProgressBar').jqxProgressBar('min');
+                ok(newMin == 50, "set min test.");
+
+                // test the value property after setting the min.
+                $('#jqxProgressBar').jqxProgressBar('value');
+                var newValue = $('#jqxProgressBar').jqxProgressBar('value');
+                ok(newValue == 50, "value after set min");
+
+                // reset value to 0
+                $('#jqxProgressBar').jqxProgressBar({ value: 0 });
+                // reset min to 0
+                $('#jqxProgressBar').jqxProgressBar({ min: 0 });
+            });
+
+            test("max property test", function () {
+                // get max
+                var max = $('#jqxProgressBar').jqxProgressBar('max');
+                ok(max == 100, "get max test.");
+
+                // set value to 100
+                $('#jqxProgressBar').jqxProgressBar({ value: 100 });
+
+                // set max to 50.
+                $('#jqxProgressBar').jqxProgressBar({ max: 50 });
+                var newMax = $('#jqxProgressBar').jqxProgressBar('max');
+                ok(newMax == 50, "set max test.");
+
+                // test the value property after setting the max.
+                $('#jqxProgressBar').jqxProgressBar('value');
+                var newValue = $('#jqxProgressBar').jqxProgressBar('value');
+                ok(newValue == 50, "value after set max");
+                // reset value to 0
+                $('#jqxProgressBar').jqxProgressBar({ value: 0 });
+                // reset min to 0
+                $('#jqxProgressBar').jqxProgressBar({ min: 0 });
+                // reset max to 100
+                $('#jqxProgressBar').jqxProgressBar({ max: 100 });
+            });
+
+            module("Module Methods");
+
+            test("actualValue method test", function () {
+                // invoke actualValue method.
+                $('#jqxProgressBar').jqxProgressBar('actualValue', 30);
+                // test the value after invoking actualValue.
+                var newValue = $('#jqxProgressBar').jqxProgressBar('value');
+                ok(newValue == 30, "value after invoking actualValue");
+            });
+
+            module("Module Events");
+
+            test("valuechanged event test", function () {
+                var valueChanged = false;
+                // on to valuechanged.
+                $('#jqxProgressBar').on('valuechanged', function () {
+                    valueChanged = true;
+                });
+
+                $('#jqxProgressBar').jqxProgressBar({ value: 10 });
+                ok(true == valueChanged, "valuechanged event.");
+
+                // off from value changed.
+                $('#jqxProgressBar').off('valuechanged');
+            });
+
+            test("complete event test", function () {
+                var complete = false;
+                // on to complete.
+                $('#jqxProgressBar').on('complete', function () {
+                    complete = true;
+                });
+
+                $('#jqxProgressBar').jqxProgressBar({ value: 100 });
+
+                // off from complete.
+                $('#jqxProgressBar').off('complete');
+
+                // test whether complete is true.
+                equal(complete, true, "complete event.");
+
+                // reset value to 0
+                $('#jqxProgressBar').jqxProgressBar({ value: 0 });
+            });
+
+            test("invalidvalue event test", function () {
+                var invalidValue = false;
+                // on to invalidvalue.
+                $('#jqxProgressBar').on('invalidvalue', function () {
+                    invalidValue = true;
+                });
+
+                $('#jqxProgressBar').jqxProgressBar({ value: 1000 });
+
+                // off from complete.
+                $('#jqxProgressBar').off('invalidvalue');
+
+                // test whether complete is true.
+                equal(invalidValue, true, "invalidvalue event.");
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id='jqxProgressBar'>
+    </div>
+    <br />
+    <br />
+    <div>
+        <h1 id="qunit-header">
+            QUnit example</h1>
+        <h2 id="qunit-banner">
+        </h2>
+        <div id="qunit-testrunner-toolbar">
+        </div>
+        <h2 id="qunit-userAgent">
+        </h2>
+        <ol id="qunit-tests">
+        </ol>
+        <div id="qunit-fixture">
+            test markup, will be hidden</div>
+    </div>
+</body>
+</html>

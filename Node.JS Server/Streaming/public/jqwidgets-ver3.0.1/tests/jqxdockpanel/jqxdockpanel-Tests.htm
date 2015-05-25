@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxDockPanel.js"></script>
+    <link rel="stylesheet" href="../../Styles/qunit-git.css" media="screen" />
+    <script type="text/javascript" src="../../Scripts/qunit-git.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#jqxDockPanel').jqxDockPanel({ width: '250px', height: '300px' });
+            $('#jqxDockPanel').css('display', 'none');
+
+            module("Module Properties");
+
+            test("width property test", function () {
+                // get width
+                var width = $('#jqxDockPanel').jqxDockPanel('width');
+                ok(parseInt(width) == parseInt(250), "get width test.");
+
+                $('#jqxDockPanel').jqxDockPanel({ width: 300 });
+                var width = $('#jqxDockPanel').jqxDockPanel('width');
+                ok(parseInt(width) == parseInt(300), "set width test.");
+            });
+
+            test("height property test", function () {
+                // get height
+                var height = $('#jqxDockPanel').jqxDockPanel('height');
+                ok(parseInt(height) == parseInt(300), "get height test.");
+
+                $('#jqxDockPanel').jqxDockPanel({ height: 350 });
+                var height = $('#jqxDockPanel').jqxDockPanel('height');
+                ok(parseInt(height) == parseInt(350), "set height test.");
+            });
+
+            test("lastchildfill property test", function () {
+                // get lastchildfill
+                var lastchildfill = $('#jqxDockPanel').jqxDockPanel('lastchildfill');
+                ok(lastchildfill == true, "get lastchildfill test.");
+
+                $('#jqxDockPanel').jqxDockPanel({ lastchildfill: false });
+                var lastchildfill = $('#jqxDockPanel').jqxDockPanel('lastchildfill');
+                ok(lastchildfill == false, "set lastchildfill test.");
+            });
+
+            test("disabled property test", function () {
+                // get disabled
+                var disabled = $('#jqxDockPanel').jqxDockPanel('disabled');
+                ok(disabled == false, "get disabled test.");
+
+                $('#jqxDockPanel').jqxDockPanel({ disabled: true });
+                var disabled = $('#jqxDockPanel').jqxDockPanel('disabled');
+                ok(disabled == true, "set disabled test.");
+                // reset disabled property.
+                $('#jqxDockPanel').jqxDockPanel({ disabled: false });         
+            });
+
+            module("Module Methods");
+
+            module("Module Events");
+
+            test("layout event test", function () {
+                var layout = false;
+                // on to valuechanged.
+                $('#jqxDockPanel').on('layout', function () {
+                    layout = true;
+                });
+
+                $('#jqxDockPanel').jqxDockPanel({ width: 10 });
+                $('#jqxDockPanel').jqxDockPanel('performLayout');
+                ok(true == layout, "layout event.");
+
+                // off from value changed.
+                $('#jqxDockPanel').off('layout');
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id='jqxDockPanel' style="font-size: 13px; font-family: Verdana; float: left;">
+        <div dock='left' style='background: Red;'>
+            Red Div</div>
+        <div dock='top' style='height: 100px; background: Blue;'>
+            Blue Div</div>
+        <div dock='right' style='background: Green;'>
+            Green Div</div>
+        <div style='background: Yellow;'>
+            Yellow Div</div>
+    </div>
+    <br />
+    <br />
+    <div>
+        <h1 id="qunit-header">
+            QUnit example</h1>
+        <h2 id="qunit-banner">
+        </h2>
+        <div id="qunit-testrunner-toolbar">
+        </div>
+        <h2 id="qunit-userAgent">
+        </h2>
+        <ol id="qunit-tests">
+        </ol>
+        <div id="qunit-fixture">
+            test markup, will be hidden</div>
+    </div>
+</body>
+</html>

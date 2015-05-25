@@ -1,0 +1,245 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="../../Styles/Site.css" media="screen" />
+    <link rel="stylesheet" href="../../Styles/qunit-git.css" media="screen" />
+    <script type="text/javascript" src="../../scripts/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/qunit-git.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#jqxCheckBox').jqxCheckBox({ width: '250px', height: '300px' });
+
+            module("Module Properties");
+
+            test("width property test", function () {
+                // get width
+                var width = $('#jqxCheckBox').jqxCheckBox('width');
+                ok(parseInt(width) == parseInt(250), "get width test.");
+
+                $('#jqxCheckBox').jqxCheckBox({ width: 300 });
+                var width = $('#jqxCheckBox').jqxCheckBox('width');
+                ok(parseInt(width) == parseInt(300), "set width test.");
+            });
+
+            test("height property test", function () {
+                // get height
+                var height = $('#jqxCheckBox').jqxCheckBox('height');
+                ok(parseInt(height) == parseInt(300), "get height test.");
+
+                $('#jqxCheckBox').jqxCheckBox({ height: 350 });
+                var height = $('#jqxCheckBox').jqxCheckBox('height');
+                ok(parseInt(height) == parseInt(350), "set height test.");
+            });
+
+            test("disabled property test", function () {
+                // get disabled
+                var disabled = $('#jqxCheckBox').jqxCheckBox('disabled');
+                ok(disabled == false, "get disabled test.");
+
+                $('#jqxCheckBox').jqxCheckBox({ disabled: true });
+                var disabled = $('#jqxCheckBox').jqxCheckBox('disabled');
+                ok(disabled == true, "set disabled test.");
+            });
+
+            test("animationShowDelay property test", function () {
+                // get animationShowDelay
+                var animationShowDelay = $('#jqxCheckBox').jqxCheckBox('animationShowDelay');
+                ok(animationShowDelay == 300, "get animationShowDelay test.");
+
+                $('#jqxCheckBox').jqxCheckBox({ animationShowDelay: 350 });
+                var animationShowDelay = $('#jqxCheckBox').jqxCheckBox('animationShowDelay');
+                ok(animationShowDelay == 350, "set animationShowDelay test.");
+            });
+
+            test("animationHideDelay property test", function () {
+                // get animationHideDelay
+                var animationHideDelay = $('#jqxCheckBox').jqxCheckBox('animationHideDelay');
+                ok(animationHideDelay == 300, "get animationHideDelay test.");
+
+                $('#jqxCheckBox').jqxCheckBox({ animationHideDelay: 350 });
+                var animationHideDelay = $('#jqxCheckBox').jqxCheckBox('animationHideDelay');
+                ok(animationHideDelay == 350, "set animationHideDelay test.");
+            });
+
+            test("boxSize property test", function () {
+                // get boxSize
+                var boxSize = $('#jqxCheckBox').jqxCheckBox('boxSize');
+                ok(boxSize == '13px', "get boxSize test.");
+
+                $('#jqxCheckBox').jqxCheckBox({ boxSize: '20px' });
+                var boxSize = $('#jqxCheckBox').jqxCheckBox('boxSize');
+                ok(boxSize == '20px', "set boxSize test.");
+            });
+
+            test("checked property test", function () {
+                // get checked
+                var checked = $('#jqxCheckBox').jqxCheckBox('checked');
+                ok(checked == false, "get checked test.");
+
+                $('#jqxCheckBox').jqxCheckBox({ checked: true });
+                var checked = $('#jqxCheckBox').jqxCheckBox('checked');
+                ok(checked == true, "set checked test.");
+            });
+
+            test("hasThreeStates property test", function () {
+                // get hasThreeStates
+                var hasThreeStates = $('#jqxCheckBox').jqxCheckBox('hasThreeStates');
+                ok(hasThreeStates == false, "get hasThreeStates test.");
+
+                $('#jqxCheckBox').jqxCheckBox({ hasThreeStates: true });
+                var hasThreeStates = $('#jqxCheckBox').jqxCheckBox('hasThreeStates');
+                ok(hasThreeStates == true, "set hasThreeStates test.");
+            });
+
+            test("enableContainerClick property test", function () {
+                // get enableContainerClick
+                var enableContainerClick = $('#jqxCheckBox').jqxCheckBox('enableContainerClick');
+                ok(enableContainerClick == true, "get enableContainerClick test.");
+
+                $('#jqxCheckBox').jqxCheckBox({ enableContainerClick: false });
+                var enableContainerClick = $('#jqxCheckBox').jqxCheckBox('enableContainerClick');
+                ok(enableContainerClick == false, "set enableContainerClick test.");
+            });
+
+            test("locked property test", function () {
+                // get locked
+                var locked = $('#jqxCheckBox').jqxCheckBox('locked');
+                ok(locked == false, "get locked test.");
+
+                $('#jqxCheckBox').jqxCheckBox({ locked: true });
+                var locked = $('#jqxCheckBox').jqxCheckBox('locked');
+                ok(locked == true, "set locked test.");
+            });
+
+            test("groupName property test", function () {
+                // get groupName
+                var groupName = $('#jqxCheckBox').jqxCheckBox('groupName');
+                ok(groupName == '', "get groupName test.");
+
+                $('#jqxCheckBox').jqxCheckBox({ groupName: 'Group' });
+                var groupName = $('#jqxCheckBox').jqxCheckBox('groupName');
+                ok(groupName == 'Group', "set groupName test.");
+            });
+
+
+            module("Module Methods");
+            test("check method test", function () {
+                $('#jqxCheckBox').jqxCheckBox({ checked: false });
+                $('#jqxCheckBox').jqxCheckBox('check');
+
+                var checked = $('#jqxCheckBox').jqxCheckBox('checked');
+                ok(checked == true, "check method test.");
+            });
+
+            test("uncheck method test", function () {
+                $('#jqxCheckBox').jqxCheckBox({ checked: true });
+                $('#jqxCheckBox').jqxCheckBox('uncheck');
+
+                var checked = $('#jqxCheckBox').jqxCheckBox('checked');
+                ok(checked == false, "unchecks method test.");
+            });
+
+
+            test("indeterminate method test", function () {
+                $('#jqxCheckBox').jqxCheckBox({ checked: true });
+                $('#jqxCheckBox').jqxCheckBox('indeterminate');
+
+                var checked = $('#jqxCheckBox').jqxCheckBox('checked');
+                ok(checked == null, "indeterminate method test.");
+            });
+
+            test("toggle method test", function () {
+                $('#jqxCheckBox').jqxCheckBox({ disabled: false, hasThreeStates: false, groupName: '', locked: false });
+             
+                $('#jqxCheckBox').jqxCheckBox({ checked: true });
+                $('#jqxCheckBox').jqxCheckBox('toggle');
+
+                var checked = $('#jqxCheckBox').jqxCheckBox('checked');
+                ok(checked == false, "toggle method test.");
+            });
+
+            test("disable method test", function () {
+                $('#jqxCheckBox').jqxCheckBox({ disabled: false});
+                $('#jqxCheckBox').jqxCheckBox('disable');
+
+                var disabled = $('#jqxCheckBox').jqxCheckBox('disabled');
+                ok(disabled == true, "disable method test.");
+            });
+
+
+            module("Module Events");
+            test("checked event test", function () {
+                $('#jqxCheckBox').jqxCheckBox({ checked: false });
+                var checkedTriggered = false;
+                $('#jqxCheckBox').on('checked', function () {
+                    checkedTriggered = true;
+                });
+
+                $('#jqxCheckBox').jqxCheckBox({ checked: true });
+
+                ok(checkedTriggered == true, "checked event test.");
+            });
+
+            test("unchecked event test", function () {
+                $('#jqxCheckBox').jqxCheckBox({ checked: true });
+                var uncheckedTriggered = true;
+                $('#jqxCheckBox').on('unchecked', function () {
+                    uncheckedTriggered = false;
+                });
+
+                $('#jqxCheckBox').jqxCheckBox({ checked: false });
+
+                ok(uncheckedTriggered == false, "unchecked event test.");
+            });
+
+            test("indeterminate event test", function () {
+                $('#jqxCheckBox').jqxCheckBox({ checked: true });
+                var indeterminateTriggered = true;
+                $('#jqxCheckBox').on('indeterminate', function () {
+                    indeterminateTriggered = null;
+                });
+
+                $('#jqxCheckBox').jqxCheckBox({ checked: null });
+
+                ok(indeterminateTriggered == null, "indeterminate event test.");
+            });
+
+            test("change event test", function () {
+                $('#jqxCheckBox').jqxCheckBox({ checked: false });
+                var changeTriggered = true;
+                $('#jqxCheckBox').on('change', function () {
+                    changeTriggered = null;
+                });
+
+                $('#jqxCheckBox').jqxCheckBox({ checked: null });
+
+                ok(changeTriggered == null, "change event test.");
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <div id='jqxCheckBox' style="font-size: 13px; font-family: Verdana; float: left;">
+     
+    </div>
+    <br />
+    <br />
+    <div>
+        <h1 id="qunit-header">
+            QUnit example</h1>
+        <h2 id="qunit-banner">
+        </h2>
+        <div id="qunit-testrunner-toolbar">
+        </div>
+        <h2 id="qunit-userAgent">
+        </h2>
+        <ol id="qunit-tests">
+        </ol>
+        <div id="qunit-fixture">
+            test markup, will be hidden</div>
+    </div>
+</body>
+</html>

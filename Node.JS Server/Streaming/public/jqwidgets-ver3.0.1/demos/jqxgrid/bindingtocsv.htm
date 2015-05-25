@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>This example shows how to create a Grid from Comma-delimited text also known as comma-separated values (CSV).</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.columnsresize.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../scripts/gettheme.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var theme = getDemoTheme();
+
+            var url = '../sampledata/nasdaq_vs_sp500.txt';
+
+            var source =
+            {
+                datatype: "csv",
+                datafields: [
+                    { name: 'Date', type: 'date' },
+                    { name: 'S&P 500', type: 'float' },
+                    { name: 'NASDAQ', type: 'float' }
+                ],
+                url: url
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            $("#jqxgrid").jqxGrid(
+            {
+                width: 670,
+                source: dataAdapter,
+                theme: theme,   
+                columnsresize: true,
+                columns: [
+                  { text: 'Date', datafield: 'Date', cellsformat: 'D', width: 250},
+                  { text: 'S&P 500', datafield: 'S&P 500', width: 200, cellsformat: 'f' },
+                  { text: 'NASDAQ', datafield: 'NASDAQ', width: 200, cellsformat: 'f' }         
+                ]
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget'>
+        <div id="jqxgrid"></div>
+    </div>
+</body>
+</html>

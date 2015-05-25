@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+<head>
+    <title id='Description'>jqxChart Donut Series with Labels Example</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare chart data as an array
+            var source =
+            {
+                datatype: "csv",
+                datafields: [
+                    { name: 'Browser' },
+                    { name: 'Share' }
+                ],
+                url: '../sampledata/desktop_browsers_share_dec2011.txt'
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source, { async: false, autoBind: true, loadError: function (xhr, status, error) { alert('Error loading "' + source.url + '" : ' + error); } });
+
+            // prepare jqxChart settings
+            var settings = {
+                title: "Desktop browsers share in Dec 2011",
+                description: "(source: wikipedia.org)",
+                enableAnimations: true,
+                showLegend: false,
+                legendPosition: { left: 520, top: 140, width: 100, height: 100 },
+                padding: { left: 5, top: 5, right: 5, bottom: 5 },
+                titlePadding: { left: 0, top: 0, right: 0, bottom: 10 },
+                source: dataAdapter,
+                colorScheme: 'scheme02',
+                seriesGroups:
+                    [
+                        {
+                            type: 'donut',
+                            showLabels: true,
+                            series:
+                                [
+                                    {
+                                        dataField: 'Share',
+                                        displayText: 'Browser',
+                                        labelRadius: 100,
+                                        initialAngle: 15,
+                                        radius: 130,
+                                        innerRadius: 50,
+                                        centerOffset: 0,
+                                        formatSettings: { sufix: '%', decimalPlaces: 1 }
+                                    }
+                                ]
+                        }
+                    ]
+            };
+
+            // setup the chart
+            $('#jqxChart').jqxChart(settings);
+
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='host' style="margin: 0 auto; width: 699px; height: 400px;">
+        <div id='jqxChart' style="width: 680px; height: 400px; position: relative; left: 0px;
+            top: 0px;">
+        </div>
+    </div>
+</body>
+</html>

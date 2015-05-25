@@ -1,0 +1,4 @@
+{"ts":1376501925255,"silentsave":true,"restoring":false,"patch":[[]],"length":0}
+{"contributors":[],"silentsave":false,"ts":1376501916030,"patch":[[{"diffs":[[1,"<!DOCTYPE html>\n<head>\n    <% include ../header.ejs %>\n    <script type=\"text/javascript\">\n        $(document).ready(function(){\n            alert('로그인이 필요합니다');\n            window.location.href='/';\n        });\n    </script>\n</head>\n<body>\n</body>\n\n"]],"start1":0,"start2":0,"length1":0,"length2":250}]],"length":250,"saved":false}
+{"ts":1376501936793,"patch":[[{"diffs":[[0,"rt('"],[-1,"로그인이 필요합니다"],[1,"ID와 비밀번호를 확인하여주세요"],[0,"');\n"]],"start1":144,"start2":144,"length1":18,"length2":25}]],"length":257,"saved":false}
+{"ts":1376501940055,"patch":[[{"diffs":[[0,"를 확인"],[-1,"하여"],[1,"해"],[0,"주세요'"]],"start1":156,"start2":156,"length1":10,"length2":9}]],"length":256,"saved":false}

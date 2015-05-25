@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<head>
+    <% include ../mobile_header.ejs %>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+    var socket = io.connect();
+    $(document).ready(function(){
+        /*********** 브라우저 크기 설정 ************/
+		if( typeof( window.innerWidth ) == 'number' ) { 
+			 devWidth = window.innerWidth;
+			 devHeight = window.innerHeight;
+		}
+		else if( document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+			 devWidth = document.documentElement.clientWidth;
+			 devHeight = document.documentElement.clientHeight; 
+		}
+		else if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+			 devWidth = document.body.clientWidth;
+			 devHeight = document.body.clientHeight; 
+		}
+		var starthsize = devHeight; // 해당 브라우저 화면의 height 를 가져와서
+		var contentHeight =  starthsize; 
+		$("div[data-role='content']").css( "height", contentHeight ); // 그값을 content 높이에 넣어줌
+        
+        socket.on('changeSWF', function(data){
+            if(data == <%= roomNumber %>){
+                document.getElementById('test').innerHTML='<embed src="/videos/finish.swf" autostart="true" width="100%" height="100%">';
+            }
+        });
+    });
+    </script>
+</head>
+<body>
+    <div data-role="page" id="wrap" data-title="screenBroadcasting">
+        <div data-role="content" id="test">
+            <object id="FlashID" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="100%" height="100%">
+                <param name="movie" value="/videos/post_broad.swf" />
+                <param name="FlashVars" value="roomNumber=<%= roomNumber %>"/>
+                <param name="quality" value="high" />
+                <param name="wmode" value="opaque" />
+                <param name="swfversion" value="9.0.45.0" />
+                <!-- 이 param 태그는 Flash Player 6.0 r65 이후 버전 사용자에게 최신 버전의 Flash Player를 다운로드하라는 메시지를 표시합니다. 사용자에게 이러한 메시지를 표시하지 않으려면 이 태그를 삭제하십시오. -->
+                <param name="expressinstall" value="Scripts/expressInstall.swf" />
+                <param name="LOOP" value="false" />
+                <!-- 다음 객체 태그는 IE 이외의 브라우저에 사용됩니다. IECC를 사용하여 IE에서 이 태그를 숨기십시오. -->
+                <!--[if !IE]>-->
+                <object type="application/x-shockwave-flash" data="/videos/post_broad.swf" width="100%" height="100%">
+                <!--<![endif]-->
+                    <param name="FlashVars" value="roomNumber=<%= roomNumber %>"/>
+                    <param name="quality" value="high" />
+                    <param name="wmode" value="opaque" />
+                    <param name="swfversion" value="9.0.45.0" />
+                    <param name="expressinstall" value="Scripts/expressInstall.swf" />
+                    <param name="LOOP" value="false" />
+                    <!-- Flash Player 6.0 이전 버전 사용자의 브라우저에는 다음과 같은 대체 내용이 표시됩니다. -->
+                    <div>
+                    <h4>이 페이지의 내용을 보려면 최신 버전의 Adobe Flash Player가 필요합니다.</h4>
+                    <p><a href="http://www.adobe.com/go/getflashplayer"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Adobe Flash Player 내려받기" width="112" height="33" /></a></p>
+                    </div>
+                <!--[if !IE]>-->
+                </object>
+            <!--<![endif]-->
+            </object>
+            <!--<Embed src="/videos/post_broad.swf" width="100%" height="100%">-->
+		</div>
+    </div>
+</body>
+

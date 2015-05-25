@@ -1,0 +1,269 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="../../Styles/Site.css" media="screen" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.web.css" media="screen" />
+    <link rel="stylesheet" href="../../Styles/qunit-git.css" media="screen" />
+    <script type="text/javascript" src="../../scripts/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/qunit-git.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcalendar.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#jqxDateTimeInput').jqxDateTimeInput({ width: 250, height: 25 });
+            $('#jqxDateTimeInput').css('display', 'none');
+
+            module("Module Properties");
+
+            test("disabled property test", function () {
+                // get disabled.
+                var disabled = $('#jqxDateTimeInput').jqxDateTimeInput('disabled');
+                ok(disabled == false, "get disabled test.");
+
+                // set disabled.
+                $('#jqxDateTimeInput').jqxDateTimeInput({ disabled: true });
+                var disabled = $('#jqxDateTimeInput').jqxDateTimeInput('disabled');
+                ok(disabled == true, "set disabled test.");
+            });
+
+            test("minDate property test", function () {
+                //    get minDate.
+                var minDate = $('#jqxDateTimeInput').jqxDateTimeInput('getMinDate');
+                var defaultMinDate = new Date(1900, 0, 1).getDate();
+                ok(minDate.getDate() == defaultMinDate, "get mindate test.");
+
+                //   set minDate
+                var date = new Date(2010, 0, 1);
+                $('#jqxDateTimeInput').jqxDateTimeInput({ minDate: new $.jqx._jqxDateTimeInput.getDateTime(date) });
+                var minDate = $('#jqxDateTimeInput').jqxDateTimeInput('getMinDate');
+                ok(minDate.getDate() == date.getDate(), "set mindate test.");
+            });
+
+            test("maxDate property test", function () {
+                //    get maxDate.
+                var maxDate = $('#jqxDateTimeInput').jqxDateTimeInput('getMaxDate');
+                var defaultMaxDate = new Date(2100, 1, 1).getDate();
+                ok(maxDate.getDate() == defaultMaxDate, "get maxDate test.");
+
+                //    set maxDate
+                var date = new Date(2013, 0, 1);
+                $('#jqxDateTimeInput').jqxDateTimeInput({ maxDate: new $.jqx._jqxDateTimeInput.getDateTime(date) });
+                var maxDate = $('#jqxDateTimeInput').jqxDateTimeInput('getMaxDate');
+                ok(maxDate.getDate() == date.getDate(), "set maxDate test.");
+            });
+
+            test("width property test", function () {
+                //        get width.
+                var width = $('#jqxDateTimeInput').jqxDateTimeInput('width');
+                ok(width == 250, "get width test.");
+
+                //        set width.
+                $('#jqxDateTimeInput').jqxDateTimeInput({ width: 300 });
+                width = $('#jqxDateTimeInput').jqxDateTimeInput('width');
+                ok(width == 300, "set width test.");
+            });
+
+            test("height property test", function () {
+                //      get height.
+                var height = $('#jqxDateTimeInput').jqxDateTimeInput('height');
+                ok(height == 25, "get height test.");
+
+                //      set height.
+                $('#jqxDateTimeInput').jqxDateTimeInput({ height: 300 });
+                height = $('#jqxDateTimeInput').jqxDateTimeInput('height');
+                ok(height == 300, "set height test.");
+            });
+
+            test("formatString property test", function () {
+                //         get formatString.
+                var formatString = $('#jqxDateTimeInput').jqxDateTimeInput('formatString');
+                ok(formatString == "dd/MM/yyyy", "get formatString test.");
+
+                //         set formatString.
+                $('#jqxDateTimeInput').jqxDateTimeInput({ formatString: "yyyy" });
+                var formatString = $('#jqxDateTimeInput').jqxDateTimeInput('formatString');
+                ok(formatString == "yyyy", "set formatString test.");
+            });
+
+
+            test("value property test", function () {
+                //         get value.
+                var value = $('#jqxDateTimeInput').jqxDateTimeInput('value');
+                var defaultvalue = new Date().getDate();
+                ok(value.getDate() == defaultvalue, "get value test.");
+
+                //         set value
+                var date = new Date(2010, 0, 1);
+                $('#jqxDateTimeInput').jqxDateTimeInput({ value: new $.jqx._jqxDateTimeInput.getDateTime(date) });
+                var value = $('#jqxDateTimeInput').jqxDateTimeInput('value');
+                ok(value.getDate() == date.getDate(), "set value test.");
+            });
+
+            test("textAlign property test", function () {
+                //     get textAlign.
+                var textAlign = $('#jqxDateTimeInput').jqxDateTimeInput('textAlign');
+                ok(textAlign == "left", "get textAlign test.");
+
+                //     set textAlign.
+                $('#jqxDateTimeInput').jqxDateTimeInput({ textAlign: "right" });
+                var textAlign = $('#jqxDateTimeInput').jqxDateTimeInput('textAlign');
+                ok(textAlign == "right", "set textAlign test.");
+            });
+
+            test("readonly property test", function () {
+                //        get readonly.
+                var readonly = $('#jqxDateTimeInput').jqxDateTimeInput('readonly');
+                ok(readonly == false, "get readonly test.");
+
+                //        set readonly.
+                $('#jqxDateTimeInput').jqxDateTimeInput({ readonly: true });
+                var readonly = $('#jqxDateTimeInput').jqxDateTimeInput('readonly');
+                ok(readonly == true, "set readonly test.");
+            });
+
+            test("showCalendarButton property test", function () {
+                //         get showCalendarButton.
+                var showCalendarButton = $('#jqxDateTimeInput').jqxDateTimeInput('showCalendarButton');
+                ok(showCalendarButton == true, "get showCalendarButton test.");
+
+                //         set showCalendarButton.
+                $('#jqxDateTimeInput').jqxDateTimeInput({ showCalendarButton: false });
+                var showCalendarButton = $('#jqxDateTimeInput').jqxDateTimeInput('showCalendarButton');
+                ok(showCalendarButton == false, "set showCalendarButton test.");
+            });
+
+            test("closeCalendarAfterSelection property test", function () {
+                //          get closeCalendarAfterSelection.
+                var closeCalendarAfterSelection = $('#jqxDateTimeInput').jqxDateTimeInput('closeCalendarAfterSelection');
+                ok(closeCalendarAfterSelection == true, "get closeCalendarAfterSelection test.");
+
+                //          set closeCalendarAfterSelection.
+                $('#jqxDateTimeInput').jqxDateTimeInput({ closeCalendarAfterSelection: false });
+                var closeCalendarAfterSelection = $('#jqxDateTimeInput').jqxDateTimeInput('closeCalendarAfterSelection');
+                ok(closeCalendarAfterSelection == false, "set closeCalendarAfterSelection test.");
+            });
+
+            test("openDelay property test", function () {
+                //         get openDelay.
+                var openDelay = $('#jqxDateTimeInput').jqxDateTimeInput('openDelay');
+                ok(openDelay == 250, "get openDelay test.");
+
+                //         set openDelay.
+                $('#jqxDateTimeInput').jqxDateTimeInput({ openDelay: 200 });
+                var openDelay = $('#jqxDateTimeInput').jqxDateTimeInput('openDelay');
+                ok(openDelay == 200, "set openDelay test.");
+            });
+
+            test("closeDelay property test", function () {
+                //        get closeDelay.
+                var closeDelay = $('#jqxDateTimeInput').jqxDateTimeInput('closeDelay');
+                ok(closeDelay == 300, "get closeDelay test.");
+
+                //        set closeDelay.
+                $('#jqxDateTimeInput').jqxDateTimeInput({ closeDelay: 2000 });
+                var closeDelay = $('#jqxDateTimeInput').jqxDateTimeInput('closeDelay');
+                ok(closeDelay == 2000, "set closeDelay test.");
+            });
+            //            
+            module("Module Methods");
+
+
+            test("setMinDate method test", function () {
+                var beforeDate = new Date($('#jqxDateTimeInput').jqxDateTimeInput('getMinDate'));
+                //              invoke setMinDate method.
+                $('#jqxDateTimeInput').jqxDateTimeInput('setMinDate', new Date(1950, 0, 1));
+                //               test value after invoking setMinDate.
+                var afterDate = $('#jqxDateTimeInput').jqxDateTimeInput('getMinDate');
+                ok(beforeDate != afterDate, "value after invoking setMinDate test");
+            });
+
+            test("getMinDate method test", function () {
+                var beforeDate = new Date($('#jqxDateTimeInput').jqxDateTimeInput('getMinDate'));
+                //          invoke setMinDate method.
+                $('#jqxDateTimeInput').jqxDateTimeInput('getMinDate');
+                //             test value after invoking getMinDate.
+                var afterDate = $('#jqxDateTimeInput').jqxDateTimeInput('getMinDate');
+                ok(beforeDate != afterDate, "value after invoking getMinDate test");
+            });
+
+            test("setMaxDate method test", function () {
+                var beforeDate = new Date($('#jqxDateTimeInput').jqxDateTimeInput('getMaxDate'));
+                //             invoke setMaxDate method.
+                $('#jqxDateTimeInput').jqxDateTimeInput('setMaxDate', new Date(2014, 0, 1));
+                //              test value after invoking setMaxDate.
+                var afterDate = $('#jqxDateTimeInput').jqxDateTimeInput('getMaxDate');
+                ok(beforeDate != afterDate, "value after invoking setMaxDate test");
+            });
+
+            test("getMaxDate method test", function () {
+                var beforeDate = new Date($('#jqxDateTimeInput').jqxDateTimeInput('getMaxDate'));
+                //       invoke getMaxDate method.
+                $('#jqxDateTimeInput').jqxDateTimeInput('getMaxDate');
+                //              test value after invoking getMaxDate.
+                var afterDate = $('#jqxDateTimeInput').jqxDateTimeInput('getMaxDate');
+                ok(beforeDate != afterDate, "value after invoking getMaxDate test");
+            });
+
+            test("setDate method test", function () {
+                var beforeDate = new Date($('#jqxDateTimeInput').jqxDateTimeInput('getDate'));
+                //          invoke setDate method.
+                $('#jqxDateTimeInput').jqxDateTimeInput('setDate', new Date(2012, 0, 1));
+                //           test value after invoking setDate.
+                var afterDate = $('#jqxDateTimeInput').jqxDateTimeInput('getDate');
+                ok(beforeDate != afterDate, "value after invoking setDate test");
+            });
+
+            test("getDate method test", function () {
+                var beforeDate = new Date($('#jqxDateTimeInput').jqxDateTimeInput('getDate'));
+                //           invoke getDate method.
+                $('#jqxDateTimeInput').jqxDateTimeInput('getDate');
+                //            test value after invoking getDate.
+                var afterDate = $('#jqxDateTimeInput').jqxDateTimeInput('getDate');
+                ok(beforeDate != afterDate, "value after invoking getDate test");
+            });
+
+            module("Module Events");
+
+            test("valuechanged event test", function () {
+                var valuechanged = false;
+
+                //  on to valuechanged.
+                $('#jqxDateTimeInput').on('valuechanged', function () {
+                    valuechanged = true;
+                });
+                $('#jqxDateTimeInput').show();
+                $('#jqxDateTimeInput').jqxDateTimeInput('setDate', new Date(2013, 3, 3));
+                $('#jqxDateTimeInput').hide();
+                 ok(true == valuechanged, "valuechanged event.");
+
+                //  off from valuechanged.
+                $('#jqxDateTimeInput').off('valuechanged');
+            });
+
+        }); 
+    </script>
+</head>
+<body>
+    <div id='jqxDateTimeInput'>
+    </div>
+    <br />
+    <br />
+    <div>
+        <h1 id="qunit-header">
+            QUnit example</h1>
+        <h2 id="qunit-banner">
+        </h2>
+        <div id="qunit-testrunner-toolbar">
+        </div>
+        <h2 id="qunit-userAgent">
+        </h2>
+        <ol id="qunit-tests">
+        </ol>
+        <div id="qunit-fixture">
+            test markup, will be hidden</div>
+    </div>
+</body>
+</html>

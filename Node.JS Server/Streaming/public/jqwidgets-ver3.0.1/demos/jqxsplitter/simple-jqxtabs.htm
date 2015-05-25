@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>Nested Splitters with jqxTabs. The sample demonstrates how to
+        add the jqxTabs widget inside a Split Panel</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxsplitter.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtabs.js"></script>
+    <script type="text/javascript" src="../../scripts/gettheme.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var theme = getDemoTheme();
+            $('#splitContainer').jqxSplitter({ height: 600, width: 600, orientation: 'horizontal', theme: theme, panels: [{ size: '10%' }, { size: '80%'}] });
+            $('#splitter').jqxSplitter({ width: '100%', theme: theme, panels: [{ size: 200 }, { size: 200}] });
+            $("#tabswidget").jqxTabs({ theme: theme, height: '100%', width: '100%' });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="splitContainer">
+        <div>
+            Top Panel
+        </div>
+        <div>
+            <div id="splitter">
+                <div>
+                    Left Panel
+                </div>
+                <div>
+                    <div class="jqx-hideborder jqx-hidescrollbars" id="tabswidget">
+                        <ul>
+                            <li style="margin-left: 30px;">Tab 1</li>
+                            <li>Tab 2</li>
+                        </ul>
+                        <div>
+                            Content 1</div>
+                        <div>
+                            Content 2</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

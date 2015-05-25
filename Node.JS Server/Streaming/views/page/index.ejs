@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<head>
+	<% include ../header.ejs %>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+        var socket = io.connect();
+        $(document).ready(function(){
+            $( "#tabs" ).tabs();
+            socket.on('makeRoom', function(){
+                window.location.href = "/";
+            });
+                
+            socket.on('uploadThumbnail', function(data){
+                $('#' + data).attr("src", data + ".jpg");
+            });
+        });
+        function move_site(text){
+            if (socket) socket.disconnect();
+            var encodeuri = encodeURI(text);
+            window.location.href = encodeuri;
+        }
+        function check_password(text, pass){
+            var str = prompt("비밀방입니다. 비밀번호를 입력해주세요");
+            if(pass == str){
+                if (socket) socket.disconnect();
+                var encodeuri = encodeURI(text);
+                window.location.href = encodeuri;
+            }
+            else{
+                alert("비밀번호가 틀렸습니다 확인후 다시 시도해주세요");
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="wrap">
+    	<div id="top">
+    		<% include ../top.ejs %>
+    	</div>
+    	<div id="center">
+            <div id="left">
+                <div id="login_form">
+                    <% include ../login_form.ejs %>
+                </div>
+            </div>
+            <div id="right">
+                <div id="tabs" style="margin-left:10px; font-size:12px;">
+                    <ul>
+                        <li><a href="#tabs-1">방송리스트</a></li>
+<%
+                        if(typeof favorites != 'undefined'){
+%>
+                            <li><a href="#tabs-2">즐겨찾기</a></li>
+<%
+                        }
+%>
+                    </ul>
+                    <div id="tabs-1">
+                        <table class="broadcast_list_table">
+<%
+                            for(var i=0; i<=(room.length/5); i++) {
+%>
+                                <tr>
+<%
+                                    for(var j=0; j<5; j++) {
+                                        if(typeof room[i*5+j] !== 'undefined') {
+%>
+                                        <td>
+                                            <span style="font-size:12px; font-weight:bold; color:#666">[ <%= room[i*5+j].name %> ]</span><br/>
+<%
+                                            if(room[i*5+j].is_public == 1) {  
+%>
+                                                <img src="/<%= room[i*5+j].number %>.jpg" class="onair_image" style="margin:10px 10px;" id="<%= room[i*5+j].number %>"  onerror="this.src='default.gif'"/><br/>
+                                                <input type="button" value="방송보기" onclick="move_site('/broadcast?room=<%= room[i*5+j].name %>&number=<%= room[i*5+j].number %>')" class="normal_button" onmouseover="this.style.backgroundColor='#929292';this.style.color='#ffffff'" onmouseout="this.style.backgroundColor='#ffffff';this.style.color='#666'" />
+<%
+                                            }
+                                            else {
+%>
+                                                <img src="/images/onAIR_rock.png" class="onair_image" style="margin:10px 10px;" /><br/>
+                                                <input type="button" value="방송보기" onclick="check_password('/broadcast?room=<%= room[i*5+j].name %>&number=<%= room[i*5+j].number %>', '<%= room[i*5+j].password %>')" class="normal_button" onmouseover="this.style.backgroundColor='#929292';this.style.color='#ffffff'" onmouseout="this.style.backgroundColor='#ffffff';this.style.color='#666'" />
+<%
+                                            }
+%>
+                                        </td> 
+<%
+                                        }
+                                    }
+%>
+                                </tr>
+<%
+                            }
+%>
+                        </table>
+                    </div>
+                    <div id="tabs-2"> 
+<%
+                        if(typeof favorites != 'undefined'){
+%>
+                            <table class="broadcast_list_table">
+<%
+                                for(var i=0; i<=(favorites.length/5); i++) {
+%>
+                                    <tr>
+<%
+                                        for(var j=0; j<5; j++) {
+                                            if(typeof favorites[i*5+j] !== 'undefined') {
+%>
+                                            <td>
+                                                <span style="font-size:12px; font-weight:bold; color:#666">[ <%= favorites[i*5+j].name %> ]</span><br/>
+<%
+                                                if(favorites[i*5+j].is_public == 1) {  
+%>
+                                                    <img src="/<%= room[i*5+j].number %>.jpg" class="onair_image" style="margin:10px 10px;" id="<%= room[i*5+j].number %>"  onerror="this.src='default.gif'"/><br/>
+                                                    <input type="button" value="방송보기" onclick="move_site('/broadcast?room=<%= favorites[i*5+j].name %>&number=<%= favorites[i*5+j].number %>')" class="normal_button" onmouseover="this.style.backgroundColor='#929292';this.style.color='#ffffff'" onmouseout="this.style.backgroundColor='#ffffff';this.style.color='#666'" />
+<%
+                                                }
+                                                else {
+%>
+                                                    <img src="/images/onAIR_rock.png" class="onair_image" style="margin:10px 10px;" /><br/>
+                                                    <input type="button" value="방송보기" onclick="check_password('/broadcast?room=<%= favorites[i*5+j].name %>&number=<%= favorites[i*5+j].number %>', '<%= favorites[i*5+j].password %>')" class="normal_button" onmouseover="this.style.backgroundColor='#929292';this.style.color='#ffffff'" onmouseout="this.style.backgroundColor='#ffffff';this.style.color='#666'" />
+<%
+                                                }
+%>
+                                            </td> 
+<%
+                                            }
+                                        }
+%>
+                                    </tr>
+<%
+                                }
+%>
+                            </table>
+<%
+                        }
+%>
+                    </div>
+                </div>
+            </div>
+        </div>
+    	</div>
+    	<div id="bottom">
+    		<% include ../bottom.ejs %>
+    	</div>
+    </div>
+</body>
+

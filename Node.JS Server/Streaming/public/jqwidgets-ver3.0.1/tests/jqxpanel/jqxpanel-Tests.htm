@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="../../Styles/Site.css" media="screen" />
+    <link rel="stylesheet" href="../../Styles/qunit-git.css" media="screen" />
+    <script type="text/javascript" src="../../scripts/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/qunit-git.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#jqxPanel').jqxPanel({ width: '250px', height: '300px' });
+
+            module("Module Properties");
+
+            test("width property test", function () {
+                // get width
+                var width = $('#jqxPanel').jqxPanel('width');
+                ok(parseInt(width) == parseInt(250), "get width test.");
+
+                $('#jqxPanel').jqxPanel({ width: 300 });
+                var width = $('#jqxPanel').jqxPanel('width');
+                ok(parseInt(width) == parseInt(300), "set width test.");
+            });
+
+            test("height property test", function () {
+                // get height
+                var height = $('#jqxPanel').jqxPanel('height');
+                ok(parseInt(height) == parseInt(300), "get height test.");
+
+                $('#jqxPanel').jqxPanel({ height: 350 });
+                var height = $('#jqxPanel').jqxPanel('height');
+                ok(parseInt(height) == parseInt(350), "set height test.");
+            });
+
+            test("disabled property test", function () {
+                // get disabled
+                var disabled = $('#jqxPanel').jqxPanel('disabled');
+                ok(disabled == false, "get disabled test.");
+
+                $('#jqxPanel').jqxPanel({ disabled: true });
+                var disabled = $('#jqxPanel').jqxPanel('disabled');
+                ok(disabled == true, "set disabled test.");
+            });
+
+            test("scrollBarSize property test", function () {
+                // get scrollBarSize
+                var scrollBarSize = $('#jqxPanel').jqxPanel('scrollBarSize');
+                ok(parseInt(scrollBarSize) == parseInt(15), "get scrollBarSize test.");
+
+                $('#jqxPanel').jqxPanel({ scrollBarSize: 20 });
+                var scrollBarSize = $('#jqxPanel').jqxPanel('scrollBarSize');
+                ok(parseInt(scrollBarSize) == parseInt(20), "set scrollBarSize test.");
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id='jqxPanel' style="font-size: 13px; font-family: Verdana; float: left;">
+     
+    </div>
+    <br />
+    <br />
+    <div>
+        <h1 id="qunit-header">
+            QUnit example</h1>
+        <h2 id="qunit-banner">
+        </h2>
+        <div id="qunit-testrunner-toolbar">
+        </div>
+        <h2 id="qunit-userAgent">
+        </h2>
+        <ol id="qunit-tests">
+        </ol>
+        <div id="qunit-fixture">
+            test markup, will be hidden</div>
+    </div>
+</body>
+</html>

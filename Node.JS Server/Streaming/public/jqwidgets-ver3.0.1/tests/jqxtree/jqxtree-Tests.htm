@@ -1,0 +1,324 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="../../Styles/Site.css" media="screen" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.web.css" media="screen" />
+    <link rel="stylesheet" href="../../Styles/qunit-git.css" media="screen" />
+    <script type="text/javascript" src="../../scripts/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/qunit-git.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtree.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <title>jqxTree Tests</title>
+    <script>
+        $(document).ready(function () {
+            $('#jqxTree').jqxTree({ width: '250px', height: '300px' });
+            $('#jqxTree').css('display', 'none');
+
+            module("Module Properties");
+
+            test("width property test", function () {
+                // get width
+                var width = $('#jqxTree').jqxTree('width');
+                ok(parseInt(width) == parseInt(250), "get width test.");
+
+                $('#jqxTree').jqxTree({ width: 300 });
+                var width = $('#jqxTree').jqxTree('width');
+                ok(parseInt(width) == parseInt(300), "set width test.");
+            });
+
+            test("height property test", function () {
+                // get height
+                var height = $('#jqxTree').jqxTree('height');
+                ok(parseInt(height) == parseInt(300), "get height test.");
+
+                $('#jqxTree').jqxTree({ height: 350 });
+                var height = $('#jqxTree').jqxTree('height');
+                ok(parseInt(height) == parseInt(350), "set height test.");
+            });
+
+            test("disabled property test", function () {
+                // get disabled
+                var disabled = $('#jqxTree').jqxTree('disabled');
+                ok(disabled == false, "get disabled test.");
+
+                $('#jqxTree').jqxTree({ disabled: true });
+                var disabled = $('#jqxTree').jqxTree('disabled');
+                ok(disabled == true, "set disabled test.");
+            });
+
+            test("easing property test", function () {
+                //get easing
+                var easing = $('#jqxTree').jqxTree('easing');
+                ok(easing == 'easeInOutCirc', "get easing test.");
+
+                $('#jqxTree').jqxTree({ easing: 'linear' });
+                var easing = $('#jqxTree').jqxTree('easing');
+                ok(easing == 'linear', "set easing test.");
+            });
+
+            test("animationShowDuration property test", function () {
+                //get animationShowDuration
+                var animationShowDuration = $('#jqxTree').jqxTree('animationShowDuration');
+                ok(animationShowDuration == 'fast', "get animationShowDuration test.");
+
+                $('#jqxTree').jqxTree({ animationShowDuration: 500 });
+                var animationShowDuration = $('#jqxTree').jqxTree('animationShowDuration');
+                ok(animationShowDuration == 500, "set animationShowDuration test.");
+            });
+
+            test("animationHideDuration property test", function () {
+                //get animationHideDuration
+                var animationHideDuration = $('#jqxTree').jqxTree('animationHideDuration');
+                ok(animationHideDuration == 'fast', "get animationHideDuration test.");
+
+                $('#jqxTree').jqxTree({ animationHideDuration: 200 });
+                var animationHideDuration = $('#jqxTree').jqxTree('animationHideDuration');
+                ok(animationHideDuration == 200, "set animationHideDuration test.");
+            });
+
+            test("enableHover property test", function () {
+                //get enableHover
+                var enableHover = $('#jqxTree').jqxTree('enableHover');
+                ok(enableHover == true, "get enableHover test.");
+
+                $('#jqxTree').jqxTree({ enableHover: false });
+                var enableHover = $('#jqxTree').jqxTree('enableHover');
+                ok(enableHover == false, "set enableHover test.");
+            });
+
+            test("enableKeyboardNavigation property test", function () {
+                //get enableKeyboardNavigation
+                var enableKeyboardNavigation = $('#jqxTree').jqxTree('enableKeyboardNavigation');
+                ok(enableKeyboardNavigation == true, "get enableKeyboardNavigation test.");
+
+                $('#jqxTree').jqxTree({ enableKeyboardNavigation: false });
+                var enableKeyboardNavigation = $('#jqxTree').jqxTree('enableKeyboardNavigation');
+                ok(enableKeyboardNavigation == false, "set enableKeyboardNavigation test.");
+            });
+
+            test("toggleMode property test", function () {
+                //get toggleMode
+                var toggleMode = $('#jqxTree').jqxTree('toggleMode');
+                ok(toggleMode == 'dblclick', "get toggleMode test.");
+
+                $('#jqxTree').jqxTree({ toggleMode: 'click' });
+                var toggleMode = $('#jqxTree').jqxTree('toggleMode');
+                ok(toggleMode == 'click', "set toggleMode test.");
+            });
+
+            test("checkboxes property test", function () {
+                //get checkboxes
+                var checkboxes = $('#jqxTree').jqxTree('checkboxes');
+                ok(checkboxes == false, "get checkboxes test.");
+
+                $('#jqxTree').jqxTree({ checkboxes: true });
+                var checkboxes = $('#jqxTree').jqxTree('checkboxes');
+                ok(checkboxes == true, "set checkboxes test.");
+            });
+
+            test("hasThreeStates property test", function () {
+                //get hasThreeStates
+                var hasThreeStates = $('#jqxTree').jqxTree('hasThreeStates');
+                ok(hasThreeStates == false, "get hasThreeStates test.");
+
+                $('#jqxTree').jqxTree({ hasThreeStates: true });
+                var hasThreeStates = $('#jqxTree').jqxTree('hasThreeStates');
+                ok(hasThreeStates == true, "set hasThreeStates test.");
+            });
+
+
+            module("Module Methods");
+            test("addTo method test", function () {
+                // add to tree
+                var listItems = $('#jqxTree').find('li').length;
+                $('#jqxTree').jqxTree('addTo', { label: 'Item 3' });
+
+                var listItemsAfterAdd = $('#jqxTree').find('li').length;
+                ok(listItems < listItemsAfterAdd, 'addTo tree test');
+                listItems = listItemsAfterAdd;
+                // add to another parent.
+                $('#jqxTree').jqxTree('addTo', { label: 'Item 4' }, $('#item1'));
+                var listItemsAfterAdd = $('#jqxTree').find('li').length;
+                ok(listItems < listItemsAfterAdd, 'addTo another item test');
+            });
+
+            test("removeItem method test", function () {
+                var listItems = $('#jqxTree').find('li').length;
+                $('#jqxTree').jqxTree('removeItem', $('#item2')[0]);
+                var listItemsAfterAdd = $('#jqxTree').find('li').length;
+                ok(listItems > listItemsAfterAdd, 'removeItem method test');
+            });
+
+            test("expandItem method test", function () {
+                $('#jqxTree').jqxTree({ disabled: false });
+                // set the animation duration properties to 0, to execute the method without delay.
+                $('#jqxTree').jqxTree({ animationShowDuration: 0, animationHideDuration: 0 });
+                // collapse the item.
+                $('#jqxTree').jqxTree('collapseItem', $('#item1')[0]);
+                // expand the item.
+                $('#jqxTree').jqxTree('expandItem', $('#item1')[0]);
+                var isExpanded = $('#jqxTree').jqxTree('isExpanded', $('#item1')[0]);
+                ok(isExpanded, 'expandItem method test');
+            });
+
+            test("collapseItem method test", function () {
+                $('#jqxTree').jqxTree({ disabled: false });
+                // set the animation duration properties to 0, to execute the method without delay.
+                $('#jqxTree').jqxTree({ animationShowDuration: 0, animationHideDuration: 0 });
+                // expand the item.
+                $('#jqxTree').jqxTree('expandItem', $('#item1')[0]);
+                // collapse the item.
+                $('#jqxTree').jqxTree('collapseItem', $('#item1')[0]);
+                var isExpanded = $('#jqxTree').jqxTree('isExpanded', $('#item1')[0]);
+                ok(!isExpanded, 'collapseItem method test');
+            });
+
+            test("selectItem method test", function () {
+                $('#jqxTree').jqxTree({ disabled: false });
+                // set the animation duration properties to 0, to execute the method without delay.
+                $('#jqxTree').jqxTree({ animationShowDuration: 0, animationHideDuration: 0 });
+                // select the item.
+                $('#jqxTree').jqxTree('selectItem', $('#item1')[0]);
+                // check whether the item is selected.
+                var isSelected = $('#jqxTree').jqxTree('isSelected', $('#item1')[0]);
+                ok(isSelected, 'selectItem method test');
+            });
+
+            test("expandAll method test", function () {
+                $('#jqxTree').jqxTree({ disabled: false });
+                // set the animation duration properties to 0, to execute the method without delay.
+                $('#jqxTree').jqxTree({ animationShowDuration: 0, animationHideDuration: 0 });
+                // expand all items.
+                $('#jqxTree').jqxTree('expandAll');
+                var items = $('#jqxTree').jqxTree('getItems');
+                var allExpanded = false;
+                $.each(items, function () {
+                    if (this.hasItems) {
+                        if (this.isExpanded) {
+                            allExpanded = true;
+                        }
+                        else allExpanded = false;
+                    }
+                });
+
+                ok(allExpanded, 'expandAll method test');
+            });
+
+            test("collapseAll method test", function () {
+                $('#jqxTree').jqxTree({ disabled: false });
+                // set the animation duration properties to 0, to execute the method without delay.
+                $('#jqxTree').jqxTree({ animationShowDuration: 0, animationHideDuration: 0 });
+                // collapse all items.
+                $('#jqxTree').jqxTree('collapseAll');
+                var items = $('#jqxTree').jqxTree('getItems');
+                var allCollapsed = false;
+                $.each(items, function () {
+                    if (this.hasItems) {
+                        if (!this.isExpanded) {
+                            allCollapsed = true;
+                        }
+                        else allCollapsed = false;
+                    }
+                });
+
+                ok(allCollapsed, 'collapseAll method test');
+            });
+
+
+            module("Module Events");
+
+            test("expand event test", function () {
+                $('#jqxTree').jqxTree({ disabled: false });
+                $('#jqxTree').jqxTree({ animationShowDuration: 0, animationHideDuration: 0 });
+
+                var expanded = false;
+                // on to expand event.
+                $('#jqxTree').on('expand', function () {
+                    expanded = true;
+                });
+
+                $('#jqxTree').jqxTree('expandItem', $('#item1')[0]);
+                ok(true == expanded, "expand event.");
+
+                // off from expand event.
+                $('#jqxTree').off('expand');
+            });
+
+            test("collapse event test", function () {
+                $('#jqxTree').jqxTree({ disabled: false });
+                $('#jqxTree').jqxTree({ animationShowDuration: 0, animationHideDuration: 0 });
+
+                $('#jqxTree').jqxTree('expandItem', $('#item1')[0]);
+
+                var expanded = true;
+                // on to collapse event.
+                $('#jqxTree').on('collapse', function () {
+                    expanded = false;
+                });
+
+                $('#jqxTree').jqxTree('collapseItem', $('#item1')[0]);
+                ok(false == expanded, "collapse event.");
+
+                // off from collapse event.
+                $('#jqxTree').off('collapse');
+            });
+
+            test("select event test", function () {
+                $('#jqxTree').jqxTree({ disabled: false });
+                $('#jqxTree').jqxTree('selectItem', null);
+
+                var selected = false;
+                // on to select.
+                $('#jqxTree').on('select', function () {
+                    selected = true;
+                });
+
+                $('#jqxTree').jqxTree('selectItem', $('#item1')[0]);
+                ok(true == selected, "select event.");
+
+                // off from select event.
+                $('#jqxTree').off('select');
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id='jqxTree' style="font-size: 13px; font-family: Verdana; float: left;">
+        <ul>
+            <li id='item1'>Item1
+                <ul>
+                    <li>Item1.1</li>
+                    <li>Item1.2</li>
+                 </ul>
+            </li>
+            <li id='item2'>Item2</li>
+             <li id='Item3'>Item3
+                <ul>
+                    <li>Item3.1</li>
+                    <li>Item3.2</li>
+                 </ul>
+            </li>
+        </ul>
+    </div>
+    <br />
+    <br />
+    <div>
+        <h1 id="qunit-header">
+            QUnit example</h1>
+        <h2 id="qunit-banner">
+        </h2>
+        <div id="qunit-testrunner-toolbar">
+        </div>
+        <h2 id="qunit-userAgent">
+        </h2>
+        <ol id="qunit-tests">
+        </ol>
+        <div id="qunit-fixture">
+            test markup, will be hidden</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>In this example is demonstrated how the get all orders by a selected Employee. Select an Employee from the ComboBox.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcombobox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../scripts/gettheme.js"></script>
+    <script type="text/javascript">
+	$(document).ready(function () {
+		var theme = getDemoTheme();
+
+		// prepare the data
+		var employeeSource =
+		{
+			datatype: "json",
+			datafields: [
+			{ name: 'EmployeeID', type: 'int'},
+			{ name: 'FirstName', type: 'string'},
+			{ name: 'LastName', type: 'string'},
+			{ name: 'Name', type: 'string'}
+			],
+			url: "combobox_and_grid_employees.php",
+			async: false
+		};
+
+		var employeesDataAdapter = new $.jqx.dataAdapter(employeeSource);
+
+		// create a comboBox. 
+		// The displayMember specifies that the list item's text will be the Employee's Name. 
+		// The valueMember specifies that the list item's value will be the Employee's ID.
+		$("#jqxcombobox").jqxComboBox(
+		{
+			width: 250,
+			height: 25,
+			source: employeesDataAdapter,
+			theme: theme,
+			promptText: 'Select an Employee',
+			selectedIndex: -1,
+			displayMember: 'Name',
+			valueMember: 'EmployeeID'
+		});
+
+		$("#jqxcombobox").bind('select', function(event)
+		{
+			// get employee's ID.
+			var employeeID = event.args.item.value;
+			// prepare the data
+			var ordersSource =
+			{
+				datatype: "json",
+				datafields: [
+				{ name: 'EmployeeID', type: 'string', values: { source: employeesDataAdapter.records,  name: 'Name' }},
+				{ name: 'OrderDate', type: 'date'},
+				{ name: 'ShipCity', type: 'string'},
+				{ name: 'ShipAddress', type: 'string'},
+				{ name: 'ShipCountry', type: 'string'}
+				],
+				type: 'POST',
+				data: {EmployeeID:employeeID},
+				url: "combobox_and_grid_orders.php"
+			};
+
+			var dataAdapter = new $.jqx.dataAdapter(ordersSource);
+			$("#grid").jqxGrid({theme: theme, 
+			source: dataAdapter,
+			columns: 
+			[
+				{datafield: "EmployeeID", text: "Employee", width: '30%'},
+				{datafield: "OrderDate", cellsformat: "d", text: "Order Date", width: '30%'},
+				{datafield: "ShipCity", text: "Ship City", width: '25%'},
+				{datafield: "ShipAddress", text: "Ship Address", width: '25%'},
+				{datafield: "ShipCountry", text: "Ship Country", width: '20%'}
+			]
+			});
+		}); 
+	});
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget' style="font-size: 13px; font-family: Verdana; float: left;">
+        <span>Get Orders by Employee:</span>
+        <div style="margin-top: 7px; margin-bottom: 5px;" id="jqxcombobox"></div>
+		<div id="grid"></div>
+    </div>
+</body>
+</html>
+<!--combobox_and_grid_employees.php
+  #Include the connect.php file
+  include('connect.php');
+  #Connect to the database
+  //connection String
+  $connect = mysql_connect($hostname, $username, $password)
+  or die('Could not connect: ' . mysql_error());
+  //select database
+  mysql_select_db($database, $connect);
+  //Select The database
+  $bool = mysql_select_db($database, $connect);
+  if ($bool === False){
+	  print "can't find $database";
+  }
+  // get data and store in a json array
+  $query = "SELECT * FROM Employees";
+
+  $result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
+  while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
+	  $employees[] = array(
+          'EmployeeID' => $row['EmployeeID'],
+          'FirstName' => $row['FirstName'],
+	        'LastName' => $row['LastName'],
+	        'Name' => $row['FirstName'] . " " . $row['LastName']
+        );
+  }
+
+  echo json_encode($employees);
+-->
+<!--combobox_and_grid_orders.php
+  #Include the connect.php file
+  include('connect.php');
+  #Connect to the database
+  //connection String
+  $connect = mysql_connect($hostname, $username, $password)
+  or die('Could not connect: ' . mysql_error());
+  //select database
+  mysql_select_db($database, $connect);
+  //Select The database
+  $bool = mysql_select_db($database, $connect);
+  if ($bool === False){
+	  print "can't find $database";
+  }
+  // get data and store in a json array
+  $query = "SELECT * FROM Orders where EmployeeID=" . $_POST["EmployeeID"];
+
+  $result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
+  while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
+	  $orders[] = array(
+          'EmployeeID' => $row['EmployeeID'],
+          'OrderDate' => $row['OrderDate'],
+	        'ShipCity' => $row['ShipCity'],
+	        'ShipAddress' => $row['ShipAddress'],
+	        'ShipCountry' => $row['ShipCountry']
+	      );
+  }
+
+  echo json_encode($orders);
+-->

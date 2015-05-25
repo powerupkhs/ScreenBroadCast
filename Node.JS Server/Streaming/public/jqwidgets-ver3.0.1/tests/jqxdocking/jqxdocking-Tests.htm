@@ -1,0 +1,219 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="../../Styles/Site.css" media="screen" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" media="screen" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.web.css" media="screen" />
+    <link rel="stylesheet" href="../../Styles/qunit-git.css" media="screen" />
+    <script type="text/javascript" src="../../scripts/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/qunit-git.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdocking.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxwindow.js"></script>
+    <title>jqxDocking Tests</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#jqxDocking').jqxDocking({ orientation: 'horizontal', width: 600 });
+
+            module('Layout');
+
+            test('Testing the float property of all panels', function () {
+                $('#jqxDocking').jqxDocking('orientation', 'vertical');
+                var panels = $('#jqxDocking').children('.jqx-docking-panel');
+                for (var i = 0; i < panels.length; i += 1) {
+                    ok($(panels[i]).css('float'), 'none', 'Panel\'s float must be equal to left.');
+                }
+                $('#jqxDocking').jqxDocking('orientation', 'horizontal');
+                for (var i = 0; i < panels.length; i += 1) {
+                    equal($(panels[i]).css('float'), 'left', 'Panel\'s float must be equal to left.');
+                }
+            });
+
+            test('Testing window\'s positions', function () {
+                var windows = $('#jqxDocking').find('.jqx-window');
+                for (var i = 0; i < windows.length; i += 1) {
+                    equal(windows[i].style.position, 'static', 'Windows should be with static position.');
+                }
+            });
+
+            test('Testing window\'s size', function () {
+                var windows = $('#jqxDocking').find('.jqx-window');
+                for (var i = 0; i < windows.length; i += 1) {
+                    equal($(windows[i]).width(), $(windows[i]).parent().width() - ($(windows[i]).outerWidth(true) - $(windows[i]).width()), 'Windows size.');
+                }
+            });
+
+            module('Properties');
+
+            test('Orientation', function () {
+                var panels = $('.jqx-docking-panel');
+                panels.each(function (index, v) {
+                    ok($(v).css('float') === 'left', 'Testing whether the orientation property have been set correctly');
+                });
+                $('#jqxDocking').jqxDocking('orientation', 'vertical');
+                panels.each(function (index, v) {
+                    ok($(v).css('float') === 'none', 'Testing whether the orientation property have been set correctly');
+                });
+                $('#jqxDocking').jqxDocking('orientation', 'horizontal');
+            });
+
+            test('Width', function () {
+                $('#jqxDocking').jqxDocking('width', '630');
+                ok(630, $('#jqxDocking').width(), 'Setting docking\'s width');
+            });
+
+            module('Methods');
+
+            test('Export/import layout', function () {
+                $('#jqxDocking').jqxDocking('orientation', 'horizontal');
+                var layout = $('#jqxDocking').jqxDocking('exportLayout'),
+                    obj = $.parseJSON(layout),
+                    valid = true;
+                try {
+                    $.parseJSON(layout);
+                } catch (e) {
+                    valid = false;
+                }
+                ok(valid, 'Checking whether the export method have construct correct JSON string.');
+                ok(obj.orientation === $('#jqxDocking').jqxDocking('orientation'), 'Checking whether the orientation have been exported correctly');
+            });
+
+            test('Disable/enable', function () {
+                var windows = $('#jqxDocking').find('.jqx-window'),
+                    disabled;
+                $('#jqxDocking').jqxDocking('disable');
+                disabled = $('#jqxDocking').jqxDocking('disabled');
+                ok(disabled, 'Checking whether the jqxDocking disabled property have been set correctly');
+                for (var i = 0; i < windows.length; i += 1) {
+                    equal($(windows[i]).jqxWindow('disabled'), true, 'The window should be disabled');
+                }
+                $('#jqxDocking').jqxDocking('enable');
+                disabled = $('#jqxDocking').jqxDocking('disabled');
+                ok(!disabled, 'Checking whether the jqxDocking disabled property have been set correctly');
+                for (var i = 0; i < windows.length; i += 1) {
+                    equal($(windows[i]).jqxWindow('disabled'), false, 'The window should be enabled');
+                }
+            });
+
+            test('Move', function () {
+                var panels = $('#jqxDocking').children('div'),
+                    nChild = $(panels[1]).children('.jqx-window')[0];
+                $('#jqxDocking').jqxDocking('move', 'w1', 1, 0);
+                var movedWindow = $('#w1');
+                ok(movedWindow.next()[0] === nChild, 'Checking if the position of the first window in the first panel have been changed successfully.');
+                $('#jqxDocking').jqxDocking('move', nChild.id, 0, 1);
+                ok($(nChild).prev()[0] === $('#w2')[0], 'Checking whether the position of the first window in the second panel have been changed successfully.');
+            });
+
+            test('setWindowMode', function () {
+                var window = $('#w1');
+                $('#jqxDocking').jqxDocking('setWindowMode', 'w1', 'floating');
+                ok(window.css('position') === 'absolute', 'Checking whether the window mode have been changed.');
+                $('#jqxDocking').jqxDocking('setWindowMode', 'w1', 'docked');
+                ok(window.parent()[0] === $('#jqxDocking').children('div')[0], 'Checking whether the window mode have been changed.');
+            });
+
+            test('hide(show)AllCloseButtons', function () {
+                var windows = $('#jqxDocking').find('.jqx-window'),
+                    closeButton;
+                $('#jqxDocking').jqxDocking('hideAllCloseButtons');
+                for (var i = 0; i < windows.length; i += 1) {
+                    closeButton = $(windows[i]).find('.jqx-window-close-button');
+                    ok(closeButton.css('visibility') === 'hidden', 'Checking wheather the close button is hidden.');
+                }
+                $('#jqxDocking').jqxDocking('showAllCloseButtons');
+                for (var i = 0; i < windows.length; i += 1) {
+                    closeButton = $(windows[i]).find('.jqx-window-close-button');
+                    ok(closeButton.css('visibility') !== 'hidden', 'Checking wheather the close button is not hidden.');
+                }
+            });
+
+            test('hide(show)AllCollapseButtons', function () {
+                var windows = $('#jqxDocking').find('.jqx-window'),
+                    closeButton;
+                $('#jqxDocking').jqxDocking('hideAllCollapseButtons');
+                for (var i = 0; i < windows.length; i += 1) {
+                    closeButton = $(windows[i]).find('.jqx-window-collapse-button');
+                    ok(closeButton.css('visibility') === 'hidden', 'Checking wheather the close button is hidden.');
+                }
+                $('#jqxDocking').jqxDocking('showAllCollapseButtons');
+                for (var i = 0; i < windows.length; i += 1) {
+                    closeButton = $(windows[i]).find('.jqx-window-collapse-button');
+                    ok(closeButton.css('visibility') !== 'hidden', 'Checking wheather the close button is not hidden.');
+                }
+            });
+
+            test('pinWindow/unpinWindow', function () {
+                $('#jqxDocking').jqxDocking('pinWindow', 'w1');
+                ok(!$('#w1').jqxWindow('draggable'), 'The window with id "w1" shouldnt be draggable.');
+                $('#jqxDocking').jqxDocking('unpinWindow', 'w1');
+                ok($('#w1').jqxWindow('draggable'), 'The window with id "w1" should be draggable.');
+            });
+
+            test('enableWindowResize/disableWindowResize', function () {
+                $('#jqxDocking').jqxDocking('setWindowMode', 'w1', 'floating');
+                $('#jqxDocking').jqxDocking('disableWindowResize', 'w1');
+                ok(!$('#w1').jqxWindow('enableResize'), 'The window shouldn\'t be resizable.');
+                $('#jqxDocking').jqxDocking('enableWindowResize', 'w1');
+                ok($('#w1').jqxWindow('enableResize'), 'The window should be resizable.');
+                $('#jqxDocking').jqxDocking('setWindowMode', 'w1', 'docked');
+            });
+
+            test('addWindow', function () {
+                //(window, mode, panel, position)
+                $(document.body).append($('<div id="w7" caption="Window 7"><div>Content 7</div></div>'));
+                $('#w7').jqxWindow();
+                $('#jqxDocking').jqxDocking('addWindow', 'w7', 'docked', 0, 0);
+                ok($('#w7').next()[0] === $('#w2')[0]);
+            });
+
+        });
+    </script>
+</head>
+<body>
+
+    <br />
+    <br />
+    <div>
+        <h1 id="qunit-header">QUnit example</h1>
+        <h2 id="qunit-banner">
+        </h2>
+        <div id="qunit-testrunner-toolbar">
+        </div>
+        <h2 id="qunit-userAgent">
+        </h2>
+        <ol id="qunit-tests">
+        </ol>
+        <div id="qunit-fixture">
+
+        </div>
+        <div style="width: 0px; overflow: hidden; height: 0px;">
+            <div id='jqxDocking' style="font-size: 13px; font-family: Verdana; float: left;">
+                <div>
+                    <div id="w1" caption="Header 1">
+                        <div>Content 1</div>
+                    </div>
+                    <div id="w2" caption="Header 2">
+                        <div>Content 2</div>
+                    </div>
+                    <div id="w3" caption="Header 3">
+                        <div>Content 3</div>
+                    </div>
+                </div>
+                <div>
+                    <div id="w4" caption="Header 4">
+                        <div>Content 4</div>
+                    </div>
+                    <div id="w5" caption="Header 5">
+                        <div>Content 5</div>
+                    </div>
+                    <div id="w6" caption="Header 6">
+                        <div>Content 6</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

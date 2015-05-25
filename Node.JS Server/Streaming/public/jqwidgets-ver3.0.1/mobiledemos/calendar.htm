@@ -1,0 +1,156 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>In this demo is simulated the touch-device behavior of the jqxButton.
+    </title>
+    <link rel="stylesheet" href="../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../jqwidgets/styles/jqx.fresh.css" type="text/css" />
+    <script type="text/javascript" src="../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="simulator.js"></script>
+    <script type="text/javascript" src="../jqwidgets/globalization/jquery.global.js"></script>
+    <style type="text/css">
+        html, body
+        {
+            height: 100%;
+            width: 100%;
+            margin: 0px;
+            padding: 0px;
+            overflow: hidden;
+            font-size: 18px;
+        }
+        .section
+        {
+            padding: 10px;
+            clear: both;
+            height: 30px;
+            line-height: 30px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .rc-t
+        {
+            -moz-border-radius-topleft: 10px;
+            -webkit-border-top-left-radius: 10px;
+            border-top-left-radius: 10px;
+            -moz-border-radius-topright: 10px;
+            -webkit-border-top-right-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .rc-b
+        {
+            -moz-border-radius-bottomleft: 10px;
+            -webkit-border-bottom-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            -moz-border-radius-bottomright: 10px;
+            -webkit-border-bottom-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+        .jqx-calendar td
+        {
+            font-size: 18px;
+        }
+        .rc-all, .jqx-calendar
+        {
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+        }
+        .input
+        {
+            font-size: 18px;
+            margin: 0px;
+            left: 15px;
+            border: none;
+            height: 30px;
+            line-height: 30px;
+            display: block;
+            position: relative;
+            background: none;
+        }
+    </style>
+    <script type="text/javascript" src="simulator.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            prepareDemo("calendar");
+            $("#calendarcontainer").hide();
+            $("#fromCalendar").jqxCalendar({ titleHeight: 35, columnHeaderHeight: 30, width: '100%', height: '100%', theme: 'fresh' });
+            $("#toCalendar").jqxCalendar({ titleHeight: 35, columnHeaderHeight: 30, width: '100%', height: '100%', theme: 'fresh' });
+            $("#from").jqxToggleButton({ enableHover: false, theme: 'fresh', width: '44%', height: 50 });
+            $("#to").jqxToggleButton({ enableHover: false, theme: 'fresh', width: '44%', height: 50 });
+            // init dates.
+            var fromDate = new Date();
+            fromDate.setFullYear(2013, 4, 30);
+            $("#fromCalendar").jqxCalendar('setDate', fromDate);
+            var toDate = new Date();
+            toDate.setFullYear(2013, 5, 25);
+            $("#toCalendar").jqxCalendar('setDate', toDate);
+            
+            $("#from").click(function () {
+                if ($("#calendarcontainer").css('display') != 'block') {
+                    $("#calendarcontainer").show();
+                }
+
+                $("#fromCalendar").show();
+                $("#toCalendar").hide();
+                $("#to").jqxToggleButton('unCheck');
+            });
+            $("#to").click(function () {
+                if ($("#calendarcontainer").css('display') != 'block') {
+                    $("#calendarcontainer").show();
+                }
+                $("#toCalendar").show();
+                $("#fromCalendar").hide();
+                $("#from").jqxToggleButton('unCheck');
+            });
+            $("#fromCalendar").on('cellSelected', function (event) {
+                var date = $.jqx.dataFormat.formatdate(event.args.date, "MMM, dd");
+                $("#fromLabel").html(date);
+            });
+            $("#toCalendar").on('cellSelected', function (event) {
+                var date = $.jqx.dataFormat.formatdate(event.args.date, "MMM, dd");
+                $("#toLabel").html(date);
+            });
+
+            initDemo("calendar");
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="demoContainer" style="margin-left: 220px; width: 460px; height: 855px; overflow: hidden;
+        background-image: url(../images/iphone.png);">
+        <div id="container" style="background-image: url(../images/ipadbackground.png); margin-left: 46px;
+            height: 518px; width: 365px; margin-top: 185px;">
+            <div id='calendar' style="margin-left: 8px; position: relative; top: 20px; height: 70%; width: 95%;">
+                <div class="section rc-all">
+                    Set Report Date Range
+                </div>
+                <div id="from" class="rc-all" style="float: left; font-size: 18px; margin: 6px;">
+                    <div style="margin: 10px 10px;">
+                        <img style="float: left; margin-right: 5px;" src="../images/catalogicon.png" />
+                        <span id="fromLabel" style="float: left; margin-top: 5px;">May, 30</span>
+                    </div>
+                </div>
+                <div id="to" class="rc-all" style="float: left; font-size: 18px; margin: 6px;">
+                    <div style="margin: 10px 10px">
+                        <img style="float: left; margin-right: 5px;" src="../images/catalogicon.png" />
+                        <span id="toLabel" style="float: left; margin-top: 5px;">Jun, 25</span>
+                    </div>
+                </div>
+                <div style="clear:both;"></div>
+                <div id="calendarcontainer" style="height: 100%; width: 88%; margin: 7px;">
+                    <div style="margin: 10px;" id="fromCalendar">
+                    </div>
+                    <div style="margin: 10px;" id="toCalendar">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

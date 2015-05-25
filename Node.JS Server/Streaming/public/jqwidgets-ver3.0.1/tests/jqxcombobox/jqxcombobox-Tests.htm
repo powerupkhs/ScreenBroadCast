@@ -1,0 +1,391 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcombobox.js"></script>
+    <link rel="stylesheet" href="../../Styles/qunit-git.css" media="screen" />
+    <script type="text/javascript" src="../../Scripts/qunit-git.js"></script>
+    <script>
+        $(document).ready(function () {
+            var items = ['item1', 'item2', 'item3', 'item4', 'item5'];
+            $('#jqxComboBox').jqxComboBox({ source: items, width: '250px', height: '25px' });
+            $('#jqxComboBox').css('display', 'none');
+            module("Module Properties");
+
+            test("disabled property test", function () {
+                // get disabled.
+                var disabled = $('#jqxComboBox').jqxComboBox('disabled');
+                ok(disabled == false, "get disabled test.");
+
+                // set disabled.
+                $('#jqxComboBox').jqxComboBox({ disabled: true });
+                var newDisabled = $('#jqxComboBox').jqxComboBox('disabled');
+                ok(newDisabled == true, "set disabled test.");
+
+                // reset disabled to false
+                $('#jqxComboBox').jqxComboBox({ disabled: false });
+            });
+
+            test("width property test", function () {
+                // get width.
+                var width = $('#jqxComboBox').jqxComboBox('width');
+                ok(width == "250px", "get width test.");
+
+                // set width.
+                $('#jqxComboBox').jqxComboBox({ width: "300px" });
+                width = $('#jqxComboBox').jqxComboBox('width');
+                ok(width == "300px", "set width test.");
+            });
+
+            test("height property test", function () {
+                // get height.
+                var height = $('#jqxComboBox').jqxComboBox('height');
+                ok(height == "25px", "get height test.");
+
+                // set height.
+                $('#jqxComboBox').jqxComboBox({ height: "50px" });
+                height = $('#jqxComboBox').jqxComboBox('height');
+                ok(height == "50px", "set height test.");
+            });
+
+            test("selectedIndex property test", function () {
+                // get selectedIndex.
+                var selectedIndex = $('#jqxComboBox').jqxComboBox('selectedIndex');
+                ok(selectedIndex == "-1", "get selectedIndex test.");
+
+                // set selectedIndex.
+                $('#jqxComboBox').jqxComboBox({ selectedIndex: "2" });
+                selectedIndex = $('#jqxComboBox').jqxComboBox('selectedIndex');
+                ok(selectedIndex == "2", "set selectedIndex test.");
+            });
+
+            test("scrollBarSize property test", function () {
+                // get scrollBarSize.
+                var scrollBarSize = $('#jqxComboBox').jqxComboBox('scrollBarSize');
+                ok(scrollBarSize == 15, "get scrollBarSize test.");
+
+                // set scrollBarSize.
+                $('#jqxComboBox').jqxComboBox({ scrollBarSize: 30 });
+                scrollBarSize = $('#jqxComboBox').jqxComboBox('scrollBarSize');
+                ok(scrollBarSize == 30, "set scrollBarSize test.");
+            });
+
+            test("arrowSize property test", function () {
+                // get arrowSize.
+                var arrowSize = $('#jqxComboBox').jqxComboBox('arrowSize');
+                ok(arrowSize == 18, "get arrowSize test.");
+
+                // set arrowSize.
+                $('#jqxComboBox').jqxComboBox({ arrowSize: 30 });
+                arrowSize = $('#jqxComboBox').jqxComboBox('arrowSize');
+                ok(arrowSize == 30, "set arrowSize test.");
+            });
+
+            test("enableHover property test", function () {
+                // get enableHover.
+                var enableHover = $('#jqxComboBox').jqxComboBox('enableHover');
+                ok(enableHover == true, "get enableHover test.");
+
+                // set enableHover.
+                $('#jqxComboBox').jqxComboBox({ enableHover: false });
+                enableHover = $('#jqxComboBox').jqxComboBox('enableHover');
+                ok(enableHover == false, "set enableHover test.");
+            });
+
+            test("enableSelection property test", function () {
+                // get enableSelection.
+                var enableSelection = $('#jqxComboBox').jqxComboBox('enableSelection');
+                ok(enableSelection == true, "get enableSelection test.");
+
+                // set enableSelection.
+                $('#jqxComboBox').jqxComboBox({ enableSelection: false });
+                enableSelection = $('#jqxComboBox').jqxComboBox('enableSelection');
+                ok(enableSelection == false, "set enableSelection test.");
+            });
+
+            test("equalItemsWidth property test", function () {
+                // get equalItemsWidth.
+                var equalItemsWidth = $('#jqxComboBox').jqxComboBox('equalItemsWidth');
+                ok(equalItemsWidth == true, "get equalItemsWidth test.");
+
+                // set equalItemsWidth.
+                $('#jqxComboBox').jqxComboBox({ equalItemsWidth: false });
+                equalItemsWidth = $('#jqxComboBox').jqxComboBox('equalItemsWidth');
+                ok(equalItemsWidth == false, "set equalItemsWidth test.");
+            });
+
+            test("itemHeight property test", function () {
+                // get itemHeight.
+                var itemHeight = $('#jqxComboBox').jqxComboBox('itemHeight');
+                ok(itemHeight == -1, "get itemHeight test.");
+
+                // set itemHeight.
+                $('#jqxComboBox').jqxComboBox({ itemHeight: 3 });
+                itemHeight = $('#jqxComboBox').jqxComboBox('itemHeight');
+                ok(itemHeight == 3, "set itemHeight test.");
+            });
+
+            test("openDelay property test", function () {
+                // get openDelay.
+                var openDelay = $('#jqxComboBox').jqxComboBox('openDelay');
+                ok(openDelay == 250, "get openDelay test.");
+
+                // set openDelay.
+                $('#jqxComboBox').jqxComboBox({ openDelay: 500 });
+                openDelay = $('#jqxComboBox').jqxComboBox('openDelay');
+                ok(openDelay == 500, "set openDelay test.");
+            });
+
+            test("emptyGroupText property test", function () {
+                // get emptyGroupText.
+                var emptyGroupText = $('#jqxComboBox').jqxComboBox('emptyGroupText');
+                ok(emptyGroupText == "Group", "get emptyGroupText test.");
+
+                // set emptyGroupText.
+                $('#jqxComboBox').jqxComboBox({ emptyGroupText: "ComboBox" });
+                emptyGroupText = $('#jqxComboBox').jqxComboBox('emptyGroupText');
+                ok(emptyGroupText == "ComboBox", "set emptyGroupText test.");
+            });
+
+            test("closeDelay property test", function () {
+                // get closeDelay.
+                var closeDelay = $('#jqxComboBox').jqxComboBox('closeDelay');
+                ok(closeDelay == 300, "get closeDelay test.");
+
+                // set closeDelay.
+                $('#jqxComboBox').jqxComboBox({ closeDelay: 300 });
+                closeDelay = $('#jqxComboBox').jqxComboBox('closeDelay');
+                ok(closeDelay == 300, "set closeDelay test.");
+            });
+
+            test("dropDownWidth property test", function () {
+                // get dropDownWidth.
+                var dropDownWidth = $('#jqxComboBox').jqxComboBox('dropDownWidth');
+                ok(dropDownWidth == "auto", "get dropDownWidth test.");
+
+                // set dropDownWidth.
+                $('#jqxComboBox').jqxComboBox({ dropDownWidth: 300 });
+                dropDownWidth = $('#jqxComboBox').jqxComboBox('dropDownWidth');
+                ok(dropDownWidth == 300, "set dropDownWidth test.");
+            });
+
+            test("dropDownHeight property test", function () {
+                // get dropDownHeight.
+                var dropDownHeight = $('#jqxComboBox').jqxComboBox('dropDownHeight');
+                ok(dropDownHeight == "200px", "get dropDownHeight test.");
+
+                // set dropDownHeight.
+                $('#jqxComboBox').jqxComboBox({ dropDownHeight: "300px" });
+                dropDownHeight = $('#jqxComboBox').jqxComboBox('dropDownHeight');
+                ok(dropDownHeight == "300px", "set dropDownHeight test.");
+            });
+
+            test("enableBrowserBoundsDetection property test", function () {
+                // get enableBrowserBoundsDetection.
+                var enableBrowserBoundsDetection = $('#jqxComboBox').jqxComboBox('enableBrowserBoundsDetection');
+                ok(enableBrowserBoundsDetection == false, "get enableBrowserBoundsDetection test.");
+
+                // set enableBrowserBoundsDetection.
+                $('#jqxComboBox').jqxComboBox({ enableBrowserBoundsDetection: true });
+                enableBrowserBoundsDetection = $('#jqxComboBox').jqxComboBox('enableBrowserBoundsDetection');
+                ok(enableBrowserBoundsDetection == true, "set enableBrowserBoundsDetection test.");
+            });
+
+            module("Module Methods");
+
+            test("disableAt method test", function () {
+                // disable item
+                $('#jqxComboBox').jqxComboBox('disableAt', 2);
+                var item = $('#jqxComboBox').jqxComboBox('getItem', 2);
+                ok(item.disabled == true, 'disableAt method test');
+            });
+
+            test("enableAt method test", function () {
+                // enable item
+                $('#jqxComboBox').jqxComboBox('enableAt', 2);
+                var item = $('#jqxComboBox').jqxComboBox('getItem', 2);
+                ok(item.disabled == false, 'enableAt method test');
+            });
+
+            test("findItems method test", function () {
+                $('#jqxComboBox').jqxComboBox({ disabled: false });
+                var source = [
+                    "Affogato",
+                    "Americano",
+                    "Bicerin",
+                    "Breve",
+                    "Café Bombón",
+                    "Café au lait",
+                    "Caffé Corretto",
+                    "Café Crema",
+                    "Caffé Latte",
+                    "Caffé macchiato",
+                    "Café mélange",
+                    "Coffee milk",
+                    "Cafe mocha",
+                    "Cappuccino",
+                    "Carajillo",
+                    "Cortado",
+                    "Cuban espresso",
+                    "Espresso",
+                    "Eiskaffee",
+                    "The Flat White",
+                    "Frappuccino",
+                    "Galao",
+                    "Greek frappé coffee",
+                    "Iced Coffee﻿",
+                    "Indian filter coffee",
+                    "Instant coffee",
+                    "Irish coffee",
+                    "Liqueur coffee",
+		            "Liqueur COFFEE"
+		       ];
+
+                $("#jqxComboBox").jqxComboBox({ source: source, searchMode: 'startswith', selectedIndex: 1 });
+
+                var matches = $('#jqxComboBox').jqxComboBox('findItems', 'a');
+                equal(matches.length, 0, 'startswith search mode test');
+                
+                var matches = $('#jqxComboBox').jqxComboBox('findItems', 'A');
+                equal(matches.length, 2, 'startswith search mode test');
+
+               
+                $("#jqxComboBox").jqxComboBox({ searchMode: 'startswithignorecase'});
+    
+              
+                var matches = $('#jqxComboBox').jqxComboBox('findItems', 'a');
+                equal(matches.length, 2, 'startswithignorecase search mode test');
+
+                var matches = $('#jqxComboBox').jqxComboBox('findItems', 'A');
+                equal(matches.length, 2, 'startswithignorecase search mode test');
+
+              
+                $("#jqxComboBox").jqxComboBox({ searchMode: 'endswith' });
+
+              
+                var matches = $('#jqxComboBox').jqxComboBox('findItems', 'e');
+                equal(matches.length, 11, 'endswith search mode test');
+
+                var matches = $('#jqxComboBox').jqxComboBox('findItems', 'espresso');
+                equal(matches.length, 1, 'endswith search mode test');
+
+                var matches = $('#jqxComboBox').jqxComboBox('findItems', 'ino');
+                equal(matches.length, 2, 'endswith search mode test');
+
+                var matches = $('#jqxComboBox').jqxComboBox('findItems', 'coffee');
+                equal(matches.length, 5, 'endswith search mode test');
+
+              
+                $("#jqxComboBox").jqxComboBox({ searchMode: 'endswithignorecase' });
+                
+                
+                var matches = $('#jqxComboBox').jqxComboBox('findItems', 'e');
+                equal(matches.length, 12, 'endswithignorecase search mode test');
+
+                var matches = $('#jqxComboBox').jqxComboBox('findItems', 'coffee');
+                equal(matches.length, 7, 'endswithignorecase search mode test');
+
+             
+                $("#jqxComboBox").jqxComboBox({ searchMode: 'contains' });
+               
+               
+                var matches = $('#jqxComboBox').jqxComboBox('findItems', 'liqueur');
+                equal(matches.length, 0, 'contains search mode test');
+
+                var matches = $('#jqxComboBox').jqxComboBox('findItems', 'Liqueur');
+                equal(matches.length, 2, 'contains search mode test');
+
+                var matches = $('#jqxComboBox').jqxComboBox('findItems', 'coffee');
+                equal(matches.length, 5, 'contains search mode test');
+
+
+                $("#jqxComboBox").jqxComboBox({ searchMode: 'containsignorecase' });
+
+
+                var matches = $('#jqxComboBox').jqxComboBox('findItems', 'liqueur');
+                equal(matches.length, 2, 'contains search mode test');
+
+                var matches = $('#jqxComboBox').jqxComboBox('findItems', 'Liqueur');
+                equal(matches.length, 2, 'contains search mode test');
+
+                var matches = $('#jqxComboBox').jqxComboBox('findItems', 'coffee');
+                equal(matches.length, 8, 'contains search mode test');
+
+
+                $("#jqxComboBox").jqxComboBox({ searchMode: 'equals' });
+
+
+                var matches = $('#jqxComboBox').jqxComboBox('findItems', 'Liqueur COFFEE');
+                equal(matches.length, 1, 'equals search mode test');
+
+                var matches = $('#jqxComboBox').jqxComboBox('findItems', 'Instant coffee');
+                equal(matches.length, 1, 'equals search mode test');
+
+                var matches = $('#jqxComboBox').jqxComboBox('findItems', 'instant coffee');
+                equal(matches.length, 0, 'equals search mode test');
+
+                var matches = $('#jqxComboBox').jqxComboBox('findItems', 'Iced Coffee');
+                equal(matches.length, 1, 'equals search mode test');
+
+                var matches = $('#jqxComboBox').jqxComboBox('findItems', 'Iced coffee');
+                equal(matches.length, 0, 'equals search mode test');
+
+
+                $("#jqxComboBox").jqxComboBox({ searchMode: 'equalsignorecase' });
+
+
+                var matches = $('#jqxComboBox').jqxComboBox('findItems', 'Liqueur COFFEE');
+                equal(matches.length, 2, 'equalsignorecase search mode test');
+
+                var matches = $('#jqxComboBox').jqxComboBox('findItems', 'Instant coffee');
+                equal(matches.length, 1, 'equalsignorecase search mode test');
+
+                var matches = $('#jqxComboBox').jqxComboBox('findItems', 'instant coffee');
+                equal(matches.length, 1, 'equalsignorecase search mode test');
+
+                var matches = $('#jqxComboBox').jqxComboBox('findItems', 'Iced Coffee');
+                equal(matches.length, 1, 'equalsignorecase search mode test');
+
+                var matches = $('#jqxComboBox').jqxComboBox('findItems', 'Iced coffee');
+                equal(matches.length, 1, 'equalsignorecase search mode test');           
+            });
+
+            module("Module Events");
+            test("selection event test", function () {
+                var selection = false;
+                $('#jqxComboBox').on('select', function () {
+                    selection = true;
+                });
+
+                $('#jqxComboBox').jqxComboBox({ selectedIndex: 0 });
+                ok(selection == true, 'select event test');
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id='jqxComboBox'>
+    </div>
+    <br />
+    <br />
+    <div>
+        <h1 id="qunit-header">
+            QUnit example</h1>
+        <h2 id="qunit-banner">
+        </h2>
+        <div id="qunit-testrunner-toolbar">
+        </div>
+        <h2 id="qunit-userAgent">
+        </h2>
+        <ol id="qunit-tests">
+        </ol>
+        <div id="qunit-fixture">
+            test markup, will be hidden</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,231 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="../../Styles/Site.css" media="screen" />
+<link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" media="screen" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.web.css" media="screen" />
+    <link rel="stylesheet" href="../../Styles/qunit-git.css" media="screen" />
+    <script type="text/javascript" src="../../scripts/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/qunit-git.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxexpander.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmaskedinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxvalidator.js"></script>
+    <title>jqxValidator Tests</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var theme = 'classic';
+            $('#sendButton').jqxButton({ width: 60, height: 25, theme: theme });
+            $('#acceptInput').jqxCheckBox({ width: 130, theme: theme });
+
+            $('#sendButton').on('click', function () {
+                $('#testForm').jqxValidator('validate');
+            });
+            $("#ssnInput").jqxMaskedInput({ mask: '###-##-####', height: 22, theme: theme });
+            $("#phoneInput").jqxMaskedInput({ mask: '(###)###-####', height: 22, theme: theme });
+            $("#zipInput").jqxMaskedInput({ mask: '###-##-####', height: 22, theme: theme });
+            $("#register").jqxExpander({ width: '300px', theme: theme, showArrow: false, toggleMode: 'none' });
+            $('#testForm').jqxValidator({ rules: [
+                                                { input: '#userInput', message: 'Username is required!', action: 'keyup', rule: 'required' },
+                                                { input: '#userInput', message: 'Your username must be between 3 and 12 characters!', action: 'keyup', rule: 'length=3,12' },
+                                                { input: '#realNameInput', message: 'Your real name is not filled correctly!', action: 'keyup', rule: 'notNumber' },
+                                                { input: '#realNameInput', message: 'Your real name is not filled correctly!', action: 'keyup', rule: 'length=3,12' },
+                                                { input: '#passwordInput', message: 'Password is required!', action: 'keyup', rule: 'required' },
+                                                { input: '#passwordInput', message: 'Your password must be between 4 and 12 characters!', action: 'keyup', rule: 'length=4,12' },
+                                                { input: '#passwordConfirmInput', message: 'Password is required!', action: 'keyup', rule: 'required' },
+                                                { input: '#passwordConfirmInput', message: 'Passwords doesn\'t match!', action: 'keyup, focus', rule: function (input) {
+                                                    if (input.val() === $('#passwordInput').val()) {
+                                                        return true;
+                                                    }
+                                                    return false;
+                                                }
+                                                },
+                                                { input: '#emailInput', message: 'E-mail is required!', action: 'keyup', rule: 'required' },
+                                                { input: '#emailInput', message: 'Invalid e-mail!', action: 'keyup', rule: 'email' },
+                                                { input: '#ssnInput', message: 'Invalid SSN!', action: 'valuechanged', rule: 'ssn' },
+                                                { input: '#phoneInput', message: 'Invalid phone number!', action: 'valuechanged', rule: 'phone' },
+                                                { input: '#zipInput', message: 'Invalid zip code!', action: 'valuechanged', rule: 'zipCode' },
+                                                { input: '#acceptInput', message: 'You have to accept the terms', action: 'change', rule: 'required', position: 'right:0,0'}], theme: theme
+            });
+
+            module('Initialization');
+
+            test('Add event listeners', function () {
+                var rules = $('#testForm').jqxValidator('rules'),
+                    input,
+                    events;
+                for (var i = 0; i < rules.length; i += 1) {
+                    input = $(rules[i].input);
+                    events = rules[i].action.split(',');
+                    for (var j = 0; j < events.length; j += 1) {
+                        if (input.data('events')) {
+                            ok(input.data('events')[$.trim(events[j])], 'Checking if the current is attached correctly');
+                        }
+                    }
+                }
+            });
+
+            module('Events');
+
+            test('validationError', function () {
+                var error = false;
+                $('#testForm').on('validationError', function () {
+                    error = true;
+                });
+                $('#testForm').jqxValidator('validate');
+                equals(error, true, 'Validation error have been handled');
+            });
+
+            test('validationSuccess', function () {
+                var success = false;
+                completeForm();
+                $('#testForm').on('validationSuccess', function () {
+                    success = true;
+                });
+                $('#testForm').jqxValidator('validate');
+                equals(success, true, 'Validation success have been handled');
+            });
+
+            function completeForm() {
+                $('#userInput').val('usr');
+                $('#realNameInput').val('usr');
+                $('#passwordInput').val('usrpass');
+                $('#passwordConfirmInput').val('usrpass');
+                $('#emailInput').val('usr@usr.us');
+                $('#ssnInput').find('input').val('222-22-2222');
+                $('#phoneInput').find('input').val('(111)111-1111');
+                $('#zipInput').find('input').val('444-44-4444');
+                $('#acceptInput').jqxCheckBox('checked', true);
+            }
+
+            module('Public API');
+
+            test('validateInput - E-mail validation', function () {
+                var invalidEmail = '331.asd@ds.s',
+                    validEmail = 'support@jqwidgets.com';
+                $('#emailInput').val(invalidEmail);
+                equals($('#testForm').jqxValidator('validateInput', '#emailInput'), false, 'Testing e-mail validaition');
+                $('#emailInput').val(validEmail);
+                equals($('#testForm').jqxValidator('validateInput', '#emailInput'), true, 'Testing e-mail validation');
+            });
+
+            test('validateInput - Required validation', function () {
+                $('#userInput').val('');
+                equals($('#testForm').jqxValidator('validateInput', '#userInput'), false, 'Testing required validaition');
+                $('#userInput').val('John');
+                equals($('#testForm').jqxValidator('validateInput', '#userInput'), true, 'Testing required validation');
+
+                $('#acceptInput').jqxCheckBox('checked', false);
+                equals($('#testForm').jqxValidator('validateInput', '#acceptInput'), false, 'Testing required validation of checkbox');
+                $('#acceptInput').jqxCheckBox('checked', true);
+                equals($('#testForm').jqxValidator('validateInput', '#acceptInput'), true, 'Testing required validation of checkbox');
+            });
+
+            test('validateInput - ZIP code validation', function () {
+                var input = $('#zipInput');
+                input.find('input').val('444-44-44443');
+                equals($('#testForm').jqxValidator('validateInput', '#zipInput'), false, 'Testing zip code validation');
+                input.find('input').val('444-44-4444');
+                equals($('#testForm').jqxValidator('validateInput', '#zipInput'), true, 'Testing zip code validation');
+            });
+
+            test('validateInput - SSN validation', function () {
+                var input = $('#ssnInput');
+                input.find('input').val('222-22-222-2');
+                equals($('#testForm').jqxValidator('validateInput', '#ssnInput'), false, 'Testing the ssn validation');
+                input.find('input').val('222-22-2222');
+                equals($('#testForm').jqxValidator('validateInput', '#ssnInput'), true, 'Testing the ssn validation');
+            });
+
+            test('validateInput - Phone number validation', function () {
+                var input = $('#phoneInput');
+                input.find('input').val('(1121)111-1111');
+                equals($('#testForm').jqxValidator('validateInput', '#phoneInput'), false, 'Testing phone number validation');
+                input.find('input').val('(111)111-1111');
+                equals($('#testForm').jqxValidator('validateInput', '#phoneInput'), true, 'Testing phone number validation');
+            });
+
+            test('Validate', function () {
+                $('#realNameInput').val('John');
+                $('#passwordInput').val('password');
+                ok(!$('#testForm').jqxValidator('validate'), 'Testing validation');
+                $('#passwordConfirmInput').val('password');
+                ok($('#testForm').jqxValidator('validate'), 'Testing validation');
+            });
+
+            asyncTest('Hide', function () {
+                $('#testForm').find('input').val('');
+                $('#testForm').jqxValidator('validate');
+                $('#testForm').jqxValidator('hide');
+                setTimeout(function () {
+                    ok(!$('.jqx-validation-hint')[0], 'Testing if there are any visible hints.');
+                    start();
+                }, 500);
+            });
+
+        });
+    </script>
+</head>
+<body>
+<form id="testForm" action="./" style="height: 0px; overflow: hidden;">
+    <table class="register-table">
+        <tr>
+            <td>Username:</td>
+            <td><input type="text" id="userInput" class="text-input" /></td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td><input type="password" id="passwordInput" class="text-input" /></td>
+        </tr>
+        <tr>
+            <td>Confirm password:</td>
+            <td><input type="password" id="passwordConfirmInput" class="text-input" /></td>
+        </tr>
+        <tr>
+            <td>Real name:</td>
+            <td><input type="text" id="realNameInput" class="text-input" /></td>
+        </tr>
+        <tr>
+            <td>E-mail:</td>
+            <td><input type="text" id="emailInput" class="text-input" /></td>
+        </tr>
+        <tr>
+            <td>SSN:</td>
+            <td><div id="ssnInput"></div></td>
+        </tr>
+        <tr>
+            <td>Phone:</td>
+            <td><div id="phoneInput"></div></td>
+        </tr>
+        <tr>
+            <td>Zip code:</td>
+            <td><div id="zipInput"></div></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="padding: 5px;"><div id="acceptInput" style="margin-left: 50px;">I accept terms</div></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;"><input type="button" value="Send" id="sendButton" /></td>
+        </tr>
+    </table>
+</form>
+    <br />
+    <br />
+    <div>
+        <h1 id="qunit-header">
+            QUnit jqxValidator</h1>
+        <h2 id="qunit-banner">
+        </h2>
+        <div id="qunit-testrunner-toolbar">
+        </div>
+        <h2 id="qunit-userAgent">
+        </h2>
+        <ol id="qunit-tests">
+        </ol>
+        <div id="qunit-fixture">
+            test markup, will be hidden</div>
+    </div>
+</body>
+</html>

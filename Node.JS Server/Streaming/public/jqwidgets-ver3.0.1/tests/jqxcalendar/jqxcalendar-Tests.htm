@@ -1,0 +1,399 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="../../Styles/Site.css" media="screen" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.web.css" media="screen" />
+    <link rel="stylesheet" href="../../Styles/qunit-git.css" media="screen" />
+    <script type="text/javascript" src="../../scripts/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/qunit-git.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcalendar.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#jqxCalendar').jqxCalendar({ width: 250, height: 230, navigationDelay: 0, disabled: true });
+            $('#jqxCalendar').css('display', 'none');
+
+            module("Module Properties");
+
+            test("disabled property test", function () {
+                // get value.
+                var disabled = $('#jqxCalendar').jqxCalendar('disabled');
+                ok(disabled == true, "get disabled test.");
+
+                // set value.
+                $('#jqxCalendar').jqxCalendar({ disabled: false });
+                var newDisabled = $('#jqxCalendar').jqxCalendar('disabled');
+                ok(newDisabled == false, "set disabled test.");
+            });
+
+            test("minDate property test", function () {
+                // get minDate.
+                var minDate = $('#jqxCalendar').jqxCalendar('getMinDate');
+                var defaultMinDate = new Date(1900, 0, 1).getDate();
+                ok(minDate.getDate() == defaultMinDate, "get mindate test.");
+
+                // set minDate
+                var date = new Date(2010, 0, 1);
+                $('#jqxCalendar').jqxCalendar({ minDate: new $.jqx._jqxDateTimeInput.getDateTime(date) });
+                var minDate = $('#jqxCalendar').jqxCalendar('getMinDate');
+                ok(minDate.getDate() == date.getDate(), "set mindate test.");
+            });
+
+            test("stepMonths property test", function () {
+                // get stepMonths.
+                var stepMonths = $('#jqxCalendar').jqxCalendar('stepMonths');
+                ok(stepMonths == 1, "get stepMonths test.");
+
+                // set stepMonths.
+                $('#jqxCalendar').jqxCalendar({ stepMonths: 3 });
+                stepMonths = $('#jqxCalendar').jqxCalendar('stepMonths');
+                ok(stepMonths == 3, "set stepMonths test.");
+            });
+
+            test("firstDayOfWeek property test", function () {
+                // get firstDayOfWeek.
+                var firstDayOfWeek = $('#jqxCalendar').jqxCalendar('firstDayOfWeek');
+                ok(firstDayOfWeek == 0, "get firstDayOfWeek test.");
+
+                // set firstDayOfWeek.
+                $('#jqxCalendar').jqxCalendar({ firstDayOfWeek: 2 });
+                firstDayOfWeek = $('#jqxCalendar').jqxCalendar('firstDayOfWeek');
+                ok(firstDayOfWeek == 2, "set firstDayOfWeek test.");
+            });
+
+            test("width property test", function () {
+                // get width.
+                var width = $('#jqxCalendar').jqxCalendar('width');
+                ok(width == 250, "get width test.");
+
+                // set width.
+                $('#jqxCalendar').jqxCalendar({ width: 300 });
+                width = $('#jqxCalendar').jqxCalendar('width');
+                ok(width == 300, "set width test.");
+            });
+
+            test("height property test", function () {
+                // get height.
+                var height = $('#jqxCalendar').jqxCalendar('height');
+                ok(height == 230, "get height test.");
+
+                // set height.
+                $('#jqxCalendar').jqxCalendar({ height: 300 });
+                height = $('#jqxCalendar').jqxCalendar('height');
+                ok(height == 300, "set height test.");
+            });
+
+            test("maxDate property test", function () {
+                // get maxDate.
+                var maxDate = $('#jqxCalendar').jqxCalendar('getMaxDate');
+                var defaultMaxDate = new Date(2100, 1, 1).getDate();
+                ok(maxDate.getDate() == defaultMaxDate, "get maxDate test.");
+
+                // set maxDate
+                var date = new Date(2013, 0, 1);
+                $('#jqxCalendar').jqxCalendar({ maxDate: new $.jqx._jqxDateTimeInput.getDateTime(date) });
+                var maxDate = $('#jqxCalendar').jqxCalendar('getMaxDate');
+                ok(maxDate.getDate() == date.getDate(), "set maxDate test.");
+            });
+
+            test("value property test", function () {
+                // get value.
+                var value = $('#jqxCalendar').jqxCalendar('getDate');
+                var defaultvalue = new Date().getDate();
+                ok(value.getDate() == defaultvalue, "get value test.");
+
+                // set value
+                var date = new Date(2010, 0, 1);
+                $('#jqxCalendar').jqxCalendar('setDate', date);
+                var value = $('#jqxCalendar').jqxCalendar('getDate');
+                ok(value.getDate() == date.getDate(), "set value test.");
+            });
+
+            test("showWeekNumbers property test", function () {
+                // get showWeekNumbers.
+                var showWeekNumbers = $('#jqxCalendar').jqxCalendar('showWeekNumbers');
+                ok(showWeekNumbers == false, "get showWeekNumbers test.");
+
+                // set showWeekNumbers.
+                $('#jqxCalendar').jqxCalendar({ showWeekNumbers: true });
+                var showWeekNumbers = $('#jqxCalendar').jqxCalendar('showWeekNumbers');
+                ok(showWeekNumbers == true, "set showWeekNumbers test.");
+            });
+
+            test("showDayNames property test", function () {
+                // get showDayNames.
+                var showDayNames = $('#jqxCalendar').jqxCalendar('showDayNames');
+                ok(showDayNames == true, "get showDayNames test.");
+
+                // set showDayNames.
+                $('#jqxCalendar').jqxCalendar({ showDayNames: false });
+                var showDayNames = $('#jqxCalendar').jqxCalendar('showDayNames');
+                ok(showDayNames == false, "set showDayNames test.");
+            });
+
+            test("enableWeekend property test", function () {
+                // get enableWeekend.
+                var enableWeekend = $('#jqxCalendar').jqxCalendar('enableWeekend');
+                ok(enableWeekend == false, "get enableWeekend test.");
+
+                // set enableWeekend.
+                $('#jqxCalendar').jqxCalendar({ enableWeekend: true });
+                var enableWeekend = $('#jqxCalendar').jqxCalendar('enableWeekend');
+                ok(enableWeekend == true, "set enableWeekend test.");
+            });
+
+            test("enableOtherMonthDays property test", function () {
+                // get enableOtherMonthDays.
+                var enableOtherMonthDays = $('#jqxCalendar').jqxCalendar('enableOtherMonthDays');
+                ok(enableOtherMonthDays == true, "get enableOtherMonthDays test.");
+
+                // set enableOtherMonthDays.
+                $('#jqxCalendar').jqxCalendar({ enableOtherMonthDays: false });
+                var enableOtherMonthDays = $('#jqxCalendar').jqxCalendar('enableOtherMonthDays');
+                ok(enableOtherMonthDays == false, "set enableOtherMonthDays test.");
+            });
+
+            test("showOtherMonthDays property test", function () {
+                // get showOtherMonthDays.
+                var showOtherMonthDays = $('#jqxCalendar').jqxCalendar('showOtherMonthDays');
+                ok(showOtherMonthDays == true, "get showOtherMonthDays test.");
+
+                // set showOtherMonthDays.
+                $('#jqxCalendar').jqxCalendar({ showOtherMonthDays: false });
+                var showOtherMonthDays = $('#jqxCalendar').jqxCalendar('showOtherMonthDays');
+                ok(showOtherMonthDays == false, "set showOtherMonthDays test.");
+            });
+
+            test("rowHeaderWidth property test", function () {
+                // get rowHeaderWidth.
+                var rowHeaderWidth = $('#jqxCalendar').jqxCalendar('rowHeaderWidth');
+                ok(rowHeaderWidth == 25, "get rowHeaderWidth test.");
+
+                // set rowHeaderWidth.
+                $('#jqxCalendar').jqxCalendar({ rowHeaderWidth: 35 });
+                rowHeaderWidth = $('#jqxCalendar').jqxCalendar('rowHeaderWidth');
+                ok(rowHeaderWidth == 35, "set rowHeaderWidth test.");
+            });
+
+            test("columnHeaderHeight property test", function () {
+                // get columnHeaderHeight.
+                var columnHeaderHeight = $('#jqxCalendar').jqxCalendar('columnHeaderHeight');
+                ok(columnHeaderHeight == 20, "get columnHeaderHeight test.");
+
+                // set columnHeaderHeight.
+                $('#jqxCalendar').jqxCalendar({ columnHeaderHeight: 35 });
+                columnHeaderHeight = $('#jqxCalendar').jqxCalendar('columnHeaderHeight');
+                ok(columnHeaderHeight == 35, "set columnHeaderHeight test.");
+            });
+
+            test("titleHeight property test", function () {
+                // get titleHeight.
+                var titleHeight = $('#jqxCalendar').jqxCalendar('titleHeight');
+                ok(titleHeight == 25, "get titleHeight test.");
+
+                // set titleHeight.
+                $('#jqxCalendar').jqxCalendar({ titleHeight: 35 });
+                titleHeight = $('#jqxCalendar').jqxCalendar('titleHeight');
+                ok(titleHeight == 35, "set titleHeight test.");
+            });
+
+            test("dayNameFormat property test", function () {
+                // get dayNameFormat.
+                var dayNameFormat = $('#jqxCalendar').jqxCalendar('dayNameFormat');
+                ok(dayNameFormat == "firstTwoLetters", "get dayNameFormat test.");
+
+                // set dayNameFormat.
+                $('#jqxCalendar').jqxCalendar({ dayNameFormat: "firstLetter" });
+                var dayNameFormat = $('#jqxCalendar').jqxCalendar('dayNameFormat');
+                ok(dayNameFormat == "firstLetter", "set dayNameFormat test.");
+            });
+
+            test("titleFormat property test", function () {
+                // get titleFormat.
+                var titleFormat = $('#jqxCalendar').jqxCalendar('titleFormat');
+                ok(titleFormat[0] == "MMMM yyyy", "get titleFormat test.");
+
+                // set titleFormat.
+                $('#jqxCalendar').jqxCalendar({ titleFormat: ["yyyy", "yyyy", "yyyy", "yyyy"] });
+                var titleFormat = $('#jqxCalendar').jqxCalendar('titleFormat');
+                ok(titleFormat[0] == "yyyy", "set titleFormat test.");
+            });
+
+            test("readOnly property test", function () {
+                // get readOnly.
+                var readOnly = $('#jqxCalendar').jqxCalendar('readOnly');
+                ok(readOnly == false, "get readOnly test.");
+
+                // set readOnly.
+                $('#jqxCalendar').jqxCalendar({ readOnly: true });
+                var readOnly = $('#jqxCalendar').jqxCalendar('readOnly');
+                ok(readOnly == true, "set readOnly test.");
+            });
+
+            test("enableFastNavigation property test", function () {
+                // get enableFastNavigation.
+                var enableFastNavigation = $('#jqxCalendar').jqxCalendar('enableFastNavigation');
+                ok(enableFastNavigation == true, "get enableFastNavigation test.");
+
+                // set enableFastNavigation.
+                $('#jqxCalendar').jqxCalendar({ enableFastNavigation: false });
+                var enableFastNavigation = $('#jqxCalendar').jqxCalendar('enableFastNavigation');
+                ok(enableFastNavigation == false, "set enableFastNavigation test.");
+            });
+
+            test("enableHover property test", function () {
+                // get enableHover.
+                var enableHover = $('#jqxCalendar').jqxCalendar('enableHover');
+                ok(enableHover == true, "get enableHover test.");
+
+                // set enableHover.
+                $('#jqxCalendar').jqxCalendar({ enableHover: false });
+                var enableHover = $('#jqxCalendar').jqxCalendar('enableHover');
+                ok(enableHover == false, "set enableHover test.");
+            });
+
+            test("enableAutoNavigation property test", function () {
+                // get enableAutoNavigation.
+                var enableAutoNavigation = $('#jqxCalendar').jqxCalendar('enableAutoNavigation');
+                ok(enableAutoNavigation == true, "get enableAutoNavigation test.");
+
+                // set enableAutoNavigation.
+                $('#jqxCalendar').jqxCalendar({ enableAutoNavigation: false });
+                var enableAutoNavigation = $('#jqxCalendar').jqxCalendar('enableAutoNavigation');
+                ok(enableAutoNavigation == false, "set enableAutoNavigation test.");
+            });
+
+            test("enableTooltips property test", function () {
+                // get enableTooltip.
+                var enableTooltip = $('#jqxCalendar').jqxCalendar('enableTooltips');
+                ok(enableTooltip == false, "get enableTooltip test.");
+
+                // set enableTooltip.
+                $('#jqxCalendar').jqxCalendar({ enableTooltips: true });
+                var enableTooltip = $('#jqxCalendar').jqxCalendar('enableTooltips');
+                ok(enableTooltip == true, "set enableTooltip test.");
+            });
+
+            test("backText property test", function () {
+                // get backText.
+                var backText = $('#jqxCalendar').jqxCalendar('backText');
+                ok(backText == "Back", "get backText test.");
+
+                // set backText.
+                $('#jqxCalendar').jqxCalendar({ backText: "Move back" });
+                var backText = $('#jqxCalendar').jqxCalendar('backText');
+                ok(backText == "Move back", "set backText test.");
+            });
+
+            test("forwardText property test", function () {
+                // get backText.
+                var forwardText = $('#jqxCalendar').jqxCalendar('forwardText');
+                ok(forwardText == "Forward", "get forwardText test.");
+
+                // set backText.
+                $('#jqxCalendar').jqxCalendar({ forwardText: "Move forward" });
+                var forwardText = $('#jqxCalendar').jqxCalendar('forwardText');
+                ok(forwardText == "Move forward", "set forwardText test.");
+            });
+
+
+            module("Module Methods");
+
+            test("setMinDate method test", function () {
+                var beforeDate = new Date($('#jqxCalendar').jqxCalendar('getMinDate'));
+                //  invoke setMinDate method.
+                $('#jqxCalendar').jqxCalendar('setMinDate', new Date(1950, 0, 1));
+                //   test value after invoking setMinDate.
+                var afterDate = $('#jqxCalendar').jqxCalendar('getMinDate');
+                ok(beforeDate != afterDate, "value after invoking setMinDate test");
+            });
+
+            test("getMinDate method test", function () {
+                var beforeDate = new Date($('#jqxCalendar').jqxCalendar('getMinDate'));
+                //  invoke setMinDate method.
+                $('#jqxCalendar').jqxCalendar('getMinDate');
+                //   test value after invoking getMinDate.
+                var afterDate = $('#jqxCalendar').jqxCalendar('getMinDate');
+                ok(beforeDate != afterDate, "value after invoking getMinDate test");
+            });
+
+            test("setMaxDate method test", function () {
+                var beforeDate = new Date($('#jqxCalendar').jqxCalendar('getMaxDate'));
+                //  invoke setMaxDate method.
+                $('#jqxCalendar').jqxCalendar('setMaxDate', new Date(2014, 0, 1));
+                //   test value after invoking setMaxDate.
+                var afterDate = $('#jqxCalendar').jqxCalendar('getMaxDate');
+                ok(beforeDate != afterDate, "value after invoking setMaxDate test");
+            });
+
+            test("getMaxDate method test", function () {
+                var beforeDate = new Date($('#jqxCalendar').jqxCalendar('getMaxDate'));
+                //  invoke getMaxDate method.
+                $('#jqxCalendar').jqxCalendar('getMaxDate');
+                //   test value after invoking getMaxDate.
+                var afterDate = $('#jqxCalendar').jqxCalendar('getMaxDate');
+                ok(beforeDate != afterDate, "value after invoking getMaxDate test");
+            });
+
+            test("setDate method test", function () {
+                var beforeDate = new Date($('#jqxCalendar').jqxCalendar('getDate'));
+                //  invoke setDate method.
+                $('#jqxCalendar').jqxCalendar('setDate', new Date(2012, 0, 1));
+                //   test value after invoking setDate.
+                var afterDate = $('#jqxCalendar').jqxCalendar('getDate');
+                ok(beforeDate != afterDate, "value after invoking setDate test");
+            });
+
+            test("getDate method test", function () {
+                var beforeDate = new Date($('#jqxCalendar').jqxCalendar('getDate'));
+                //  invoke getDate method.
+                $('#jqxCalendar').jqxCalendar('getDate');
+                //   test value after invoking getDate.
+                var afterDate = $('#jqxCalendar').jqxCalendar('getDate');
+                ok(beforeDate != afterDate, "value after invoking getDate test");
+            });
+
+
+
+            module("Module Events");
+
+            test("valuechanged event test", function () {
+                var valuechanged = false;
+                // on to backButtonClick.
+                $('#jqxCalendar').on('valuechanged', function () {
+                    valuechanged = true;
+                });
+
+                $('#jqxCalendar').jqxCalendar('setDate', new Date(2009, 3, 3));
+                ok(true == valuechanged, "valuechanged event.");
+
+                // off from backButtonClick.
+                $('#jqxCalendar').off('valuechanged');
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id='jqxCalendar'>
+    </div>
+    <br />
+    <br />
+    <div>
+        <h1 id="qunit-header">
+            QUnit example</h1>
+        <h2 id="qunit-banner">
+        </h2>
+        <div id="qunit-testrunner-toolbar">
+        </div>
+        <h2 id="qunit-userAgent">
+        </h2>
+        <ol id="qunit-tests">
+        </ol>
+        <div id="qunit-fixture">
+            test markup, will be hidden</div>
+    </div>
+</body>
+</html>

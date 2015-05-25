@@ -1,0 +1,277 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="../../Styles/Site.css" media="screen" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../Styles/qunit-git.css" media="screen" />
+    <script type="text/javascript" src="../../scripts/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/qunit-git.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.columnsresize.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.grouping.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.pager.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.sort.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.filter.js"></script> 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Test Grid Selection functionality.
+
+            // prepare the data
+            var data = new Array();
+
+            var firstNames =
+            [
+                "Shelley", "Nancy", "Andrew", "Regina", "Yoshi", "Antoni", "Mayumi", "Ian", "Peter", "Lars", "Petra", "Martin", "Sven", "Elio", "Beate", "Cheryl", "Michael", "Guylene"
+            ];
+
+            var lastNames =
+            [
+                "Fuller", "Davolio", "Burke", "Murphy", "Nagase", "Saavedra", "Ohno", "Devling", "Wilson", "Peterson", "Winkler", "Bein", "Petersen", "Rossi", "Vileid", "Saylor", "Bjorn", "Nodier"
+            ];
+
+            var productNames =
+            [
+                "Black Tea", "Green Tea", "Caffe Espresso", "Doubleshot Espresso", "Caffe Latte", "White Chocolate Mocha", "Cramel Latte", "Caffe Americano", "Cappuccino", "Espresso Truffle", "Espresso con Panna", "Peppermint Mocha Twist"
+            ];
+
+            var priceValues =
+            [
+                "2.25", "1.5", "3.0", "3.3", "4.5", "3.6", "3.8", "2.5", "5.0", "1.75", "3.25", "4.0", '2.1', '1.5', '5.7', '0.5', '0.9', '3.8'
+            ];
+
+            var generaterow = function (index) {
+                if (index == undefined) index = "id";
+
+                var row = {};
+                var productindex = index;
+                var price = parseFloat(priceValues[productindex]);
+                var quantity = 1 + Math.round(Math.random() * 10);
+                row["id"] = index;
+                row["firstname"] = firstNames[index];
+                row["lastname"] = lastNames[index];
+                row["productname"] = productNames[productindex];
+                row["price"] = price;
+                row["quantity"] = quantity;
+                row["total"] = price * quantity;
+                var date = new Date();
+                date.setFullYear(2012, Math.floor(Math.random() * 11), Math.floor(Math.random() * 27));
+                date.setHours(0, 0, 0, 0);
+                row["date"] = date;
+                return row;
+            }
+
+            for (var i = 0; i < firstNames.length; i++) {
+                data[i] = generaterow(i);
+            }
+
+            var source =
+            {
+                localdata: data,
+                datatype: "array",
+                id: 'id'
+            };
+
+            $("#jqxgrid").jqxGrid(
+            {
+                width: 400,
+                height: 100,
+                source: source,
+                columns: [
+                  { text: 'First Name', datafield: 'firstname', width: 100 },
+                  { text: 'Last Name', datafield: 'lastname', width: 100 },
+                  { text: 'Product', datafield: 'productname', width: 180 },
+                  { text: 'Quantity', datafield: 'quantity', width: 80, cellsalign: 'right' },
+                  { text: 'Unit Price', datafield: 'price', width: 90, cellsalign: 'right', cellsformat: 'c2' },
+                  { text: 'Date', datafield: 'date', width: 90, cellsalign: 'right', cellsformat: 'd' },
+                  { text: 'Total', datafield: 'total', width: 100, cellsalign: 'right', cellsformat: 'c2' }
+                ]
+            });
+
+            module("Module Sorting");
+
+            test("sort asc by String Column function test", function () {
+                $('#jqxgrid').jqxGrid('sortby', 'firstname', 'asc');
+                var info = $('#jqxgrid').jqxGrid('getdatainformation');
+
+                var sorted = 1;
+                for (var i = 1; i < info.rowscount; i++) {
+                    var value = $("#jqxgrid").jqxGrid('getrenderedcell', i, 'firstname').value;
+                    var prevValue = $("#jqxgrid").jqxGrid('getrenderedcell', i - 1, 'firstname').value;
+
+                    if (prevValue.toLowerCase() < value.toLowerCase()) {
+                        sorted++;
+                    }
+                }
+
+                ok(sorted == info.rowscount, "sort asc test.");
+            });
+            test("sort desc by String Column function test", function () {
+                $('#jqxgrid').jqxGrid('sortby', 'firstname', 'desc');
+                var info = $('#jqxgrid').jqxGrid('getdatainformation');
+
+                var sorted = 1;
+                for (var i = 1; i < info.rowscount; i++) {
+                    var value = $("#jqxgrid").jqxGrid('getrenderedcell', i, 'firstname').value;
+                    var prevValue = $("#jqxgrid").jqxGrid('getrenderedcell', i - 1, 'firstname').value;
+
+                    if (prevValue.toLowerCase() > value.toLowerCase()) {
+                        sorted++;
+                    }
+                }
+
+                ok(sorted == info.rowscount, "sort desc test.");
+            });
+            test("sort and clear sorting", function () {
+                $('#jqxgrid').jqxGrid('sortby', 'firstname', 'desc');
+                var info = $('#jqxgrid').jqxGrid('getdatainformation');
+
+                var sorted = 1;
+                for (var i = 1; i < info.rowscount; i++) {
+                    var value = $("#jqxgrid").jqxGrid('getrenderedcell', i, 'firstname').value;
+                    var prevValue = $("#jqxgrid").jqxGrid('getrenderedcell', i - 1, 'firstname').value;
+
+                    if (prevValue.toLowerCase() > value.toLowerCase()) {
+                        sorted++;
+                    }
+                }
+
+                ok(sorted == info.rowscount, "sorted test.");
+       
+                $('#jqxgrid').jqxGrid('sortby', 'firstname', null);
+                var sorted = 1;
+                for (var i = 1; i < info.rowscount; i++) {
+                    var value = $("#jqxgrid").jqxGrid('getrenderedcell', i, 'firstname').value;
+                    var prevValue = $("#jqxgrid").jqxGrid('getrenderedcell', i - 1, 'firstname').value;
+
+                    if (prevValue.toLowerCase() > value.toLowerCase()) {
+                        sorted++;
+                    }
+                }
+                ok(sorted != info.rowscount, "clear sort test.");
+            });
+            test("sort asc by Date Column function test", function () {
+                $('#jqxgrid').jqxGrid('sortby', 'date', 'asc');
+                var info = $('#jqxgrid').jqxGrid('getdatainformation');
+
+                var sorted = 1;
+                for (var i = 1; i < info.rowscount; i++) {
+                    var value = $("#jqxgrid").jqxGrid('getrenderedcell', i, 'date').value;
+                    var prevValue = $("#jqxgrid").jqxGrid('getrenderedcell', i - 1, 'date').value;
+
+                    if (prevValue <= value) {
+                        sorted++;
+                    }
+                }
+
+                ok(sorted == info.rowscount, "sort date asc test.");
+            });
+            test("sort desc by Date Column function test", function () {
+                $('#jqxgrid').jqxGrid('sortby', 'date', 'desc');
+                var info = $('#jqxgrid').jqxGrid('getdatainformation');
+
+                var sorted = 1;
+                for (var i = 1; i < info.rowscount; i++) {
+                    var value = $("#jqxgrid").jqxGrid('getrenderedcell', i, 'date').value;
+                    var prevValue = $("#jqxgrid").jqxGrid('getrenderedcell', i - 1, 'date').value;
+
+                    if (prevValue >= value) {
+                        sorted++;
+                    }
+                }
+
+                ok(sorted == info.rowscount, "sort date desc test.");
+            });
+            test("sort asc by Floating-Number Column function test", function () {
+                $('#jqxgrid').jqxGrid('sortby', 'price', 'asc');
+                var info = $('#jqxgrid').jqxGrid('getdatainformation');
+
+                var sorted = 1;
+                for (var i = 1; i < info.rowscount; i++) {
+                    var value = $("#jqxgrid").jqxGrid('getrenderedcell', i, 'price').value;
+                    var prevValue = $("#jqxgrid").jqxGrid('getrenderedcell', i - 1, 'price').value;
+
+                    if (prevValue <= value) {
+                        sorted++;
+                    }
+                }
+
+                ok(sorted == info.rowscount, "sort float-number asc test.");
+            });
+            test("sort desc by Floating-Number Column function test", function () {
+                $('#jqxgrid').jqxGrid('sortby', 'price', 'desc');
+                var info = $('#jqxgrid').jqxGrid('getdatainformation');
+
+                var sorted = 1;
+                for (var i = 1; i < info.rowscount; i++) {
+                    var value = $("#jqxgrid").jqxGrid('getrenderedcell', i, 'price').value;
+                    var prevValue = $("#jqxgrid").jqxGrid('getrenderedcell', i - 1, 'price').value;
+
+                    if (prevValue >= value) {
+                        sorted++;
+                    }
+                }
+
+                ok(sorted == info.rowscount, "sort float-number desc test.");
+            });
+            test("sort asc by Integer-Number Column function test", function () {
+                $('#jqxgrid').jqxGrid('sortby', 'quantity', 'asc');
+                var info = $('#jqxgrid').jqxGrid('getdatainformation');
+
+                var sorted = 1;
+                for (var i = 1; i < info.rowscount; i++) {
+                    var value = $("#jqxgrid").jqxGrid('getrenderedcell', i, 'quantity').value;
+                    var prevValue = $("#jqxgrid").jqxGrid('getrenderedcell', i - 1, 'quantity').value;
+
+                    if (prevValue <= value) {
+                        sorted++;
+                    }
+                }
+
+                ok(sorted == info.rowscount, "sort int-number asc test.");
+            });
+            test("sort desc by Integer-Number Column function test", function () {
+                $('#jqxgrid').jqxGrid('sortby', 'quantity', 'desc');
+                var info = $('#jqxgrid').jqxGrid('getdatainformation');
+
+                var sorted = 1;
+                for (var i = 1; i < info.rowscount; i++) {
+                    var value = $("#jqxgrid").jqxGrid('getrenderedcell', i, 'quantity').value;
+                    var prevValue = $("#jqxgrid").jqxGrid('getrenderedcell', i - 1, 'quantity').value;
+
+                    if (prevValue >= value) {
+                        sorted++;
+                    }
+                }
+
+                ok(sorted == info.rowscount, "sort int-number desc test.");
+            });
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <h1 id="qunit-header">
+            QUnit example</h1>
+        <h2 id="qunit-banner">
+        </h2>
+        <div id="qunit-testrunner-toolbar">
+        </div>
+        <h2 id="qunit-userAgent">
+        </h2>
+        <ol id="qunit-tests">
+        </ol>
+        <div id="qunit-fixture">
+            test markup, will be hidden</div>
+    </div>
+    <div  style="display: none;" id="jqxgrid">
+    </div>
+</body>
+</html>

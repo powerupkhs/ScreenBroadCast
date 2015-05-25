@@ -1,0 +1,291 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+     <link rel="stylesheet" href="../../Styles/Site.css" media="screen" />
+    <link rel="stylesheet" href="../../Styles/qunit-git.css" media="screen" />
+    <script type="text/javascript" src="../../scripts/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/qunit-git.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxnumberinput.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#jqxNumberInput').jqxNumberInput({ width: 250, height: 35, decimal: 55555 });
+            $('#jqxNumberInput').css('display', 'none');
+
+            module("Module Properties");
+
+            test("value property test", function () {
+                // get value.
+                $('#jqxNumberInput').jqxNumberInput('setDecimal', 55555);
+                var value = $('#jqxNumberInput').jqxNumberInput('value');
+                ok(value == '__,_55,555.00', "get value test.");
+
+                // set value.
+                $('#jqxNumberInput').jqxNumberInput({ value: '10000' });
+                var newValue = $('#jqxNumberInput').jqxNumberInput('value');
+                ok(newValue == '__,_10,000.00', "set value test.");
+
+                // reset value to 0
+                $('#jqxNumberInput').jqxNumberInput({ value: 0 });
+            });
+
+            test("width property test", function () {
+                // get width.
+                var width = $('#jqxNumberInput').jqxNumberInput('width');
+                ok(width == 250, "get width test.");
+
+                // set width.
+                $('#jqxNumberInput').jqxNumberInput({ width: 300 });
+                width = $('#jqxNumberInput').jqxNumberInput('width');
+                ok(width == 300, "set width test.");
+            });
+
+            test("height property test", function () {
+                // get height.
+                var height = $('#jqxNumberInput').jqxNumberInput('height');
+                ok(height == 35, "get height test.");
+
+                // set height.
+                $('#jqxNumberInput').jqxNumberInput({ height: 50 });
+                height = $('#jqxNumberInput').jqxNumberInput('height');
+                ok(height == 50, "set height test.");
+            });
+
+            test("decimal property test", function () {
+                // get decimal.
+                var decimal = $('#jqxNumberInput').jqxNumberInput('decimal');
+                ok(decimal == 0, "get decimal test.");
+
+                // set decimal.
+                $('#jqxNumberInput').jqxNumberInput({ decimal: 5 });
+                decimal = $('#jqxNumberInput').jqxNumberInput('decimal');
+                ok(decimal == 5, "set decimal test.");
+            });
+
+            test("min property test", function () {
+                // get min.
+                var min = $('#jqxNumberInput').jqxNumberInput('min');
+                ok(min == -99999999, "get min test.");
+
+                // set min.
+                $('#jqxNumberInput').jqxNumberInput({ min: 15 });
+                min = $('#jqxNumberInput').jqxNumberInput('min');
+                ok(min == 15, "set min test.");
+            });
+
+            test("max property test", function () {
+                // get max.
+                var max = $('#jqxNumberInput').jqxNumberInput('max');
+                ok(max == 99999999, "get max test.");
+
+                // set max.
+                $('#jqxNumberInput').jqxNumberInput({ max: 15 });
+                max = $('#jqxNumberInput').jqxNumberInput('max');
+                ok(max == 15, "set max test.");
+            });
+
+            test("validationMessage property test", function () {
+                // get validationMessage.
+                var validationMessage = $('#jqxNumberInput').jqxNumberInput('validationMessage');
+                ok(validationMessage == "Invalid value", "get validationMessage test.");
+
+                // set validationMessage.
+                $('#jqxNumberInput').jqxNumberInput({ validationMessage: "Error" });
+                validationMessage = $('#jqxNumberInput').jqxNumberInput('validationMessage');
+                ok(validationMessage == "Error", "set validationMessage test.");
+            });
+
+            test("textAlign property test", function () {
+                // get textAlign.
+                var textAlign = $('#jqxNumberInput').jqxNumberInput('textAlign');
+                ok(textAlign == "right", "get textAlign test.");
+
+                // set textAlign.
+                $('#jqxNumberInput').jqxNumberInput({ textAlign: "left" });
+                textAlign = $('#jqxNumberInput').jqxNumberInput('textAlign');
+                ok(textAlign == "left", "set textAlign test.");
+            });
+
+            test("readOnly property test", function () {
+                // get readOnly.
+                var readOnly = $('#jqxNumberInput').jqxNumberInput('readOnly');
+                ok(readOnly == false, "get readOnly test.");
+
+                // set readOnly.
+                $('#jqxNumberInput').jqxNumberInput({ readOnly: true });
+                readOnly = $('#jqxNumberInput').jqxNumberInput('readOnly');
+                ok(readOnly == true, "set readOnly test.");
+            });
+
+            test("promptChar property test", function () {
+                // get promptChar.
+                var promptChar = $('#jqxNumberInput').jqxNumberInput('promptChar');
+                ok(promptChar == "_", "get promptChar test.");
+
+                // set promptChar.
+                $('#jqxNumberInput').jqxNumberInput({ promptChar: "." });
+                promptChar = $('#jqxNumberInput').jqxNumberInput('promptChar');
+                ok(promptChar == ".", "set promptChar test.");
+            });
+
+            test("decimalDigits property test", function () {
+                // get decimalDigits.
+                var decimalDigits = $('#jqxNumberInput').jqxNumberInput('decimalDigits');
+                ok(decimalDigits == 2, "get decimalDigits test.");
+
+                // set decimalDigits.
+                $('#jqxNumberInput').jqxNumberInput({ decimalDigits: 5 });
+                decimalDigits = $('#jqxNumberInput').jqxNumberInput('decimalDigits');
+                ok(decimalDigits == 5, "set decimalDigits test.");
+            });
+
+            test("decimalSeparator property test", function () {
+                // get decimalSeparator.
+                var decimalSeparator = $('#jqxNumberInput').jqxNumberInput('decimalSeparator');
+                ok(decimalSeparator == ".", "get decimalSeparator test.");
+
+                // set decimalSeparator.
+                $('#jqxNumberInput').jqxNumberInput({ decimalSeparator: "," });
+                decimalSeparator = $('#jqxNumberInput').jqxNumberInput('decimalSeparator');
+                ok(decimalSeparator == ",", "set decimalSeparator test.");
+            });
+
+            test("groupSeparator property test", function () {
+                // get groupSeparator.
+                var groupSeparator = $('#jqxNumberInput').jqxNumberInput('groupSeparator');
+                ok(groupSeparator == ",", "get groupSeparator test.");
+
+                // set groupSeparator.
+                $('#jqxNumberInput').jqxNumberInput({ groupSeparator: "." });
+                groupSeparator = $('#jqxNumberInput').jqxNumberInput('groupSeparator');
+                ok(groupSeparator == ".", "set groupSeparator test.");
+            });
+
+            test("groupSize property test", function () {
+                // get groupSize.
+                var groupSize = $('#jqxNumberInput').jqxNumberInput('groupSize');
+                ok(groupSize == "3", "get groupSize test.");
+
+                // set groupSize.
+                $('#jqxNumberInput').jqxNumberInput({ groupSize: "7" });
+                groupSize = $('#jqxNumberInput').jqxNumberInput('groupSize');
+                ok(groupSize == "7", "set groupSize test.");
+            });
+
+            test("symbol property test", function () {
+                // get symbol.
+                var symbol = $('#jqxNumberInput').jqxNumberInput('symbol');
+                ok(symbol == "", "get symbol test.");
+
+                // set symbol.
+                $('#jqxNumberInput').jqxNumberInput({ symbol: "." });
+                symbol = $('#jqxNumberInput').jqxNumberInput('symbol');
+                ok(symbol == ".", "set symbol test.");
+            });
+
+            test("symbolPosition property test", function () {
+                // get symbolPosition.
+                var symbolPosition = $('#jqxNumberInput').jqxNumberInput('symbolPosition');
+                ok(symbolPosition == "left", "get symbolPosition test.");
+
+                // set symbolPosition.
+                $('#jqxNumberInput').jqxNumberInput({ symbolPosition: "right" });
+                symbolPosition = $('#jqxNumberInput').jqxNumberInput('symbolPosition');
+                ok(symbolPosition == "right", "set symbolPosition test.");
+            });
+
+            test("digits property test", function () {
+                // get digits.
+                var digits = $('#jqxNumberInput').jqxNumberInput('digits');
+                ok(digits == 8, "get digits test.");
+
+                // set digits.
+                $('#jqxNumberInput').jqxNumberInput({ digits: 5 });
+                digits = $('#jqxNumberInput').jqxNumberInput('digits');
+                ok(digits == 5, "set digits test.");
+            });
+
+            test("negative property test", function () {
+                // get negative.
+                var negative = $('#jqxNumberInput').jqxNumberInput('negative');
+                ok(negative == false, "get negative test.");
+
+                // set negative.
+                $('#jqxNumberInput').jqxNumberInput({ negative: true });
+                negative = $('#jqxNumberInput').jqxNumberInput('negative');
+                ok(negative == true, "set negative test.");
+            });
+
+            test("disabled property test", function () {
+                // get disabled.
+                var disabled = $('#jqxNumberInput').jqxNumberInput('disabled');
+                ok(disabled == false, "get disabled test.");
+
+                // set disabled.
+                $('#jqxNumberInput').jqxNumberInput({ disabled: true });
+                disabled = $('#jqxNumberInput').jqxNumberInput('disabled');
+                ok(disabled == true, "set disabled test.");
+            });
+
+            test("negativeSymbol property test", function () {
+                // get negativeSymbol.
+                var negativeSymbol = $('#jqxNumberInput').jqxNumberInput('negativeSymbol');
+                ok(negativeSymbol == '-', "get negativeSymbol test.");
+
+                // set negativeSymbol.
+                $('#jqxNumberInput').jqxNumberInput({ negativeSymbol: "?" });
+                negativeSymbol = $('#jqxNumberInput').jqxNumberInput('negativeSymbol');
+                ok(negativeSymbol == "?", "set negativeSymbol test.");
+            });
+
+
+            module("Module Methods");
+
+            test("setDecimal property test", function () {
+                // invoke setDecimal.
+                $('#jqxNumberInput').jqxNumberInput('setDecimal', 11111);
+                var decimal = $('#jqxNumberInput').jqxNumberInput('getDecimal');
+                ok(parseInt(decimal) == 11111, "setDecimal test.");
+            });
+
+            module("Module Events");
+
+            test("valuechanged event test", function () {
+                var valuechanged = false;
+                // on to valuechanged.
+                $('#jqxNumberInput').on('valuechanged', function () {
+                    valuechanged = true;
+                });
+
+                $('#jqxNumberInput').show();
+                $('#jqxNumberInput').jqxNumberInput({ value: 55555 });
+                $('#jqxNumberInput').hide();
+                ok(true == valuechanged, "valuechanged event.");
+
+                // off from value changed.
+                $('#jqxNumberInput').off('valuechanged');
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id='jqxNumberInput'>
+    </div>
+    <br />
+    <br />
+    <div>
+        <h1 id="qunit-header">
+            QUnit example</h1>
+        <h2 id="qunit-banner">
+        </h2>
+        <div id="qunit-testrunner-toolbar">
+        </div>
+        <h2 id="qunit-userAgent">
+        </h2>
+        <ol id="qunit-tests">
+        </ol>
+        <div id="qunit-fixture">
+            test markup, will be hidden</div>
+    </div>
+</body>
+</html>

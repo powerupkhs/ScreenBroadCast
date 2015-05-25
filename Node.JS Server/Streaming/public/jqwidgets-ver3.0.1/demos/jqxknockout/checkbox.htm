@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">Integration of jqxCheckBox with Knockout</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../../scripts/json2.js"></script>
+    <script type="text/javascript" src="../../scripts/knockout-2.2.1.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../scripts/gettheme.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxknockout.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {   
+            var viewModel = function (value) {
+                this.count = 0;
+                this.checked = ko.observable(value);
+                this.disabled = ko.observable(false);
+
+                // display checked state.
+                this.getState = function () {
+                    alert("Checked: " + this.checked());
+                }
+                // check checkbox.
+                this.check = function () {
+                    this.checked(true);
+                }
+                // toggle disabled state.
+                this.toggle = function () {
+                    this.count++;
+                    this.disabled(this.count % 2);
+                }
+            };
+
+            ko.applyBindings(new viewModel(true));
+        });
+    </script>
+</head>
+<body class='default'>
+        <div data-bind="jqxCheckBox: {checked: checked, disabled: disabled, width: '120px', theme: getDemoTheme()}" style='margin-bottom: 10px;'>jqxCheckBox</div>
+        <input data-bind="click: getState, jqxButton: {theme: getDemoTheme()}" type="button" value="Get Value" />
+        <input data-bind="click: check, jqxButton: {theme: getDemoTheme()}" type="button" value="Set Value" />
+        <input data-bind="click: toggle, jqxButton: {theme: getDemoTheme()}" type="button" value="Toggle Disabled" />
+</body>
+</html>

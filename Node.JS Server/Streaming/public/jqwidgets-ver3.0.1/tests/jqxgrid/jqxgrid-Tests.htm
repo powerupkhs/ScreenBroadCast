@@ -1,0 +1,460 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="../../Styles/Site.css" media="screen" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../../Styles/qunit-git.css" media="screen" />
+    <script type="text/javascript" src="../../scripts/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/qunit-git.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.columnsresize.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.grouping.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.pager.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.sort.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.filter.js"></script> 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Test Grid functionality.
+
+            // prepare the data
+            var data = new Array();
+
+            var firstNames =
+            [
+                "Andrew", "Nancy", "Shelley", "Regina", "Yoshi", "Antoni", "Mayumi", "Ian", "Peter", "Lars", "Petra", "Martin", "Sven", "Elio", "Beate", "Cheryl", "Michael", "Guylene"
+            ];
+
+            var lastNames =
+            [
+                "Fuller", "Davolio", "Burke", "Murphy", "Nagase", "Saavedra", "Ohno", "Devling", "Wilson", "Peterson", "Winkler", "Bein", "Petersen", "Rossi", "Vileid", "Saylor", "Bjorn", "Nodier"
+            ];
+
+            var productNames =
+            [
+                "Black Tea", "Green Tea", "Caffe Espresso", "Doubleshot Espresso", "Caffe Latte", "White Chocolate Mocha", "Cramel Latte", "Caffe Americano", "Cappuccino", "Espresso Truffle", "Espresso con Panna", "Peppermint Mocha Twist"
+            ];
+
+            var priceValues =
+            [
+                "2.25", "1.5", "3.0", "3.3", "4.5", "3.6", "3.8", "2.5", "5.0", "1.75", "3.25", "4.0"
+            ];
+
+            var generaterow = function (index) {
+                if (index == undefined) index = "id";
+
+                var row = {};
+                var productindex = Math.floor(Math.random() * productNames.length);
+                var price = parseFloat(priceValues[productindex]);
+                var quantity = 1 + Math.round(Math.random() * 10);
+                row["id"] = index;
+                row["firstname"] = firstNames[Math.floor(Math.random() * firstNames.length)];
+                row["lastname"] = lastNames[Math.floor(Math.random() * lastNames.length)];
+                row["productname"] = productNames[productindex];
+                row["price"] = price;
+                row["quantity"] = quantity;
+                row["total"] = price * quantity;
+                return row;
+            }
+
+            for (var i = 0; i < 24; i++) {
+                data[i] = generaterow(i);
+            }
+
+            var source =
+            {
+                localdata: data,
+                datatype: "array",
+                id: 'id'
+            };
+
+            $("#jqxgrid").jqxGrid(
+            {
+                width: 400,
+                height: 100,
+                source: source,
+                columns: [
+                  { text: 'First Name', datafield: 'firstname', width: 100 },
+                  { text: 'Last Name', datafield: 'lastname', width: 100 },
+                  { text: 'Product', datafield: 'productname', width: 180 },
+                  { text: 'Quantity', datafield: 'quantity', width: 80, cellsalign: 'right' },
+                  { text: 'Unit Price', datafield: 'price', width: 90, cellsalign: 'right', cellsformat: 'c2' },
+                  { text: 'Total', datafield: 'total', width: 100, cellsalign: 'right', cellsformat: 'c2' }
+                ]
+            });
+
+            module("Module Properties");
+
+            test("width property test", function () {
+                // get width.
+                var width = $('#jqxgrid').jqxGrid('width');
+                ok(width == 400, "get width test.");
+
+                // set width.
+                $('#jqxgrid').jqxGrid({ width: "300px" });
+                width = $('#jqxgrid').jqxGrid('width');
+                ok(width == "300px", "set width test.");
+            });
+
+            test("height property test", function () {
+                // get height.
+                var height = $('#jqxgrid').jqxGrid('height');
+                ok(height == 100, "get height test.");
+
+                // set height.
+                $('#jqxgrid').jqxGrid({ height: "250px" });
+                height = $('#jqxgrid').jqxGrid('height');
+                ok(height == "250px", "set height test.");
+                $('#jqxgrid').jqxGrid({ height: "25px" });
+            });
+
+            test("disabled property test", function () {
+                // get disabled.
+                var disabled = $('#jqxgrid').jqxGrid('disabled');
+                ok(disabled == false, "get disabled test.");
+
+                // set disabled.
+                $('#jqxgrid').jqxGrid({ disabled: true });
+                var newDisabled = $('#jqxgrid').jqxGrid('disabled');
+                ok(newDisabled == true, "set disabled test.");
+                $('#jqxgrid').jqxGrid({ disabled: false });
+
+            });
+
+            test("altrows property test", function () {
+                // get altrows.
+                var altcellsbefore = $('.jqx-grid-cell-alt');
+
+                var altrows = $('#jqxgrid').jqxGrid('altrows');
+                ok(altrows == false, "get altrows test.");
+
+                // set altrows.
+                $('#jqxgrid').jqxGrid({ altrows: true });
+                var altrows = $('#jqxgrid').jqxGrid('altrows');
+                ok(altrows == true, "set altrows test.");
+            });
+
+            test("groupable property test", function () {
+                // get groupable.
+                var groupable = $('#jqxgrid').jqxGrid('groupable');
+                ok(groupable == false, "get groupable test.");
+
+                // set groupable.
+                $('#jqxgrid').jqxGrid({ groupable: true });
+                var groupable = $('#jqxgrid').jqxGrid('groupable');
+                ok(groupable == true, "set groupable test.");
+
+                var $groupsheader = $('#groupsheader')
+                var isvisible = false;
+                if ($groupsheader.css('visibility') == 'visible') {
+                    isvisible = true;
+                }
+                ok(isvisible == true, "isvisible test.");
+                ok($groupsheader.height() == $('#jqxgrid').jqxGrid('groupsheaderheight'), 'group header height test');
+            });
+
+            module("Module Methods");
+
+            test("addgroup and removegroup functions test", function () {
+                $('#jqxgrid').jqxGrid('addgroup', 'firstname');
+                var groups = $('#jqxgrid').jqxGrid('groups');
+                ok(groups.length == 1, 'groups add test.');
+
+                var groups = $('#jqxgrid').jqxGrid('getrootgroupscount');
+                ok(groups > 1, 'groups count after add test.');
+
+                $('#jqxgrid').jqxGrid('removegroup', 'firstname');
+                var groups = $('#jqxgrid').jqxGrid('groups');
+                ok(groups.length == 0, 'groups remove test.');
+
+                var groups = $('#jqxgrid').jqxGrid('getrootgroupscount');
+                ok(groups == 0, 'groups count after remove test.');
+            });
+
+            test("sortby function test", function () {
+                var cell = $("#jqxgrid").jqxGrid('getrenderedcell', 0, 'firstname');
+                var celllastname = $("#jqxgrid").jqxGrid('getrenderedcell', 0, 'lastname');
+                var cellproductname = $("#jqxgrid").jqxGrid('getrenderedcell', 0, 'productname');
+                $('#jqxgrid').jqxGrid('sortby', 'firstname', 'asc');
+                var newcell = $("#jqxgrid").jqxGrid('getrenderedcell', 0, 'firstname');
+                var newcelllastname = $("#jqxgrid").jqxGrid('getrenderedcell', 0, 'lastname');
+                var newcellproductname = $("#jqxgrid").jqxGrid('getrenderedcell', 0, 'lastname');
+                ok(cell.value != newcell.value || celllastname.value != newcelllastname.value || cellproductname.value != newcellproductname.value, 'sortby test.');
+
+                // test sort order.
+                var newcell2 = $("#jqxgrid").jqxGrid('getrenderedcell', 9, 'firstname');
+                var newcelllastname2 = $("#jqxgrid").jqxGrid('getrenderedcell', 9, 'lastname');
+                ok(newcell.value < newcell2.value, 'sortby sort order asc test.');
+
+                $('#jqxgrid').jqxGrid('sortby', 'firstname', 'desc');
+                var cell = $("#jqxgrid").jqxGrid('getrenderedcell', 0, 'firstname');
+                var newcell2 = $("#jqxgrid").jqxGrid('getrenderedcell', 9, 'firstname');
+                ok(cell.value > newcell2.value, 'sortby sort order desc test.');
+
+                var sortcells = $('#jqxgrid').find('.jqx-grid-cell-sort');
+                ok(sortcells.length > 0, 'sort render test.');
+            });
+
+            test("removesort function test", function () {
+                $('#jqxgrid').jqxGrid('removesort');
+                var sortcells = $('#jqxgrid').find('.jqx-grid-cell-sort');
+                ok(sortcells.length == 0, 'removesort test.');
+            });
+
+            test("getcell function test", function () {
+                var cell = $('#jqxgrid').jqxGrid('getcell', 0, 'firstname');
+                ok(cell != null && cell.value.length > 0, "get cell test");
+
+                var cell = $('#jqxgrid').jqxGrid('getcell', 35, 'firstname');
+                ok(cell == null, "get cell test with invalid row index");
+            });
+
+            test("getrowdata function test", function () {
+                var row = $('#jqxgrid').jqxGrid('getrowdata', 0);
+                ok(row != null, "get row test");
+
+                var row = $('#jqxgrid').jqxGrid('getrowdata', 35);
+                ok(row == null, "get row test with invalid row index");
+            });
+
+            test("addrow function test", function () {
+                var row = generaterow();
+                var datainfo = $('#jqxgrid').jqxGrid('getdatainformation');
+                $('#jqxgrid').jqxGrid('addrow', 'id', row);
+
+                var newdatainfo = $('#jqxgrid').jqxGrid('getdatainformation');
+                ok(datainfo.rowscount < newdatainfo.rowscount, "addrow test");
+
+                var cell = $('#jqxgrid').jqxGrid('getcell', datainfo.rowscount, 'firstname');
+                ok(cell.value == row['firstname'], "new row position test");
+
+                var row = generaterow();
+                var datainfo = $('#jqxgrid').jqxGrid('getdatainformation');
+                $('#jqxgrid').jqxGrid('addrow', 'id1', row, 'top');
+
+                var newdatainfo = $('#jqxgrid').jqxGrid('getdatainformation');
+                ok(datainfo.rowscount < newdatainfo.rowscount, "add a row at top test");
+
+                var cell = $('#jqxgrid').jqxGrid('getcell', 0, 'firstname');
+                ok(cell.value == row['firstname'], "new row at top position test");
+            });
+
+            test("deleterow function test", function () {
+                var datainfo = $('#jqxgrid').jqxGrid('getdatainformation');
+                var rowid = $('#jqxgrid').jqxGrid('getrowid', 0);
+                $('#jqxgrid').jqxGrid('deleterow', rowid);
+                var newrowid = $('#jqxgrid').jqxGrid('getrowid', 0);
+                ok(rowid != newrowid, "delete row test");
+
+                var newdatainfo = $('#jqxgrid').jqxGrid('getdatainformation');
+                ok(datainfo.rowscount > newdatainfo.rowscount, "rows count after delete test");
+            });
+
+            test("updaterow function test", function () {
+                var rowid = $('#jqxgrid').jqxGrid('getrowid', 0);
+                var firstname = $('#jqxgrid').jqxGrid('getcell', 0, 'firstname').value;
+                var lastname = $('#jqxgrid').jqxGrid('getcell', 0, 'lastname').value;
+                var row = generaterow();
+                $('#jqxgrid').jqxGrid('updaterow', rowid, row);
+                var newfirstname = $('#jqxgrid').jqxGrid('getcell', 0, 'firstname').value;
+                var newlastname = $('#jqxgrid').jqxGrid('getcell', 0, 'lastname').value;
+                ok(firstname != newfirstname || lastname != newlastname, "update row test");
+            });
+
+            test("selectrow function test", function () {
+                $('#jqxgrid').jqxGrid('selectrow', 0);
+                var selectedrow = $('#jqxgrid').jqxGrid('getselectedrowindex');
+                ok(0 == selectedrow, "selectrow test.");
+            });
+
+            test("unselectrow function test", function () {
+                $('#jqxgrid').jqxGrid('selectrow', 0);
+                $('#jqxgrid').jqxGrid('unselectrow', 0);
+                var selectedrow = $('#jqxgrid').jqxGrid('getselectedrowindex');
+                ok(-1 == selectedrow, "unselectrow test.");
+            });
+
+            test("clearselection function test", function () {
+                $('#jqxgrid').jqxGrid('selectrow', 0);
+                $('#jqxgrid').jqxGrid('clearselection');
+                var selectedrow = $('#jqxgrid').jqxGrid('getselectedrowindex');
+                ok(-1 == selectedrow, "clearselection test.");
+            });
+
+            test("setrowheight function test", function () {
+                $('#jqxgrid').jqxGrid('setrowheight', 0, 200);
+                var rowheight = $('#jqxgrid').jqxGrid('getrowheight', 0);
+                ok(rowheight == 200, "setrowheight test.");
+                $('#jqxgrid').jqxGrid('setrowheight', 0, 25);
+                var rowheight = $('#jqxgrid').jqxGrid('getrowheight', 0);
+                ok(rowheight == 25, "setrowheight test after changing the same row's height.");
+            });
+
+            test("setcolumntext function test", function () {
+                $('#jqxgrid').jqxGrid('setcolumnproperty', 'firstname', 'text', 'FirstName');
+                var text = $('#jqxgrid').jqxGrid('getcolumnproperty', 'firstname', 'text');
+                ok(text == "FirstName", "setcolumnproperty function test.");
+            });
+
+            test("hidecolumn function test", function () {
+                $('#jqxgrid').jqxGrid('hidecolumn', 'firstname');
+                var visible = $('#jqxgrid').jqxGrid('iscolumnvisible', 'firstname');
+                ok(visible == false, "hidecolumn test.");
+
+                $('#jqxgrid').jqxGrid('showcolumn', 'firstname');
+                var visible = $('#jqxgrid').jqxGrid('iscolumnvisible', 'firstname');
+                ok(visible == true, "showcolumn test.");
+            });
+
+            test("setcolumnalign function test", function () {
+                $('#jqxgrid').jqxGrid('setcolumnproperty', 'firstname', 'align', 'right');
+
+                var align = $('#jqxgrid').jqxGrid('getcolumnproperty', 'firstname', 'align');
+                ok(align == 'right', "setcolumnalign test.");
+            });
+
+            test("setcolumnwidth function test", function () {
+                $('#jqxgrid').jqxGrid('setcolumnproperty', 'firstname', 'width', 250);
+
+                var columnwidth = $('#jqxgrid').jqxGrid('getcolumnproperty', 'firstname', 'width');
+                ok(columnwidth == 250, "setcolumn width test.");
+
+                $('#jqxgrid').jqxGrid('setcolumnproperty', 'firstname', 'width', 100);
+                var columnwidth = $('#jqxgrid').jqxGrid('getcolumnproperty', 'firstname', 'width');
+                ok(columnwidth == 100, "reset column width test.");
+            });
+
+            test("expandgroup and collapsegroup functions test", function () {
+                $('#jqxgrid').jqxGrid('addgroup', 'firstname');
+                $('#jqxgrid').jqxGrid('expandgroup', 0);
+                var group = $('#jqxgrid').jqxGrid('getgroup', 0);
+                ok(group.expanded == true, "expandgroup test.");
+
+                $('#jqxgrid').jqxGrid('collapsegroup', 0);
+                var group = $('#jqxgrid').jqxGrid('getgroup', 0);
+                ok(group.expanded == false, "collapsegroup test.");
+                $('#jqxgrid').jqxGrid('removegroup', 'firstname');
+            });
+
+            test("showrow and hiderow functions test", function () {
+                $('#jqxgrid').jqxGrid('hiderow', 0);
+                var hidden = $('#jqxgrid').jqxGrid('isrowhiddenat', 0);
+                ok(hidden, "hiderow test.");
+                $('#jqxgrid').jqxGrid('showrow', 0);
+                var hidden = $('#jqxgrid').jqxGrid('isrowhiddenat', 0);
+                ok(!hidden, "show test.");
+            });
+
+            var xmldataurl = "../../demos/sampledata/orders.xml";
+            // prepare the data
+            var source =
+            {
+                datatype: "xml",
+                datafields: [
+                    { name: 'ShippedDate', map: 'm\\:properties>d\\:ShippedDate', type: 'date' },
+                    { name: 'Freight', map: 'm\\:properties>d\\:Freight', type: 'float' },
+                    { name: 'ShipName', map: 'm\\:properties>d\\:ShipName' },
+                    { name: 'ShipAddress', map: 'm\\:properties>d\\:ShipAddress' },
+                    { name: 'ShipCity', map: 'm\\:properties>d\\:ShipCity' },
+                    { name: 'ShipCountry', map: 'm\\:properties>d\\:ShipCountry' }
+                ],
+                root: "entry",
+                record: "content",
+                id: 'm\\:properties>d\\:OrderID',
+                url: xmldataurl
+            };
+
+            $("#jqxgrid2").jqxGrid(
+            {
+                width: 670,
+                source: source,
+                sortable: true,
+                pageable: true,
+                columns: [
+                  { text: 'Ship Name', datafield: 'ShipName', width: 250 },
+                  { text: 'Shipped Date', datafield: 'ShippedDate', width: 230, cellsformat: 'D' },
+                  { text: 'Freight', datafield: 'Freight', width: 130, cellsformat: 'F2', cellsalign: 'right' },
+                  { text: 'Ship Address', datafield: 'ShipAddress', width: 350 },
+                  { text: 'Ship City', datafield: 'ShipCity', width: 100 },
+                  { text: 'Ship Country', datafield: 'ShipCountry', width: 101 }
+                ]
+            });
+
+            module("Module Properties");
+
+            $('#jqxgrid2').on('bindingcomplete', function () {
+                test("data loaded test", function () {
+                    // get rowdata.
+                    var rowdata = $('#jqxgrid2').jqxGrid('getrowdata', 0);
+                    ok(rowdata["ShipName"] == "Vins et alcools Chevalier", "data loaded test");
+                    ok(true, "bindingcomplete test");
+                });
+
+                test("data formatting test", function () {
+                    // get cell.
+                    var cell = $('#jqxgrid2').jqxGrid('getcell', 0, "ShippedDate");
+                    var datetext = $('#jqxgrid2').find('.jqx-grid-cell')[1].innerText;
+                    var date = new Date(datetext);
+                    ok(cell.value.getDate() == date.getDate() && cell.value.getMonth() == date.getMonth(), "date cells test");
+
+                    var cellvalue = $('#jqxgrid2').jqxGrid('getcell', 0, "Freight").value;
+                    var freighttext = $('#jqxgrid2').find('.jqx-grid-cell')[2].innerText;
+                    ok(parseFloat(freighttext) == parseFloat(cellvalue), "float cells test");
+                });
+            });
+            module("Module Events");
+            test("rowselect test", function () {
+                var selectrow = false;
+                $("#jqxgrid").on('rowselect', function () {
+                    selectrow = true;
+                });
+
+                $('#jqxgrid').jqxGrid('selectrow', 0);
+                ok(selectrow == true, "rowselect test");
+
+                $("#jqxgrid").off('rowselect');
+            });
+
+            test("rowunselect test", function () {
+                var selectrow = false;
+                $("#jqxgrid").on('rowunselect', function () {
+                    selectrow = true;
+                });
+
+                $('#jqxgrid').jqxGrid('selectrow', 0);
+                $('#jqxgrid').jqxGrid('unselectrow', 0);
+                ok(selectrow == true, "rowunselect test");
+
+                $("#jqxgrid").off('rowunselect');
+            });
+        });
+    </script>
+</head>
+<body>
+    <div>
+        <h1 id="qunit-header">
+            QUnit example</h1>
+        <h2 id="qunit-banner">
+        </h2>
+        <div id="qunit-testrunner-toolbar">
+        </div>
+        <h2 id="qunit-userAgent">
+        </h2>
+        <ol id="qunit-tests">
+        </ol>
+        <div id="qunit-fixture">
+            test markup, will be hidden</div>
+    </div>
+    <div style="display: none;" id="jqxgrid">
+    </div>
+    <div style="display: none;" id="jqxgrid2">
+    </div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="../../Styles/Site.css" media="screen" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.web.css" media="screen" />
+    <link rel="stylesheet" href="../../styles/qunit-git.css" media="screen" />
+    <script type="text/javascript" src="../../scripts/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../../scripts/qunit-git.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#jqxbuttons').jqxButton({ width: '250px', height: '30px' });
+            $('#jqxbuttons').css('visibility', 'hidden');
+
+            module("Module Properties");
+
+            test("width property test", function () {
+                // get width.
+                var width = $('#jqxbuttons').jqxButton('width');
+                ok(width == "250px", "get width test.");
+
+                // set width.
+                $('#jqxbuttons').jqxButton({ width: "300px" });
+                width = $('#jqxbuttons').jqxButton('width');
+                ok(width == "300px", "set width test.");
+            });
+
+            test("height property test", function () {
+                // get height.
+                var height = $('#jqxbuttons').jqxButton('height');
+                ok(height == "30px", "get height test.");
+
+                // set height.
+                $('#jqxbuttons').jqxButton({ height: "50px" });
+                height = $('#jqxbuttons').jqxButton('height');
+                ok(height == "50px", "set height test.");
+            });
+
+            test("disabled property test", function () {
+                // get disabled.
+                var disabled = $('#jqxbuttons').jqxButton('disabled');
+                ok(disabled == false, "get disabled test.");
+
+                // set disabled.
+                $('#jqxbuttons').jqxButton({ disabled: true });
+                var newDisabled = $('#jqxbuttons').jqxButton('disabled');
+                ok(newDisabled == true, "set disabled test.");
+
+            });
+
+
+            module("Module Methods");
+
+
+
+            module("Module Events");
+
+
+        });
+    </script>
+</head>
+<body>
+    <input type="button" id='jqxbuttons' value='Button' />
+    <br />
+    <br />
+    <div>
+        <h1 id="qunit-header">
+            QUnit example</h1>
+        <h2 id="qunit-banner">
+        </h2>
+        <div id="qunit-testrunner-toolbar">
+        </div>
+        <h2 id="qunit-userAgent">
+        </h2>
+        <ol id="qunit-tests">
+        </ol>
+        <div id="qunit-fixture">
+            test markup, will be hidden</div>
+    </div>
+</body>
+</html>

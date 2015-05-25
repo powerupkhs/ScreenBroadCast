@@ -1,0 +1,55 @@
+<% 
+    if(typeof whoami !== 'undefined') {
+%> 
+        <div class="login_form">
+            <h3 class="headerbar"><span class="title">login</span></h3>
+            <form method="post" action="logout">
+        		<table style="padding:10px;">
+        			<tr>
+        				<td colspan="3" style="font-size:12px">
+                            <%= whoami %>님 환영합니다
+        				</td>
+        			</tr>
+        			<tr>
+        				<td colspan="3">
+        					<input type="submit" value="로그아웃" class="formbutton" />
+        				</td>
+        			</tr>
+        		</table>
+        	</form>
+        </div>
+<%
+    }
+    else {
+%>
+        <div class="login_form">
+            <h3 class="headerbar"><span class="title">LOGIN</span></h3>
+        	<form method="post" action="login">
+        		<table style="padding:10px;">
+        			<tr>
+        				<th>ID : </th>
+        				<td><input type="text" name="id" tabindex="1" /></td>
+        				<td rowspan="2"><input type="submit" value="로그인" tabindex="3" class="login_button" /></td>
+        			</tr>
+        			<tr>
+        				<th>PW : </th>
+        				<td><input type="password" name="password" tabindex="2" /></td>
+        			</tr>
+        			<tr>
+        				<td colspan="3">
+        					<input type="checkbox" name="login_option" value="maintain" /> <span style="font-size:12px">아이디 저장</span> 
+        					<input type="checkbox" name="login_option" value="security" /> <span style="font-size:12px">보안 접속</span>
+        				</td>
+        			</tr>
+        			<tr>
+        				<td colspan="3">
+        					<input type="button" value="회원가입" onclick="window.location.href='/JoinMember'" class="formbutton" />
+        					<input type="button" value="ID/PW찾기" class="formbutton" />
+        				</td>
+        			</tr>
+        		</table>
+        	</form>
+        </div>
+<%
+    }
+%>

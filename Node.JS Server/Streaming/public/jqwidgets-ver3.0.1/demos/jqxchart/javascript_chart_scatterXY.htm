@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+<head>
+    <title id='Description'>jqxChart Scatter Series Example</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            // prepare chart data as an array
+            var sampleData = [
+                    { City: 'New York', SalesQ1: 330500, SalesQ2: 210500, YoYGrowth: 1.05 },
+                    { City: 'London', SalesQ1: 120000, SalesQ2: 169000, YoYGrowth: 1.15 },
+                    { City: 'Paris', SalesQ1: 205000, SalesQ2: 275500, YoYGrowth: 1.45 },
+                    { City: 'Tokyo', SalesQ1: 187000, SalesQ2: 130100, YoYGrowth: 0.45 },
+                    { City: 'Berlin', SalesQ1: 187000, SalesQ2: 113000, YoYGrowth: 1.65 },
+                    { City: 'San Francisco', SalesQ1: 142000, SalesQ2: 102000, YoYGrowth: 1.25 },
+                    { City: 'Chicago', SalesQ1: 171000, SalesQ2: 124000, YoYGrowth: 0.75 }
+                ];
+
+            // prepare jqxChart settings
+            var settings = {
+                title: "Sales by City in Q1 & Q2",
+                description: "",
+                enableAnimations: true,
+                showLegend: true,
+                padding: { left: 5, top: 5, right: 5, bottom: 5 },
+                titlePadding: { left: 90, top: 0, right: 0, bottom: 10 },
+                source: sampleData,
+                categoryAxis:
+                    {
+                        dataField: 'City',
+                        valuesOnTicks: false
+                    },
+                colorScheme: 'scheme04',
+                seriesGroups:
+                    [
+                        {
+                            type: 'scatter',
+                            valueAxis:
+                            {
+                                unitInterval: 50000,
+                                minValue: 50000,
+                                maxValue: 350000,
+                                description: 'Sales ($)',
+                                formatSettings: { prefix: '$', thousandsSeparator: ',' }
+                            },
+                            series: [
+                                    { dataField: 'SalesQ1', radius: 5, displayText: 'Sales in Q1', color: '#1100EE' },
+                                    { dataField: 'SalesQ2', radius: 5, displayText: 'Sales in Q2', color: '#EE0011' }
+                                ]
+                        }
+                    ]
+            };
+
+            // setup the chart
+            $('#jqxChart').jqxChart(settings);
+
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxChart' style="width: 680px; height: 400px">
+    </div>
+</body>
+</html>

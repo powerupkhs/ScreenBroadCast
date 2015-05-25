@@ -1,0 +1,247 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <link rel="stylesheet" href="../../Styles/qunit-git.css" media="screen" />
+    <script type="text/javascript" src="../../Scripts/qunit-git.js"></script>
+    <script>
+        $(document).ready(function () {
+            var items = ['item1', 'item2', 'item3', 'item4', 'item5'];
+            $('#jqxDropDownList').jqxDropDownList({ source: items, width: '250px', height: '25px' });
+            $('#jqxDropDownList').css('display', 'none');
+            module("Module Properties");
+
+            test("disabled property test", function () {
+                // get disabled.
+                var disabled = $('#jqxDropDownList').jqxDropDownList('disabled');
+                ok(disabled == false, "get disabled test.");
+
+                // set disabled.
+                $('#jqxDropDownList').jqxDropDownList({ disabled: true });
+                var newDisabled = $('#jqxDropDownList').jqxDropDownList('disabled');
+                ok(newDisabled == true, "set disabled test.");
+
+                // reset disabled to false
+                $('#jqxDropDownList').jqxDropDownList({ disabled: false });
+            });
+
+            test("width property test", function () {
+                // get width.
+                var width = $('#jqxDropDownList').jqxDropDownList('width');
+                ok(width == "250px", "get width test.");
+
+                // set width.
+                $('#jqxDropDownList').jqxDropDownList({ width: "300px" });
+                width = $('#jqxDropDownList').jqxDropDownList('width');
+                ok(width == "300px", "set width test.");
+            });
+
+            test("height property test", function () {
+                // get height.
+                var height = $('#jqxDropDownList').jqxDropDownList('height');
+                ok(height == "25px", "get height test.");
+
+                // set height.
+                $('#jqxDropDownList').jqxDropDownList({ height: "50px" });
+                height = $('#jqxDropDownList').jqxDropDownList('height');
+                ok(height == "50px", "set height test.");
+            });
+
+            test("selectedIndex property test", function () {
+                // get selectedIndex.
+                var selectedIndex = $('#jqxDropDownList').jqxDropDownList('selectedIndex');
+                ok(selectedIndex == "-1", "get selectedIndex test.");
+
+                // set selectedIndex.
+                $('#jqxDropDownList').jqxDropDownList({ selectedIndex: "2" });
+                selectedIndex = $('#jqxDropDownList').jqxDropDownList('selectedIndex');
+                ok(selectedIndex == "2", "set selectedIndex test.");
+            });
+
+            test("scrollBarSize property test", function () {
+                // get scrollBarSize.
+                var scrollBarSize = $('#jqxDropDownList').jqxDropDownList('scrollBarSize');
+                ok(scrollBarSize == 15, "get scrollBarSize test.");
+
+                // set scrollBarSize.
+                $('#jqxDropDownList').jqxDropDownList({ scrollBarSize: 30 });
+                scrollBarSize = $('#jqxDropDownList').jqxDropDownList('scrollBarSize');
+                ok(scrollBarSize == 30, "set scrollBarSize test.");
+            });
+
+            test("arrowSize property test", function () {
+                // get arrowSize.
+                var arrowSize = $('#jqxDropDownList').jqxDropDownList('arrowSize');
+                ok(arrowSize == 19, "get arrowSize test.");
+
+                // set arrowSize.
+                $('#jqxDropDownList').jqxDropDownList({ arrowSize: 30 });
+                arrowSize = $('#jqxDropDownList').jqxDropDownList('arrowSize');
+                ok(arrowSize == 30, "set arrowSize test.");
+            });
+
+            test("enableHover property test", function () {
+                // get enableHover.
+                var enableHover = $('#jqxDropDownList').jqxDropDownList('enableHover');
+                ok(enableHover == true, "get enableHover test.");
+
+                // set enableHover.
+                $('#jqxDropDownList').jqxDropDownList({ enableHover: false });
+                enableHover = $('#jqxDropDownList').jqxDropDownList('enableHover');
+                ok(enableHover == false, "set enableHover test.");
+            });
+
+            test("enableSelection property test", function () {
+                // get enableSelection.
+                var enableSelection = $('#jqxDropDownList').jqxDropDownList('enableSelection');
+                ok(enableSelection == true, "get enableSelection test.");
+
+                // set enableSelection.
+                $('#jqxDropDownList').jqxDropDownList({ enableSelection: false });
+                enableSelection = $('#jqxDropDownList').jqxDropDownList('enableSelection');
+                ok(enableSelection == false, "set enableSelection test.");
+            });
+
+            test("equalItemsWidth property test", function () {
+                // get equalItemsWidth.
+                var equalItemsWidth = $('#jqxDropDownList').jqxDropDownList('equalItemsWidth');
+                ok(equalItemsWidth == true, "get equalItemsWidth test.");
+
+                // set equalItemsWidth.
+                $('#jqxDropDownList').jqxDropDownList({ equalItemsWidth: false });
+                equalItemsWidth = $('#jqxDropDownList').jqxDropDownList('equalItemsWidth');
+                ok(equalItemsWidth == false, "set equalItemsWidth test.");
+            });
+
+            test("itemHeight property test", function () {
+                // get itemHeight.
+                var itemHeight = $('#jqxDropDownList').jqxDropDownList('itemHeight');
+                ok(itemHeight == -1, "get itemHeight test.");
+
+                // set itemHeight.
+                $('#jqxDropDownList').jqxDropDownList({ itemHeight: 3 });
+                itemHeight = $('#jqxDropDownList').jqxDropDownList('itemHeight');
+                ok(itemHeight == 3, "set itemHeight test.");
+            });
+
+            test("openDelay property test", function () {
+                // get openDelay.
+                var openDelay = $('#jqxDropDownList').jqxDropDownList('openDelay');
+                ok(openDelay == 250, "get openDelay test.");
+
+                // set openDelay.
+                $('#jqxDropDownList').jqxDropDownList({ openDelay: 500 });
+                openDelay = $('#jqxDropDownList').jqxDropDownList('openDelay');
+                ok(openDelay == 500, "set openDelay test.");
+            });
+
+            test("emptyGroupText property test", function () {
+                // get emptyGroupText.
+                var emptyGroupText = $('#jqxDropDownList').jqxDropDownList('emptyGroupText');
+                ok(emptyGroupText == "Group", "get emptyGroupText test.");
+
+                // set emptyGroupText.
+                $('#jqxDropDownList').jqxDropDownList({ emptyGroupText: "ComboBox" });
+                emptyGroupText = $('#jqxDropDownList').jqxDropDownList('emptyGroupText');
+                ok(emptyGroupText == "ComboBox", "set emptyGroupText test.");
+            });
+
+            test("closeDelay property test", function () {
+                // get closeDelay.
+                var closeDelay = $('#jqxDropDownList').jqxDropDownList('closeDelay');
+                ok(closeDelay == 300, "get closeDelay test.");
+
+                // set closeDelay.
+                $('#jqxDropDownList').jqxDropDownList({ closeDelay: 300 });
+                closeDelay = $('#jqxDropDownList').jqxDropDownList('closeDelay');
+                ok(closeDelay == 300, "set closeDelay test.");
+            });
+
+            test("dropDownWidth property test", function () {
+                // get dropDownWidth.
+                var dropDownWidth = $('#jqxDropDownList').jqxDropDownList('dropDownWidth');
+                ok(dropDownWidth == "auto", "get dropDownWidth test.");
+
+                // set dropDownWidth.
+                $('#jqxDropDownList').jqxDropDownList({ dropDownWidth: 300 });
+                dropDownWidth = $('#jqxDropDownList').jqxDropDownList('dropDownWidth');
+                ok(dropDownWidth == 300, "set dropDownWidth test.");
+            });
+
+            test("dropDownHeight property test", function () {
+                // get dropDownHeight.
+                var dropDownHeight = $('#jqxDropDownList').jqxDropDownList('dropDownHeight');
+                ok(dropDownHeight == "200px", "get dropDownHeight test.");
+
+                // set dropDownHeight.
+                $('#jqxDropDownList').jqxDropDownList({ dropDownHeight: "300px" });
+                dropDownHeight = $('#jqxDropDownList').jqxDropDownList('dropDownHeight');
+                ok(dropDownHeight == "300px", "set dropDownHeight test.");
+            });
+
+            test("enableBrowserBoundsDetection property test", function () {
+                // get enableBrowserBoundsDetection.
+                var enableBrowserBoundsDetection = $('#jqxDropDownList').jqxDropDownList('enableBrowserBoundsDetection');
+                ok(enableBrowserBoundsDetection == false, "get enableBrowserBoundsDetection test.");
+
+                // set enableBrowserBoundsDetection.
+                $('#jqxDropDownList').jqxDropDownList({ enableBrowserBoundsDetection: true });
+                enableBrowserBoundsDetection = $('#jqxDropDownList').jqxDropDownList('enableBrowserBoundsDetection');
+                ok(enableBrowserBoundsDetection == true, "set enableBrowserBoundsDetection test.");
+            });
+
+            module("Module Methods");
+
+            test("disableAt method test", function () {
+                // disable item
+                $('#jqxDropDownList').jqxDropDownList('disableAt', 2);
+                var item = $('#jqxDropDownList').jqxDropDownList('getItem', 2);
+                ok(item.disabled == true, 'disableAt method test');
+            });
+
+            test("enableAt method test", function () {
+                // enable item
+                $('#jqxDropDownList').jqxDropDownList('enableAt', 2);
+                var item = $('#jqxDropDownList').jqxDropDownList('getItem', 2);
+                ok(item.disabled == false, 'enableAt method test');
+            });
+            module("Module Events");
+            test("selection event test", function () {
+                var selection = false;
+                $('#jqxDropDownList').on('select', function () {
+                    selection = true;
+                });
+
+                $('#jqxDropDownList').jqxDropDownList({ selectedIndex: 0 });
+                ok(selection == true, 'select event test');
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id='jqxDropDownList'>
+    </div>
+    <br />
+    <br />
+    <div>
+        <h1 id="qunit-header">
+            QUnit example</h1>
+        <h2 id="qunit-banner">
+        </h2>
+        <div id="qunit-testrunner-toolbar">
+        </div>
+        <h2 id="qunit-userAgent">
+        </h2>
+        <ol id="qunit-tests">
+        </ol>
+        <div id="qunit-fixture">
+            test markup, will be hidden</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">Custom Rows Selection</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.edit.js"></script>  
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.pager.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.sort.js"></script>      
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../scripts/gettheme.js"></script>
+     <script type="text/javascript">
+         $(document).ready(function () {
+             var theme = getDemoTheme();
+
+             // prepare the data
+             var data = preparegriddata(200);
+
+             var source =
+            {
+                localdata: data,
+                datatype: "array",
+                datafields:
+                [
+                    { name: 'firstname', type: 'string' },
+                    { name: 'lastname', type: 'string' },
+                    { name: 'productname', type: 'string' },
+                    { name: 'available', type: 'bool' },
+                    { name: 'quantity', type: 'number' }
+                ],
+                updaterow: function (rowid, rowdata, commit) {
+                    // synchronize with the server - send update command   
+                    commit(true);
+                }
+            };
+
+             var dataAdapter = new $.jqx.dataAdapter(source);
+             var columnCheckBox = null;
+             var updatingCheckState = false;
+
+             // initialize jqxGrid. Disable the built-in selection.
+            $("#jqxgrid").jqxGrid(
+            {
+                source: dataAdapter,
+                editable: true,
+                theme: theme,
+                enablehover: false,
+                selectionmode: 'none',
+                pageable: true,
+                sortable: true,
+                autoheight: true,
+                columns: [
+                  {
+                      text: '', menu: false, sortable: false,
+                      datafield: 'available', columntype: 'checkbox', width: 40,
+                      renderer: function () {
+                          return '<div style="margin-left: 10px; margin-top: 5px;"></div>';
+                      },
+                      rendered: function (element) {
+                          $(element).jqxCheckBox({ theme: theme, width: 16, height: 16, animationShowDelay: 0, animationHideDelay: 0 });
+                          columnCheckBox = $(element);
+                          $(element).on('change', function (event) {
+                              var checked = event.args.checked;
+                              var pageinfo = $("#jqxgrid").jqxGrid('getpaginginformation');
+                              var pagenum = pageinfo.pagenum;
+                              var pagesize = pageinfo.pagesize;
+                              if (checked == null || updatingCheckState) return;
+                              $("#jqxgrid").jqxGrid('beginupdate');
+
+                              // select all rows when the column's checkbox is checked.
+                              if (checked) {
+                                  $("#jqxgrid").jqxGrid('selectallrows');
+                              }
+                              // unselect all rows when the column's checkbox is checked.
+                              else if (checked == false) {
+                                  $("#jqxgrid").jqxGrid('clearselection');
+                              }
+
+                              // update cells values.
+                              var startrow = pagenum * pagesize;
+                              for (var i = startrow; i < startrow + pagesize; i++) {
+                                  // The bound index represents the row's unique index. 
+                                  // Ex: If you have rows A, B and C with bound indexes 0, 1 and 2, afer sorting, the Grid will display C, B, A i.e the C's bound index will be 2, but its visible index will be 0.
+                                  // The code below gets the bound index of the displayed row and updates the value of the row's available column.
+                                  var boundindex = $("#jqxgrid").jqxGrid('getrowboundindex', i);
+                                  $("#jqxgrid").jqxGrid('setcellvalue', boundindex, 'available', event.args.checked);
+                              }
+
+                              $("#jqxgrid").jqxGrid('endupdate');
+                          });
+                          return true;
+                      }
+                  },
+                  { text: 'First Name', editable: false, datafield: 'firstname', width: 90 },
+                  { text: 'Last Name', editable: false, datafield: 'lastname', width: 90 },
+                  { text: 'Product', editable: false, datafield: 'productname', width: 200 },
+                  { text: 'Quantity', editable: false, datafield: 'quantity' }
+               ]
+            });
+
+            var updatePageState = function (pagenum) {
+                var datainfo = $("#jqxgrid").jqxGrid('getdatainformation');
+                var pagenum = datainfo.paginginformation.pagenum;
+                var pagesize = datainfo.paginginformation.pagesize;
+                var startrow = pagenum * pagesize;
+                // select the rows on the page.
+                $("#jqxgrid").jqxGrid('beginupdate');
+                var checkedItemsCount = 0;
+                for (var i = startrow; i < startrow + pagesize; i++) {
+                    var boundindex = $("#jqxgrid").jqxGrid('getrowboundindex', i);
+                    var value = $("#jqxgrid").jqxGrid('getcellvalue', boundindex, 'available');
+                    if (value) checkedItemsCount++;
+                    if (value) {
+                        $("#jqxgrid").jqxGrid('selectrow', boundindex);
+                    }
+                    else {
+                        $("#jqxgrid").jqxGrid('unselectrow', boundindex);
+                    }
+                }
+
+                $("#jqxgrid").jqxGrid('endupdate');
+                if (checkedItemsCount == pagesize) {
+                    columnCheckBox.jqxCheckBox({ checked: true });
+                }
+                else if (checkedItemsCount == 0) {
+                    columnCheckBox.jqxCheckBox({ checked: false });
+                }
+                else {
+                    columnCheckBox.jqxCheckBox({ checked: null });
+                }
+            }
+
+            // update the selection after sort.
+            $("#jqxgrid").on('sort', function (event) {
+                updatePageState();
+            });
+
+             // update the selection after page change.
+            $("#jqxgrid").on('pagechanged', function (event) {
+                 updatePageState();
+             });
+
+             // select or unselect rows when a checkbox is checked or unchecked. 
+             $("#jqxgrid").on('cellvaluechanged', function (event) {
+                 if (event.args.value) {
+                     $("#jqxgrid").jqxGrid('selectrow', event.args.rowindex);
+                 }
+                 else {
+                     $("#jqxgrid").jqxGrid('unselectrow', event.args.rowindex);
+                 }
+
+                 // update the state of the column's checkbox. When all checkboxes on the displayed page are checked, we need to check column's checkbox. We uncheck it,
+                 // when there are no checked checkboxes on the page and set it to intederminate state when there is at least one checkbox checked on the page.  
+                 if (columnCheckBox) {
+                     var datainfo = $("#jqxgrid").jqxGrid('getdatainformation');
+                     var pagesize = datainfo.paginginformation.pagesize;
+                     var pagenum = datainfo.paginginformation.pagenum;
+                     var selectedRows = $("#jqxgrid").jqxGrid('getselectedrowindexes');
+                     var state = false;
+                     var count = 0;
+                     $.each(selectedRows, function () {
+                         if (pagenum * pagesize <= this && this < pagenum * pagesize + pagesize) {
+                             count++;
+                         }
+                     });
+
+                     if (count != 0) state = null;
+                     if (count == pagesize) state = true;
+                     if (count == 0) state = false;
+                     
+                     updatingCheckState = true;
+                     $(columnCheckBox).jqxCheckBox({ checked: state });
+
+                     updatingCheckState = false;
+                 }
+             });
+         });
+
+        function preparegriddata(rowscount) {
+            // prepare the data
+            var data = new Array();
+            var firstNames =
+            [
+                "Andrew", "Nancy", "Shelley", "Regina", "Yoshi", "Antoni", "Mayumi", "Ian", "Peter", "Lars", "Petra", "Martin", "Sven", "Elio", "Beate", "Cheryl", "Michael", "Guylene"
+            ];
+
+             var lastNames =
+            [
+                "Fuller", "Davolio", "Burke", "Murphy", "Nagase", "Saavedra", "Ohno", "Devling", "Wilson", "Peterson", "Winkler", "Bein", "Petersen", "Rossi", "Vileid", "Saylor", "Bjorn", "Nodier"
+            ];
+
+            var productNames =
+            [
+                "Black Tea", "Green Tea", "Caffe Espresso", "Doubleshot Espresso", "Caffe Latte", "White Chocolate Mocha", "Caramel Latte", "Caffe Americano", "Cappuccino", "Espresso Truffle", "Espresso con Panna", "Peppermint Mocha Twist"
+            ];
+          
+            for (var i = 0; i < rowscount; i++) {
+                var row = {};
+                var productindex = Math.floor(Math.random() * productNames.length);
+                var quantity = 1 + Math.round(Math.random() * 10);
+
+                row["available"] = false;
+                row["firstname"] = firstNames[Math.floor(Math.random() * firstNames.length)];
+                row["lastname"] = lastNames[Math.floor(Math.random() * lastNames.length)];
+                row["productname"] = productNames[productindex];
+                row["quantity"] = quantity;
+                data[i] = row;
+            }
+
+            return data;
+        }
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget'>
+        <div id="jqxgrid"></div>
+     </div>
+</body>
+</html>

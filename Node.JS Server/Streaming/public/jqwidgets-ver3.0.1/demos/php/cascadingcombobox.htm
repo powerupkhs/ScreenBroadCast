@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>In this example is demonstrated how to create cascading ComboBox. The data source of the "Orders" Combobox is updated dynamically depending on the selected Customer.</title> 
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcombobox.js"></script>
+    <script type="text/javascript" src="../../scripts/gettheme.js"></script> 
+    <script type="text/javascript">
+	$(document).ready(function () {
+		var theme = getDemoTheme();
+		// prepare the data
+		var customersSource =
+		{
+			datatype: "json",
+			datafields: [
+				{ name: 'CompanyName'},
+				{ name: 'CustomerID'}
+			],
+			url: 'cascadingcombobox_data.php',
+			cache: false,
+            async: false
+		};
+
+		var customersAdapter = new $.jqx.dataAdapter(customersSource);
+
+		$("#customers").jqxComboBox(
+		{
+			source: customersAdapter,
+			theme: theme,
+			width: 200,
+			height: 25,
+			promptText: "Select customer...",
+			displayMember: 'CompanyName',
+			valueMember: 'CustomerID'
+		});    
+
+		var ordersSource =
+		{
+			datatype: "json",
+			datafields: [
+				{ name: 'CustomerID'},
+				{ name: 'OrderID'},
+				{ name: 'ShipCity'},
+				{ name: 'OrderDate'},
+				{ name: 'ShipName'},
+				{ name: 'ShipCountry'},
+				{ name: 'ShipAddress'}
+			],
+			url: 'cascadingcombobox_data.php',
+			cache: false,
+			async: false
+		};
+		var ordersAdapter = new $.jqx.dataAdapter(ordersSource);
+		
+		$("#orders").jqxComboBox(
+		{
+			theme: theme,
+			width: 200,
+			height: 25,
+			disabled: true,
+			promptText: "Select order...",
+			displayMember: 'OrderID',
+			valueMember: 'CustomerID',
+			autoDropDownHeight: true
+		});   
+		
+		$("#customers").bind('select', function(event)
+		{
+			if (event.args)
+			{
+				$("#orders").jqxComboBox({ disabled: false, selectedIndex: -1});		
+				var value = event.args.item.value;
+				ordersSource.data = {CustomerID: value};
+				ordersAdapter = new $.jqx.dataAdapter(ordersSource);
+				$("#orders").jqxComboBox({source: ordersAdapter});
+			}
+		});   
+		
+		$("#orders").bind('select', function(event) 
+		{
+			if (event.args)
+			{
+				var index = $("#orders").jqxComboBox('selectedIndex');		
+				if (index != -1)
+				{
+					var record = ordersAdapter.records[index];
+					var details = "<table><tr><td>OrderDate</td><td>ShipCity</td><td>ShipCountry</td><td>ShipAddress</td><td>ShipName</td></tr>";
+					details += "<tr><td>" + record.OrderDate + "</td><td>" + record.ShipCity + "</td><td>" + record.ShipCountry + "</td><td>" + record.ShipAddress + "</td><td>" + record.ShipName + "</td></tr>";
+					$("#orderInfo").html(details);
+				}
+			}
+		});
+	});
+    </script>
+</head>
+<body class='default'>
+  <div>
+    <span style="margin-top: 6px; font-size: 12px; font-family: verdana; float: left;">Customers:</span><div style="margin-left: 5px; float: left;" id="customers"></div>
+	<div style='clear: both;'></div>
+  <div style='margin-top: 20px;'>
+    <span style="margin-top: 6px; font-size: 12px; font-family: verdana; float: left;">Orders:</span><div style="margin-left: 5px; float: left;" id="orders"></div>
+   <br/>
+  <div style="margin-top: 25px; font-size: 12px; font-family: verdana;" id="orderInfo"></div>
+</body>
+</html>
+<!--cascadingcombobox_data.php
+  #Include the connect.php file
+  include('connect.php');
+  #Connect to the database
+  //connection String
+  $connect = mysql_connect($hostname, $username, $password)
+  or die('Could not connect: ' . mysql_error());
+  //select database
+  mysql_select_db($database, $connect);
+  //Select The database
+  $bool = mysql_select_db($database, $connect);
+  if ($bool === False){
+	    print "can't find $database";
+  }
+  
+  if (isset($_GET['CustomerID']))
+  {
+     // get data and store in a json array
+     $query = "SELECT * FROM Orders where CustomerID='" .$_GET['CustomerID'] . "'";
+     $result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
+     while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
+	       $orders[] = array(
+          'CustomerID' => $row['CustomerID'],
+          'ShipCity' => $row['ShipCity'],
+          'OrderID' => $row['OrderID'],
+          'OrderDate' => $row['OrderDate'],
+          'ShipName' => $row['ShipName'],
+          'ShipAddress' => $row['ShipAddress'],
+          'ShipCountry' => $row['ShipCountry']         
+	       );
+     }
+     
+     echo json_encode($orders);
+     return;
+  }
+  
+  // get data and store in a json array
+  $query = "SELECT * FROM customers";
+
+  $result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
+  while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
+	  $customers[] = array(
+          'CustomerID' => $row['CustomerID'],
+          'CompanyName' => $row['CompanyName']
+	       );
+  }
+
+  echo json_encode($customers);
+-->

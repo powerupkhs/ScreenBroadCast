@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.web.css" media="screen" />
+    <link rel="stylesheet" href="../../Styles/Site.css" media="screen" />
+    <link rel="stylesheet" href="../../Styles/qunit-git.css" media="screen" />
+    <script type="text/javascript" src="../../scripts/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/qunit-git.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxexpander.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxnavigationbar.js"></script>
+     <script type="text/javascript">
+         $(document).ready(function () {
+
+             $("#jqxNavigationBar").jqxNavigationBar({ expandAnimationDuration: 0, collapseAnimationDuration: 0, animationType: 'none', width: '400px', height: '420px' });
+             $("#jqxNavigationBar").css('visibility', 'hidden');
+             module("Module Properties");
+
+             test("disabled property test", function () {
+                 // get disabled
+                 var disabled = $('#jqxNavigationBar').jqxNavigationBar('disabled');
+                 ok(disabled == false, "get disabled test.");
+
+                 // set disabled.
+                 $('#jqxNavigationBar').jqxNavigationBar({ disabled: true });
+                 var disabled = $('#jqxNavigationBar').jqxNavigationBar('disabled');
+                 ok(disabled == true, "set disabled test.");
+
+
+             });
+
+             test("toggleMode property test", function () {
+                 // get toggleMode
+                 var toggleMode = $('#jqxNavigationBar').jqxNavigationBar('toggleMode');
+                 ok(toggleMode == "click", "get toggleMode test.");
+
+                 // set toggleMode.
+                 $('#jqxNavigationBar').jqxNavigationBar({ toggleMode: "dblclick" });
+                 var toggleMode = $('#jqxNavigationBar').jqxNavigationBar('toggleMode');
+                 ok(toggleMode == "dblclick", "set toggleMode test.");
+             });
+
+             test("expandMode property test", function () {
+                 // get expandMode
+                 var expandMode = $('#jqxNavigationBar').jqxNavigationBar('expandMode');
+                 ok(expandMode == "singleFitHeight", "get expandMode test.");
+
+                 // set expandMode.
+                 $('#jqxNavigationBar').jqxNavigationBar({ expandMode: "multiple" });
+                 var expandMode = $('#jqxNavigationBar').jqxNavigationBar('expandMode');
+                 ok(expandMode == "multiple", "set expandMode test.");
+             });
+
+             test("showArrow property test", function () {
+                 // get showArrow
+                 var showArrow = $('#jqxNavigationBar').jqxNavigationBar('showArrow');
+                 ok(showArrow == true, "get showArrow test.");
+
+                 // set showArrow.
+                 $('#jqxNavigationBar').jqxNavigationBar({ showArrow: false });
+                 var showArrow = $('#jqxNavigationBar').jqxNavigationBar('showArrow');
+                 ok(showArrow == false, "set showArrow test.");
+             });
+
+             test("arrowPosition property test", function () {
+                 // get arrowPosition
+                 var arrowPosition = $('#jqxNavigationBar').jqxNavigationBar('arrowPosition');
+                 ok(arrowPosition == "right", "get arrowPosition test.");
+
+                 // set arrowPosition.
+                 $('#jqxNavigationBar').jqxNavigationBar({ arrowPosition: "left" });
+                 var arrowPosition = $('#jqxNavigationBar').jqxNavigationBar('arrowPosition');
+                 ok(arrowPosition == "left", "set arrowPosition test.");
+             });
+
+             test("expandedIndexes property test", function () {
+                 // get expandedIndexes
+                 var expandedIndexes = $('#jqxNavigationBar').jqxNavigationBar('expandedIndexes');
+                 ok(expandedIndexes != undefined, "get expandedIndexes test.");
+
+                 // set expandedIndexes.
+                 $('#jqxNavigationBar').jqxNavigationBar({ expandedIndexes: new Array()});
+                 $('#jqxNavigationBar').jqxNavigationBar({ expandedIndexes: [1]});
+                 var expandedIndexes = $('#jqxNavigationBar').jqxNavigationBar('expandedIndexes');
+
+                 ok(expandedIndexes.length == 1, "set expandedIndexes test.");
+             });
+
+             test("height property test", function () {
+                 // get height
+                 var height = $('#jqxNavigationBar').jqxNavigationBar('height');
+                 ok(height =="420px", "get height test.");
+
+                 // set height.
+                 $('#jqxNavigationBar').jqxNavigationBar({ height: "50px" });
+                 var height = $('#jqxNavigationBar').jqxNavigationBar('height');
+                 ok(height == "50px", "set height test.");
+             });
+
+             test("width property test", function () {
+                 // get width
+                 var width = $('#jqxNavigationBar').jqxNavigationBar('width');
+                 ok(width == "400px", "get width test.");
+
+                 // set width.
+                 $('#jqxNavigationBar').jqxNavigationBar({ width: "500px" });
+                 var width = $('#jqxNavigationBar').jqxNavigationBar('width');
+                 ok(width == "500px", "set width test.");
+             });
+         });
+    </script>
+</head>
+<body>
+    <div id='jqxNavigationBar'>
+        <div>
+        </div>
+        <div>
+        </div>
+       <div>
+        </div>
+        <div>
+        </div>
+       <div>
+        </div>
+        <div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div>
+        <h1 id="qunit-header">
+            QUnit example</h1>
+        <h2 id="qunit-banner">
+        </h2>
+        <div id="qunit-testrunner-toolbar">
+        </div>
+        <h2 id="qunit-userAgent">
+        </h2>
+        <ol id="qunit-tests">
+        </ol>
+        <div id="qunit-fixture">
+            test markup, will be hidden</div>
+    </div>
+</body>
+</html>

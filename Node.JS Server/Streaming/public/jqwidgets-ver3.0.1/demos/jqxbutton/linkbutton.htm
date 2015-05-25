@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="keywords" content="jQuery Button, CheckBox, Toggle Button, Repeat Button, Radio Button, Link Button, Button" /> 
+    <meta name="description" content="The jqxLinkButton widget represents a button created from anchor element" />
+    <script type="text/javascript" src="../../scripts/gettheme.js"></script>
+    <title id='Description'>The jqxLinkButton widget represents a button created from anchor element.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+</head>
+<body>
+    <div id='content'>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var theme = getDemoTheme();
+
+                // Create a jqxToggleButton widget.
+                $("#jqxButton").jqxLinkButton({ width: '200', height: '30', theme: theme });
+            });
+        </script>
+        <div style='width:200px;' id='jqxWidget'>
+            <div>
+                <a style='margin-left: 25px;' target="_blank" href="http://www.jqwidgets.com" id='jqxButton'>Link Button</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

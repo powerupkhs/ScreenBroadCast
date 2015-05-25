@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="keywords" content="jQuery Calendar, Month Calendar, MonthCalendar, DateTimeInput, DateTimePicker, Date Picker" />
+    <meta name="description" content="This demo demonstrates the jqxCalendar widget. Choose a date and navigate through the months by clicking the left or right navigation arrows.
+The jqxCalendar has built-in Keyboard navigation so you can click on it and navigate by using the left, right, up or down arrow keys." />
+    <title id='Description'>This demo demonstrates the jqxCalendar widget. Choose a date
+        and navigate through the months by clicking the left or right navigation arrows.
+        The jqxCalendar has built-in Keyboard navigation so you can click on it and navigate
+        by using the left, right, up or down arrow keys. To switch to Year and Decade views, you need to click the Calendar's title. </title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/gettheme.js"></script>
+    <script type="text/javascript" src="../../scripts/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var theme = getDemoTheme();
+            // create jqxcalendar.
+            $("#jqxWidget").jqxCalendar({ width: '100%', height: '100%', theme: theme });
+        });
+    </script>
+    <style>
+        body, html {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body class='default'>
+    <div id="container" style="min-width: 200px; min-height: 200px; width: 30%; height: 30%;">
+        <div id='jqxWidget'>
+        </div>
+    </div>
+</body>
+</html>

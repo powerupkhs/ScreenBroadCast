@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+   <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmaskedinput.js"></script>
+    <link rel="stylesheet" href="../../Styles/qunit-git.css" media="screen" />
+    <script type="text/javascript" src="../../Scripts/qunit-git.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#jqxMaskedInput').jqxMaskedInput({ width: '250px', height: '30px', value: 55555 });
+            $('#jqxMaskedInput').css('display', 'none');
+            module("Module Properties");
+
+            test("value property test", function () {
+                // get value.
+                var value = $('#jqxMaskedInput').jqxMaskedInput('value');
+                ok(value == 55555, "get value test.");
+
+                // set value.
+                $('#jqxMaskedInput').jqxMaskedInput({ value: '10000' });
+                var newValue = $('#jqxMaskedInput').jqxMaskedInput('value');
+                ok(newValue == '10000', "set value test.");
+
+                // reset value to 0
+                $('#jqxMaskedInput').jqxMaskedInput({ value: 0 });
+            });
+
+            test("width property test", function () {
+                // get width.
+                var width = $('#jqxMaskedInput').jqxMaskedInput('width');
+                ok(width == "250px", "get width test.");
+
+                // set width.
+                $('#jqxMaskedInput').jqxMaskedInput({ width: "300px" });
+                width = $('#jqxMaskedInput').jqxMaskedInput('width');
+                ok(width == "300px", "set width test.");
+            });
+
+            test("height property test", function () {
+                // get height.
+                var height = $('#jqxMaskedInput').jqxMaskedInput('height');
+                ok(height == "30px", "get height test.");
+
+                // set height.
+                $('#jqxMaskedInput').jqxMaskedInput({ height: "50px" });
+                height = $('#jqxMaskedInput').jqxMaskedInput('height');
+                ok(height == "50px", "set height test.");
+            });
+
+            test("mask property test", function () {
+                // get mask.
+                var mask = $('#jqxMaskedInput').jqxMaskedInput('mask');
+                ok(mask == "99999", "get mask test.");
+
+                // set mask.
+                $('#jqxMaskedInput').jqxMaskedInput({ mask: "99" });
+                mask = $('#jqxMaskedInput').jqxMaskedInput('mask');
+                ok(mask == "99", "set mask test.");
+            });
+
+            test("textAlign property test", function () {
+                // get textAlign.
+                var textAlign = $('#jqxMaskedInput').jqxMaskedInput('textAlign');
+                ok(textAlign == "left", "get textAlign test.");
+
+                // set textAlign.
+                $('#jqxMaskedInput').jqxMaskedInput({ textAlign: "right" });
+                textAlign = $('#jqxMaskedInput').jqxMaskedInput('textAlign');
+                ok(textAlign == "right", "set textAlign test.");
+            });
+
+            test("readOnly property test", function () {
+                // get readOnly.
+                var readOnly = $('#jqxMaskedInput').jqxMaskedInput('readOnly');
+                ok(readOnly == false, "get readOnly test.");
+
+                // set readOnly.
+                $('#jqxMaskedInput').jqxMaskedInput({ readOnly: true });
+                readOnly = $('#jqxMaskedInput').jqxMaskedInput('readOnly');
+                ok(readOnly == true, "set readOnly test.");
+            });
+
+            test("promptChar property test", function () {
+                // get promptChar.
+                var promptChar = $('#jqxMaskedInput').jqxMaskedInput('promptChar');
+                ok(promptChar == "_", "get promptChar test.");
+
+                // set promptChar.
+                $('#jqxMaskedInput').jqxMaskedInput({ promptChar: "." });
+                promptChar = $('#jqxMaskedInput').jqxMaskedInput('promptChar');
+                ok(promptChar == ".", "set promptChar test.");
+            });
+
+            module("Module Methods");
+
+
+
+            module("Module Events");
+
+            test("valuechanged event test", function () {
+                var valuechanged = false;
+                // on to valuechanged.
+                $('#jqxMaskedInput').on('valuechanged', function () {
+                    valuechanged = true;
+                });
+
+                $('#jqxMaskedInput').jqxMaskedInput({ value: 66 });
+                ok(true == valuechanged, "valuechanged event.");
+
+                // off from value changed.
+                $('#jqxMaskedInput').off('valuechanged');
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id='jqxMaskedInput'>
+    </div>
+    <br />
+    <br />
+    <div>
+        <h1 id="qunit-header">
+            QUnit example</h1>
+        <h2 id="qunit-banner">
+        </h2>
+        <div id="qunit-testrunner-toolbar">
+        </div>
+        <h2 id="qunit-userAgent">
+        </h2>
+        <ol id="qunit-tests">
+        </ol>
+        <div id="qunit-fixture">
+            test markup, will be hidden</div>
+    </div>
+</body>
+</html>

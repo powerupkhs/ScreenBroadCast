@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title id='Description'>The jqxTooltip widget displays a popup message. The widget can be used in combination with any html element.
+        Hover over the posters to see more information about the films.</title>
+    <link rel="stylesheet" type="text/css" href="../../jqwidgets/styles/jqx.base.css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="../../scripts/gettheme.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var theme = getDemoTheme();
+            $("#filmPicture1").jqxTooltip({ content: '<b>Title:</b> <i>The Amazing Spider-man</i><br /><b>Year:</b> 2012', position: 'mouse', name: 'movieTooltip', theme: theme });
+            $("#filmPicture2").jqxTooltip({ content: '<b>Title:</b> <i>The Avengers</i><br /><b>Year:</b> 2012', position: 'mouse', name: 'movieTooltip', theme: theme });
+            $("#filmPicture3").jqxTooltip({ content: '<b>Title:</b> <i>The Dark Knight Rises</i><br /><b>Year:</b> 2012', position: 'mouse', name: 'movieTooltip', theme: theme });
+            $("#filmPicture4").jqxTooltip({ content: '<b>Title:</b> <i>Harry Potter and the Deathly Hallows - Part 1</i><br /><b>Year:</b> 2010', position: 'mouse', name: 'movieTooltip', theme: theme });
+            $("#filmPicture5").jqxTooltip({ content: '<b>Title:</b> <i>Harry Potter and the Deathly Hallows - Part 2</i><br /><b>Year:</b> 2011', position: 'mouse', name: 'movieTooltip', theme: theme });
+            $("#filmPicture6").jqxTooltip({ content: '<b>Title:</b> <i>Inception</i><br /><b>Year:</b> 2010', position: 'mouse', name: 'movieTooltip', theme: theme });
+            $("#filmPicture7").jqxTooltip({ content: '<b>Title:</b> <i>Star Trek</i><br /><b>Year:</b> 2009', position: 'mouse', name: 'movieTooltip', theme: theme });
+            $("#filmPicture8").jqxTooltip({ content: '<b>Title:</b> <i>Star Wars</i> Episode III: <i>Revenge of the Sith</i><br /><b>Year:</b> 2005', position: 'mouse', name: 'movieTooltip', theme: theme });
+            $("#filmPicture9").jqxTooltip({ content: '<b>Title:</b> <i>Thor</i><br /><b>Year:</b> 2011', position: 'mouse', name: 'movieTooltip', theme: theme });
+        });
+    </script>
+</head>
+<body>
+    <div style="width: 400px;" id="container">
+        <img style="margin: 8px;" src="../../images/The_Amazng_Spider_Man.jpeg" id="filmPicture1" />
+        <img style="margin: 8px;" src="../../images/The_Avengers.jpg" id="filmPicture2" />
+        <img style="margin: 8px;" src="../../images/The_Dark_Knight_Rises.jpg" id="filmPicture3" />
+        <img style="margin: 8px;" src="../../images/Harry_Potter_7_Part_1.jpg" id="filmPicture4" />
+        <img style="margin: 8px;" src="../../images/Harry_Potter_7_Part_2.jpg" id="filmPicture5" />
+        <img style="margin: 8px;" src="../../images/Inception.jpg" id="filmPicture6" />
+        <img style="margin: 8px;" src="../../images/Star_Trek.jpg" id="filmPicture7" />
+        <img style="margin: 8px;" src="../../images/Star_Wars_Episode_III.jpg" id="filmPicture8" />
+        <img style="margin: 8px;" src="../../images/Thor.jpg" id="filmPicture9" />
+    </div>
+</body>
+</html>

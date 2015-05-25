@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+<head>
+    <title id='Description'>jqxChart Events Example</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxchart.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare chart data
+            var sampleData = [
+                    { Day: 'Monday', Keith: 30, Erica: 15, George: 25 },
+                    { Day: 'Tuesday', Keith: 25, Erica: 25, George: 30 },
+                    { Day: 'Wednesday', Keith: 30, Erica: 20, George: 25 },
+                    { Day: 'Thursday', Keith: 35, Erica: 25, George: 45 },
+                    { Day: 'Friday', Keith: 20, Erica: 20, George: 25 },
+                    { Day: 'Saturday', Keith: 30, Erica: 20, George: 30 },
+                    { Day: 'Sunday', Keith: 60, Erica: 45, George: 90 }
+                ];
+
+            // prepare jqxChart settings
+            var settings = {
+                title: "Fitness & exercise weekly scorecard",
+                description: "Time spent in vigorous exercise",
+                padding: { left: 5, top: 5, right: 5, bottom: 5 },
+                titlePadding: { left: 90, top: 0, right: 0, bottom: 10 },
+                source: sampleData,
+                categoryAxis:
+                    {
+                        dataField: 'Day',
+                        showGridLines: false
+                    },
+                colorScheme: 'scheme04',
+                showToolTips: false,
+                enableAnimations: true,
+                seriesGroups:
+                    [
+                        {
+                            type: 'column',
+                            valueAxis:
+                            {
+                                minValue: 0,
+                                maxValue: 100,
+                                unitInterval: 10,
+                                description: 'Time in minutes'
+                            },
+                            mouseover: myEventHandler,
+                            mouseout: myEventHandler,
+                            click: myEventHandler,
+
+                            series: [
+                                    { dataField: 'Keith', displayText: 'Keith' },
+                                    { dataField: 'Erica', displayText: 'Erica' },
+                                    { dataField: 'George', displayText: 'George' }
+                                ]
+                        }
+                    ]
+            };
+
+            function myEventHandler(e) {
+                var eventData = '<div><b>Last Event: </b>' + e.event + '<b>, DataField: </b>' + e.serie.dataField + '<b>, Value: </b>' + e.elementValue + "</div>";
+                $('#eventText').html(eventData);
+            };
+
+            // select the chartContainer DIV element and render the chart.
+            $('#chartContainer').jqxChart(settings);
+        });
+    </script>
+</head>
+<body style="background:white;">
+    <table>
+    <tr>
+    <td>
+    <div id='chartContainer' style="width:600px; height: 400px"/>
+    </td>
+    </tr>
+    <tr><td>
+    <div id='eventText' style="width:600px; height: 30px"/>
+    </td>
+    </tr>
+    </table>
+</body>
+</html>

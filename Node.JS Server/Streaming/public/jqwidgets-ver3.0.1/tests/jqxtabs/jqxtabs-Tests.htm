@@ -1,0 +1,288 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="../../Styles/Site.css" media="screen" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" media="screen" />
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.web.css" media="screen" />
+    <link rel="stylesheet" href="../../Styles/qunit-git.css" media="screen" />
+    <script type="text/javascript" src="../../scripts/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="../../Scripts/qunit-git.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxtabs.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tabs').jqxTabs({ enableScrollAnimation: false, animationType: 'none'});
+            module('Tab layout testing methods');
+            $('#tabs').css('visibility', 'hidden');
+            test('Test titles float', function () {
+                $('#tabs').jqxTabs('position', 'top');
+                var count = $('#tabs').jqxTabs('length');
+                while (count) {
+                    count--;
+                    equal($($('#tabs').jqxTabs('_titleList')[count]).css('float'), 'left', 'If position is top or bottom checking float');
+                }
+                $('#tabs').jqxTabs('position', 'bottom');
+                var count = $('#tabs').jqxTabs('length');
+                while (count) {
+                    count--;
+                    equal($($('#tabs').jqxTabs('_titleList')[count]).css('float'), 'left', 'If position is top or bottom checking float');
+                }
+                //Restting last position
+                $('#tabs').jqxTabs('position', 'top');
+            });
+            test('Testing autoHeight', function () {
+                $('#tabs').jqxTabs('autoHeight', true);
+                var maxHeaderSizeItem = $('#tabs').jqxTabs('_maxHeightTab');
+                var maxHeaderSize = -2 + parseInt($('#tabs').jqxTabs('_titleList')[maxHeaderSizeItem].outerHeight())
+                var count = $('#tabs').jqxTabs('length');
+                while (count > 1) {
+                    count--;
+                    var headerSize = parseInt($('#tabs').jqxTabs('_titleList')[count].outerHeight(true));
+                    equal(headerSize, maxHeaderSize, 'All tabs must be with the same height');
+                }
+            });
+
+            module('Functionality');
+
+            test('Selection tracker', function () {
+                $('#tabs').jqxTabs('selectionTracker', false);
+                $('#tabs').jqxTabs('select', 0);
+                $('#tabs').jqxTabs('select', 1);
+                var cssClass = $('#tabs').jqxTabs('_titleList')[1].attr('class');
+                ok(cssClass.indexOf('selected') >= 0, 'The selected item should be marked with selected style in the css.');
+            });
+
+            test('Testing positioning', function () {
+                $('#tabs').jqxTabs('position', 'bottom');
+                var contentTop = parseInt($('#tabs').jqxTabs('_contentWrapper').position().top);
+                var headerTop = parseInt($('#tabs').jqxTabs('_headerWrapper').position().top);
+                var contentHeight = parseInt($('#tabs').jqxTabs('_contentWrapper').outerHeight(true));
+                ok(contentTop < headerTop, 'Content\'s top must be less than header\'s top.');
+                equals(headerTop, contentHeight, 'Header\'s top position must be equal to the content outerHeight(true)');
+
+                $('#tabs').jqxTabs('position', 'top');
+                var contentTop = parseInt($('#tabs').jqxTabs('_contentWrapper').position().top);
+                var headerTop = parseInt($('#tabs').jqxTabs('_headerWrapper').position().top);
+                var headerHeight = parseInt($('#tabs').jqxTabs('_headerWrapper').outerHeight(true));
+                ok(contentTop > headerTop, 'Content\'s top must be greater than header\'s top.');
+                equals(contentTop, headerHeight+2, 'Content\'s top position must be equal to the headers outerHeight(true)');
+            });
+
+            test('Testing height', function () {
+                var height = 300;
+                $('#tabs').jqxTabs('height', height);
+                var contentHeight = parseInt($('#tabs').jqxTabs('_contentWrapper').outerHeight(true));
+                var headerHeight = parseInt($('#tabs').jqxTabs('_headerWrapper').outerHeight(true));
+                equals(parseInt($('#tabs').jqxTabs('host').height()), height, 'The height of the host must be equal to the height which we are setting.');
+                equals(contentHeight + headerHeight,  height, 'Header height + content height should be equals to the current host height.');
+            });
+
+            test('Testing width', function () {
+                var width = 500;
+                $('#tabs').jqxTabs('width', width);
+                var contentWidth = parseInt($('#tabs').jqxTabs('_contentWrapper').width());
+                var headerWidth = parseInt($('#tabs').jqxTabs('_headerWrapper').width());
+                equals(parseInt($('#tabs').jqxTabs('host').width()), width, 'The width of the host must be equal to the width which we are setting.');
+                // 2 is equal to the left and right border offset.
+                equals(contentWidth, width, 'Content width should be equals to the current host width.');
+                equals(headerWidth, width, 'Width width should be equals to the current host width.');
+            });
+
+            test('Selected item', function () {
+                $('#tabs').jqxTabs('selectedItem', 2);
+                equal($('#tabs').jqxTabs('selectedItem'), 2, 'The selected item should be 2.');
+            });
+
+            test('Disable testing', function () {
+                $('#tabs').jqxTabs('disable');
+                var count = $('#tabs').jqxTabs('length');
+                while (count) {
+                    count--;
+                    var event = $('#tabs').jqxTabs('_titleList')[count].data('events');
+                    var disabled = $('#tabs').jqxTabs('_titleList')[count].disabled;
+                    var cssClass = $('#tabs').jqxTabs('_titleList')[count].attr('class');
+                    equal(true, disabled, 'The current item disabled property must be true.');
+                    ok(cssClass.indexOf('disable') >= 0, 'This item should have disabled css class.');
+                }
+            });
+
+            test('Enable testing', function () {
+                $('#tabs').jqxTabs('enable');
+                var count = $('#tabs').jqxTabs('length');
+                while (count) {
+                    count--;
+                    var event = $('#tabs').jqxTabs('_titleList')[count].data('events');
+                    var disabled = $('#tabs').jqxTabs('_titleList')[count].disabled;
+                    var cssClass = $('#tabs').jqxTabs('_titleList')[count].attr('class');
+                    equal(false, disabled, 'The current item disabled property must be false.');
+                    ok(cssClass.indexOf('jqx-tabs-title-disable') < 0, 'This item should have enabled css class.');
+                }
+            });
+
+            test('Adding item at specific index', function () {
+                $('#tabs').jqxTabs('addAt', 2, 'test', 'test');
+                var title = $('#tabs').jqxTabs('_titleList')[2].text();
+                var content = $('#tabs').jqxTabs('_contentList')[2].text();
+                equal(title, 'test', 'The title should be equal to the aded title.');
+                equal(content, 'test', 'The content should be equal to the added content.');
+            });
+
+            test('Items reordering', function () {
+                var title0 = $('#tabs').jqxTabs('_titleList')[0];
+                var title2 = $('#tabs').jqxTabs('_titleList')[2];
+                $('#tabs').jqxTabs('_reorderItems', 2, 0);
+                ok(title2 === $('#tabs').jqxTabs('_titleList')[1], 'Item 2 should be on the place of item 1.');
+                ok(title0 === $('#tabs').jqxTabs('_titleList')[2], 'Item 0 should be on the place of item 2.');
+
+                var title0 = $('#tabs').jqxTabs('_titleList')[0];
+                var title1 = $('#tabs').jqxTabs('_titleList')[1];
+                $('#tabs').jqxTabs('_reorderItems', 0, 1);
+                ok(title0 === $('#tabs').jqxTabs('_titleList')[1], 'Item 0 should be on the place of item 1.');
+            });
+
+            test('Removing item', function () {
+                var countBefore = $('#tabs').jqxTabs('length');
+                $('#tabs').jqxTabs('removeAt', 2);
+                var countAfter = $('#tabs').jqxTabs('length');
+                equal(countAfter, countBefore - 1, 'We must have one item less.');
+                var title = $('#tabs').jqxTabs('_titleList')[2].text();
+                var content = $('#tabs').jqxTabs('_contentList')[2].text();
+                notEqual(title, 'test', 'The title should not be equal to the aded title.');
+                notEqual(content, 'test', 'The content should not be equal to the added content.');
+            });
+
+            module('Events');
+
+            test('Selecting, selected, unselecting, unselected', function () {
+                $('#tabs').jqxTabs('select', 0);
+                var selecting = false,
+                    selected = false,
+                    unselecting = false,
+                    unselected = false;
+                $('#tabs').on('selecting', function () {
+                    selecting = true;
+                });
+                $('#tabs').on('selected', function () {
+                    selected = true;
+                });
+                $('#tabs').on('unselecting', function () {
+                    unselecting = true;
+                });
+                $('#tabs').on('unselected', function () {
+                    unselected = true;
+                });
+                $('#tabs').jqxTabs('select', 1);
+                ok(selecting, 'Selecting event should be triggered.');
+                ok(selected, 'Selected event should be triggered.');
+                ok(unselecting, 'Unselecting event should be triggered.');
+                ok(unselected, 'Unselected event should be triggered.');
+            });
+
+            test('Add, removed', function () {
+                var add = false,
+                    remove = false;
+                $('#tabs').on('add', function () {
+                    add = true;
+                });
+                $('#tabs').on('removed', function () {
+                    remove = true;
+                });
+                $('#tabs').jqxTabs('addAt', 2, 'title', 'content');
+                $('#tabs').jqxTabs('removeAt', 2);
+                ok(add, 'Add event should be triggered.');
+                ok(remove, 'Remove event should be triggered.');
+            });
+
+            test('Disable, enable', function () {
+                var disable = false,
+                    enable = false;
+                $('#tabs').on('disabled', function () {
+                    disable = true;
+                });
+                $('#tabs').on('enabled', function () {
+                    enable = true;
+                });
+                $('#tabs').jqxTabs('disableAt', 2);
+                $('#tabs').jqxTabs('enableAt', 2);
+                ok(disable, 'Disable event should be triggered.');
+                ok(enable, 'Enable event should be triggered.');
+            });
+        });
+    </script>
+</head>
+<body>
+<div style='height: 1px;' >
+    <div id="tabs">
+        <ul>
+            <li>First<br />
+                item</li>
+            <li>Second item</li>
+            <li>Third item</li>
+            <li>Fourth item</li>
+        </ul>
+        <div>
+            <p>
+                A popular target for organized raids by Anonymous is Habbo, a popular social networking
+                site designed as a virtual hotel. The first major raid is known as the "Great Habbo
+                Raid of '06," and a subsequent raid the following year is known as the "Great Habbo
+                Raid of '07."[17] The raid actually predates and was not inspired by the news of
+                an Alabama amusement park banning a two-year-old toddler affected by AIDS from entering
+                the park's swimming pool.[18] Users signed up to the Habbo site dressed in avatars
+                of a black man wearing a grey suit and an Afro hairstyle and blocked entry to the
+                pool, declaring that it was "closed due to AIDS,"[17][19] flooding the site with
+                internet sayings,[19] and forming swastika-like formations.[19] When the raiders
+                were banned, they complained of racism.[19] In response, the Habbo admins often
+                ban users with avatars matching the profile of the raiders even months after the
+                latest raid.[citation needed]</p>
+        </div>
+        <div>
+            <p>
+                According to white supremacist radio host Hal Turner, in December 2006 and January
+                2007 individuals who identified themselves as Anonymous took Turner's website offline,
+                costing him thousands of dollars in bandwidth bills. As a result, Turner sued 4chan,
+                eBaum's World, 7chan, and other websites for copyright infringement. He lost his
+                plea for an injunction, however, and failed to receive letters from the court, which
+                caused the lawsuit to lapse.</p>
+        </div>
+        <div>
+            <p>
+                On December 7, 2007, the Canada-based Toronto Sun newspaper published a report on
+                the arrest of the alleged Internet predator Chris Forcand.[21] Forcand, 53, was
+                charged with two counts of luring a child under the age of 14, attempt to invite
+                sexual touching, attempted exposure, possessing a dangerous weapon, and carrying
+                a concealed weapon.[22] The report stated that Forcand was already being tracked
+                by "cyber-vigilantes who seek to out anyone who presents with a sexual interest
+                in children" before police investigations commenced.[21] A Global Television Network
+                report identified the group responsible for Forcand's arrest as a "self-described
+                Internet vigilante group called Anonymous" who contacted the police after some members
+                were "propositioned" by Forcand with "disgusting photos of himself." The report
+                also stated that this is the first time a suspected Internet predator was arrested
+                by the police as a result of Internet vigilantism.[23]</p>
+        </div>
+        <div>
+            <p>
+                Following allegations of vote rigging after the results of the June 2009 Iranian
+                presidential election were announced, declaring Iran's incumbent President Mahmoud
+                Ahmadinejad as the winner, thousands of Iranians participated in demonstrations.
+                Anonymous, together with The Pirate Bay and various Iranian hackers, launched an
+                Iranian Green Party Support site called Anonymous Iran.[67] The site has drawn over
+                22,000 supporters world wide and allows for information exchange between the world
+                and Iran, despite attempts by the Iranian government to censor news about the riots
+                on the internet. The site provides resources and support to Iranians who are protesting.</p>
+        </div>
+    </div>
+    </div>
+    <h1 id="qunit-header">
+        QUnit jqxTabs</h1>
+    <h2 id="qunit-banner">
+    </h2>
+    <div id="qunit-testrunner-toolbar">
+    </div>
+    <h2 id="qunit-userAgent">
+    </h2>
+    <ol id="qunit-tests">
+    </ol>
+    <div id="qunit-fixture">
+        test markup, will be hidden</div>
+</body>
+</html>

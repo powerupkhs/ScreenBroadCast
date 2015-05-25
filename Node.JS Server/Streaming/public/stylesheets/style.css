@@ -1,0 +1,222 @@
+/* about common tag */
+body {
+    text-align:center;
+}
+
+
+
+
+
+
+/*about layout */
+#wrap {
+    width:960px;
+	margin:auto;
+}
+#top {
+    width:100%;
+    height:150px;
+} 
+#left {
+    float:left;
+    width:270px;
+}
+#right {
+    float:left;
+    width:685px;
+    margin-bottom:10px;
+}
+#bottom {
+    width:960px;
+	margin:auto;
+	clear:both;
+    border-top:1px solid black;
+}
+
+
+
+
+
+
+/* about my_style  */
+/* login_form style */
+#login_form {
+    vertical-align:middle;
+    display:table-cell;
+    background-color:#f8f8f8;
+    border:1px solid #3AA6D0;
+    border-radius:6px; 
+    box-shadow: 2px 2px 5px #999;
+}
+#login_form table {
+    width:270px; /* center의 left영역과 크기 같게 */
+    height:120px;
+    margin-top:10px;
+}
+#login_form .headerbar {
+	background-color:#3AA6D0; 
+	margin-bottom:0;
+	text-align:center;
+    height:25px;
+}
+#login_form .headerbar span.title {
+	display:inline-block;
+    padding-top:4px;
+	width:39px;
+    font-weight:bold;
+    color:#ffffff;
+}
+#login_form table th, .login_form table td {
+	padding:2px;
+	text-align:center;
+}
+#logout_form table th, .logout_form table td {
+	text-align:center;
+}
+
+/* join_member page style */
+#join_member_wrap .provision {
+    text-align:center;
+}
+#join_member_wrap .provision textarea {
+	overflow-x:hidden;
+	overflow-y:scroll;
+	resize:none;
+}
+#join_member_wrap {
+    width:960px;
+	margin:auto;	
+}
+#join_member_wrap #center .provision {
+	padding-top:10px;
+	width:600px;
+	margin:auto;	
+}
+#join_member_wrap #center .provision textarea {
+	margin-top:10px;
+	width:600px; /* this is equal after css provision */
+	height:150px;
+}
+#join_member_wrap #center .form {
+	position:relative;
+	padding:20px 0;
+	width:450px;
+	margin:auto;
+}
+/* form css */
+.cssform p {
+    text-align: left;
+	width: 250px;
+	clear: left;
+	margin: 0;
+	padding: 5px 0 8px 0;
+	padding-left: 155px; /*width of left column containing the label elements*/
+	border-top: 1px dashed gray;
+	height: 1%;
+}
+
+.cssform label {
+	font-weight: bold;
+	float: left;
+	margin-left: -120px; /*width of left column*/
+	width: 160px; /*width of labels. Should be smaller than left column (155px) to create some right margin*/
+}
+
+.cssform textarea {
+	width: 250px;
+	height: 150px;
+}
+
+.cssform div.submit_button {
+	text-align:center;
+}
+
+/* button style */
+.login_button {
+	cursor:pointer;
+	border:outset 1px #ccc;
+	background:#999;
+	color:#666;
+	font-weight:bold;
+	padding: 15px 5px;
+	margin: 0 5px;
+	background:#ffffff repeat-x left top;
+}
+.formbutton {
+    cursor:pointer;
+    border:outset 1px #ccc;
+	background:#999;
+	color:#666;
+	font-weight:bold;
+	padding: 1px 3px;
+	margin-left:5px;
+	background:#ffffff repeat-x left top;
+    
+}
+.normal_button {
+    cursor:pointer;
+	border:outset 1px #ccc;
+	background:#999;
+	color:#666;
+	font-weight:bold;
+	padding: 3px 5px;
+	margin-left:5px;
+	background:#ffffff repeat-x left top;
+    font-size:12px;
+}
+/* copyright style */
+#copyright {
+    display:inline-block;
+    text-align:center;
+}
+#copyright table td {
+    padding:10px;
+	color:#424242;
+}
+/* title_logo image style */
+.title_logo {
+    margin-top:10px;
+    width:400px;
+    height:130px;
+}
+/* bottom_logo image style */
+.bottom_logo {
+    width:130px;
+    height:50px;
+}
+/* onair image style */
+.onair_image {
+    width:80px;
+    height:80px;
+}
+/* broadcast streaming style */
+#broadcast {
+    width:685px;
+    boarder:1px solid black;
+}
+/* braodcast list table style */
+.broadcast_list_table{
+    margin-left:10px;
+}
+.broadcast_list_table tr td{
+    padding:10px;
+}
+
+
+
+/* bold class style */
+.bold {
+    font-weight:bold;
+}
+/* red class style */
+.red {
+	color:red;	
+}
+/* blue class style */
+.blue {
+	color:#3aa6d0;	
+}
+/* black class style */
+.black {
+	color:black;	
+}

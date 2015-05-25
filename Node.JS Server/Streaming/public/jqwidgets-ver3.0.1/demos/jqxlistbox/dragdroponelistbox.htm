@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title id="Description">In this demo, you can reorder the ListBox items by dragging a list item and dropping it above or below another item.</title>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdragdrop.js"></script>
+    <script type="text/javascript" src="../../scripts/gettheme.js"></script>
+  </head>
+<body>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var data = [
+                    "Affogato",
+                    "Americano",
+                    "Bicerin",
+                    "Breve",
+                    "Café Bombón",
+                    "Café au lait",
+                    "Caffé Corretto",
+                    "Café Crema",
+                    "Caffé Latte",
+                    "Caffé macchiato",
+                    "Café mélange",
+                    "Coffee milk",
+                    "Cafe mocha"
+		        ];
+
+            var theme = getDemoTheme();
+            // Create a jqxListBox
+            $("#listBoxA").jqxListBox({ allowDrop: true, allowDrag: true, source: data, theme: theme, width: 200, height: 250});
+        });
+    </script>
+    <div id="listBoxA">
+    </div>
+</body>
+</html>

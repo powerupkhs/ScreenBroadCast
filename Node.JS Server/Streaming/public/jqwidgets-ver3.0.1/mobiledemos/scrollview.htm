@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">jqxScrollView represents a widget which can be used for viewing content which is wider than the visible area outlined by the device's screen. Specific item can be chosen using drag movements or clicking/tapping on the buttons at the bottom of the jqxScrollView.</title>
+    <link rel="stylesheet" href="../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="../jqwidgets/styles/jqx.fresh.css" type="text/css" />
+    <script type="text/javascript" src="../scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../jqwidgets/jqxscrollview.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            prepareDemo("photoGallery");
+            $('#photoGallery').jqxScrollView({ width: '100%', height: '100%', theme: 'fresh', buttonsOffset: [0, 0] });
+            initDemo("photoGallery");
+        });
+    </script>
+    <style type="text/css">
+        html, body
+        {
+            height: 100%;
+            width: 100%;
+            margin: 0px;
+            padding: 0px;
+            overflow: hidden;
+        }
+        .photo
+        {
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    </style>
+    <script type="text/javascript" src="simulator.js"></script>
+</head>
+<body class='default'>
+    <div id="demoContainer" style="width: 900px; height: 704px; overflow: hidden; background-image: url(../images/ipad.png);">
+        <div id="container" style="margin-left: 91px; height: 510px; width: 710px; margin-top: 93px;">
+            <div id="photoGallery">
+                <div>
+                    <div class="photo" style="background-image: url(../images/imageNature3.jpg)">
+                    </div>
+                </div>
+                <div>
+                    <div class="photo" style="background-image: url(../images/imageNature2.jpg)">
+                    </div>
+                </div>
+                <div>
+                    <div class="photo" style="background-image: url(../images/imageNature1.jpg)">
+                    </div>
+                </div>
+                <div>
+                    <div class="photo" style="background-image: url(../images/imageNature4.jpg)">
+                    </div>
+                </div>
+                <div>
+                    <div class="photo" style="background-image: url(../images/imageNature5.jpg)">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

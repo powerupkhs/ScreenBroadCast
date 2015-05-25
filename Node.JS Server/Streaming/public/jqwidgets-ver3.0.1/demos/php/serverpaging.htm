@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../../jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="../../scripts/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.pager.js"></script>
+    <script type="text/javascript" src="../../jqwidgets/jqxgrid.selection.js"></script>	
+    <script type="text/javascript" src="../../jqwidgets/jqxdata.js"></script>	
+    <script type="text/javascript" src="../../scripts/gettheme.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var theme = getDemoTheme();
+        
+            var source =
+            {
+                 datatype: "json",
+                 datafields: [
+					 { name: 'CompanyName'},
+					 { name: 'ContactName'},
+					 { name: 'ContactTitle'},
+					 { name: 'Address'},
+					 { name: 'City'},
+					 { name: 'Country'}
+                ],
+			    url: 'serverpaging_data.php',
+			    root: 'Rows',
+                cache: false,
+				beforeprocessing: function(data)
+				{		
+					source.totalrecords = data[0].TotalRows;
+				}
+            };		
+			
+		    var dataadapter = new $.jqx.dataAdapter(source);
+
+            // initialize jqxGrid
+            $("#jqxgrid").jqxGrid(
+            {
+                width: 600,
+			    source: dataadapter,
+                theme: theme,
+			    autoheight: true,
+				pageable: true,
+				virtualmode: true,
+				rendergridrows: function()
+				{
+					  return dataadapter.records;     
+				},
+                columns: [
+                      { text: 'Company Name', datafield: 'CompanyName', width: 250 },
+                      { text: 'Contact Name', datafield: 'ContactName', width: 200 },
+                      { text: 'Contact Title', datafield: 'ContactTitle', width: 200 },
+                      { text: 'Address', datafield: 'Address', width: 180 },
+                      { text: 'City', datafield: 'City', width: 100 },
+                      { text: 'Country', datafield: 'Country' }
+                  ]
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+     <div id="jqxgrid"></div>
+ </body>
+</html>
+<!--serverpaging_data.php
+	#Include the connect.php file
+	include('connect.php');
+	#Connect to the database
+	//connection String
+	$connect = mysql_connect($hostname, $username, $password)
+	or die('Could not connect: ' . mysql_error());
+	//Select The database
+	$bool = mysql_select_db($database, $connect);
+	if ($bool === False){
+	   print "can't find $database";
+	}
+	// get data and store in a json array
+
+	$pagenum = $_GET['pagenum'];
+	$pagesize = $_GET['pagesize'];
+	$start = $pagenum * $pagesize;
+	$query = "SELECT SQL_CALC_FOUND_ROWS * FROM Customers LIMIT $start, $pagesize";
+
+	$result = mysql_query($query) or die("SQL Error 1: " . mysql_error());
+	$sql = "SELECT FOUND_ROWS() AS `found_rows`;";
+	$rows = mysql_query($sql);
+	$rows = mysql_fetch_assoc($rows);
+	$total_rows = $rows['found_rows'];
+	while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
+		$customers[] = array(
+			'CompanyName' => $row['CompanyName'],
+			'ContactName' => $row['ContactName'],
+			'ContactTitle' => $row['ContactTitle'],
+			'Address' => $row['Address'],
+			'City' => $row['City'],
+			'Country' => $row['Country']
+		  );
+	}
+    $data[] = array(
+       'TotalRows' => $total_rows,
+	   'Rows' => $customers
+	);
+	echo json_encode($data);
+
+-->
